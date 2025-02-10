@@ -1,6 +1,6 @@
 # Clean Architecture – Implementation in .NET
 
-## 📌 Sobre o Projeto  
+## 📌 About the Project
 **PeopleHub** is a Proof of Concept (PoC) for an API developed in **.NET 8**, following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)** to ensure a modular, testable, and easily maintainable codebase. 
 
 The project's architecture has been carefullu designed to promote the **separation of concernss**, isolating business rules from infrastructure and external frameworks.
