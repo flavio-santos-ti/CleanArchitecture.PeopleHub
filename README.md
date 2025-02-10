@@ -1,11 +1,17 @@
-# 📖 Clean Architecture – Estrutura, Diretrizes e Implementação no .NET
+# Clean Architecture – Implementação no .NET
 
 ## 📌 Sobre o Projeto  
-O **PeopleHub** é uma API desenvolvida em **.NET 8**, seguindo os princípios da **Clean Architecture** e **Domain-Driven Design (DDD)** para garantir um código modular, testável e de fácil manutenção.  
+O **PeopleHub** é uma Prova de Conceito (PoC) de uma API desenvolvida em **.NET 8**, seguindo os princípios da **Clean Architecture** e **Domain-Driven Design (DDD)** para garantir um código modular, testável e de fácil manutenção.  
 
 A arquitetura do projeto foi cuidadosamente projetada para promover a **separação de responsabilidades**, isolando regras de negócio da infraestrutura e frameworks externos.
 
 ---
+
+## 📄 Documentação
+
+Para mais detalhes sobre a arquitetura e implementação do projeto, consulte a documentação da PoC:
+
+📄 [PoC-PeopleHub-v0.pdf](backend/docs/PoC-PeopleHub-v0.pdf)
 
 ## 🏗️ Arquitetura do Projeto  
 A estrutura segue a **Clean Architecture**, garantindo a independência do domínio em relação às camadas externas. As principais camadas são:
@@ -48,8 +54,9 @@ A organização dos diretórios segue a separação de camadas da Clean Architec
  ┃ ┗ 📂 PeopleHub.Domain
  ┣ 📂 05-Config
  ┃ ┗ 📂 PeopleHub.AppConfig
- ┗ 📜 README.md
- ``
+ ┣ 📜 README.md
+ ┗ 📜 PoC-PeopleHub-v0.pdf
+```
 
 ---
 
