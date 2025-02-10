@@ -67,8 +67,12 @@ public class PersonController : ControllerBase
     public async Task<IActionResult> GetIndividualByCpf(string cpf)
     {
         _logger.LogInformation("Fetching individual person by CPF: {Cpf}", cpf);
-        var person = await _personService.GetIndividualByCpfAsync(cpf);
-        return person == null ? NotFound() : Ok(person);
+        var response = await _personService.GetIndividualByCpfAsync(cpf);
+
+        if (!response.IsSuccess)
+            return StatusCode(response.StatusCode, response);
+
+        return StatusCode(response.StatusCode, response);
     }
 
     [HttpPost("legal")]

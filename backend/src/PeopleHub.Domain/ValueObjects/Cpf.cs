@@ -21,9 +21,29 @@ public class Cpf
         Value = cleanedCpf;
     }
 
-    public override string ToString()
+    /// <summary>
+    /// Removes any non-numeric characters from the CPF.
+    /// </summary>
+    public static string Clean(string cpf)
     {
-        return $"{Value.Substring(0, 3)}.{Value.Substring(3, 3)}.{Value.Substring(6, 3)}-{Value.Substring(9, 2)}";
+        return OnlyNumbers.Replace(cpf, "");
+    }
+
+    /// <summary>
+    /// Checks if a CPF is valid without throwing excpetions.
+    /// Returns 'null' if valid, or an error message if invalid.
+    /// </summary>
+    public static string? Validate(string cpf)
+    {
+        if (string.IsNullOrWhiteSpace(cpf))
+            return "CPF is required.";
+
+        var cleanedCpf = OnlyNumbers.Replace(cpf, "");
+
+        if (cleanedCpf.Length != 11)
+            return "CPF must have 11 digits.";
+
+        return null; // Valid CPF 
     }
 
     public static implicit operator string(Cpf? cpf) => cpf?.Value ?? string.Empty;

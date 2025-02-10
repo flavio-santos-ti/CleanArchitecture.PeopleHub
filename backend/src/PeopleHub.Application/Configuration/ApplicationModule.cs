@@ -23,6 +23,7 @@ namespace PeopleHub.Application.Configuration
         {
             services.AddScoped<IContextProvider>(provider => new FixedContextProvider("DefaultContext"));
 
+            // Registration of UseCases
             services.AddScoped<IRegisterLegalPersonUseCase>(provider =>
             {
                 return new RegisterLegalPersonUseCase(
@@ -131,13 +132,21 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            // Registro dos demais UseCases e Serviços
-            services.AddScoped<IGetIndividualPersonByCpfUseCase, GetIndividualPersonByCpfUseCase>();
+            services.AddScoped<IGetIndividualPersonByCpfUseCase>(provider =>
+            {
+                return new GetIndividualPersonByCpfUseCase(
+                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IAuditLogService>(),
+                    provider.GetRequiredService<IHttpContextAccessor>(),
+                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
+                    new FixedContextProvider("individualPerson")
+                );
+            });
+
             services.AddScoped<IUpdateUserAccountUseCase, UpdateUserAccountUseCase>();
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
 
-
-            // Serviços compartilhados
+            // Registration of Services
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<IAuditLogService, AuditLogService>();

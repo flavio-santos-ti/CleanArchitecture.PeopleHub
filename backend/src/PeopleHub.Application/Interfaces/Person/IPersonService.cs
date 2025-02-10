@@ -10,7 +10,7 @@ public interface IPersonService
 {
     Task<ApiResponseDto<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
     Task<ApiResponseDto<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);
-    Task<IndividualPersonEntity?> GetIndividualByCpfAsync(string cpf);
+    Task<ApiResponseDto<IndividualPersonEntity?>> GetIndividualByCpfAsync(string cpf);
     Task<ApiResponseDto<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);
     Task<ApiResponseDto<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request);
     Task<ApiResponseDto<bool>> DeleteIndividualAsync(DeleteIndividualPersonDto request);
