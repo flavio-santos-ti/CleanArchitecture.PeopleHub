@@ -211,4 +211,19 @@ public abstract class BaseAuditableUseCase : BaseUseCase
 
         return ApiResponseDto<T>.Fail(_contextName, message, 409);
     }
+
+    protected async Task<ApiResponseDto<T>> ReadSuccessWithAudit<T>(
+        object eventValue,
+        string message = "Success",
+        T? data = default)
+    {
+        var logData = new
+        {
+            Message = message,
+            Response = eventValue
+        };
+
+        await RegisterAuditLogAsync("READ", _contextName, 200, eventData: logData);
+        return ApiResponseDto<T>.Success(_contextName, message, 200, data);
+    }
 }

@@ -50,7 +50,7 @@ public class PersonService : IPersonService
         return await _registerLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<IndividualPersonEntity?> GetIndividualByCpfAsync(string cpf)
+    public async Task<ApiResponseDto<IndividualPersonEntity?>> GetIndividualByCpfAsync(string cpf)
     {
         return await _getIndividualPersonByCpfUseCase.ExecuteAsync(cpf);
     }

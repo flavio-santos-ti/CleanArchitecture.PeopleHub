@@ -1,8 +1,9 @@
-﻿using PeopleHub.Domain.Entities;
+﻿using PeopleHub.Application.Dtos.Response;
+using PeopleHub.Domain.Entities;
 
 namespace PeopleHub.Application.Interfaces.IndividualPerson;
 
 public interface IGetIndividualPersonByCpfUseCase
 {
-    Task<IndividualPersonEntity?> ExecuteAsync(string cpf);
+    Task<ApiResponseDto<IndividualPersonEntity?>> ExecuteAsync(string cpf);
 }
