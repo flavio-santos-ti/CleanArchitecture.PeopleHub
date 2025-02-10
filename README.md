@@ -11,54 +11,8 @@ A arquitetura do projeto foi cuidadosamente projetada para promover a **separaç
 
 Para mais detalhes sobre a arquitetura e implementação do projeto, consulte a documentação da PoC:
 
-📄 [PoC-PeopleHub-v0.pdf](backend/docs/PoC-PeopleHub-v0.pdf)
+📄 [Documento da Arquitetura do Projeto](backend/docs/PoC-PeopleHub-v0.pdf)
 
-## 🏗️ Arquitetura do Projeto  
-A estrutura segue a **Clean Architecture**, garantindo a independência do domínio em relação às camadas externas. As principais camadas são:
-
-### 🔹 **Domain Layer (Camada de Domínio)**
-- Contém as **regras de negócio** essenciais do sistema.  
-- Implementa **entidades** e **value objects** imutáveis.  
-- Independente de infraestrutura e frameworks.
-
-### 🔹 **Application Layer (Camada de Aplicação)**
-- Contém os **casos de uso** (Use Cases) e serviços que orquestram as regras de negócio.  
-- Não acessa diretamente banco de dados ou tecnologia específica.  
-
-### 🔹 **Infrastructure Layer (Camada de Infraestrutura)**
-- Implementação de **persistência**, **repositórios**, **autenticação** e integração com serviços externos.  
-- Usa **Entity Framework Core (PostgreSQL)** para persistência.
-
-### 🔹 **Presentation Layer (Camada de Apresentação)**
-- Implementa a **API RESTful** utilizando **ASP.NET Core Web API**.  
-- Responsável por tratar requisições HTTP e mapear respostas.
-
-### 🔹 **AppConfig Layer**
-- Responsável por carregar configurações globais do projeto.  
-- Implementa a configuração de **JWT Authentication**.
-
----
-
-## 📂 Estrutura do Repositório  
-A organização dos diretórios segue a separação de camadas da Clean Architecture:
-
-```
-📦 PeopleHub
- ┣ 📂 01-Presentation
- ┃ ┗ 📂 PeopleHub.Api
- ┣ 📂 02-Infrastructure
- ┃ ┗ 📂 PeopleHub.Infrastructure
- ┣ 📂 03-Application
- ┃ ┗ 📂 PeopleHub.Application
- ┣ 📂 04-Domain
- ┃ ┗ 📂 PeopleHub.Domain
- ┣ 📂 05-Config
- ┃ ┗ 📂 PeopleHub.AppConfig
- ┣ 📜 README.md
- ┗ 📜 PoC-PeopleHub-v0.pdf
-```
-
----
 
 ## 🚀 Tecnologias e Frameworks Utilizados  
 | Tecnologia | Descrição |
