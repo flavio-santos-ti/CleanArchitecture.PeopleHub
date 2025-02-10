@@ -1,49 +1,54 @@
 ﻿using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Dtos.Log;
+using PeopleHub.Application.Dtos.Response;
+using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.IndividualPerson;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
+using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.IndividualPerson;
 
-public class GetIndividualPersonByCpfUseCase : IGetIndividualPersonByCpfUseCase
+public class GetIndividualPersonByCpfUseCase : BaseAuditableUseCase, IGetIndividualPersonByCpfUseCase
 {
     private readonly IPersonRepository _personRepository;
-    private readonly IAuditLogService _auditLogService;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IAuthenticatedUserAccountService _authenticatedUserService;
 
 
-    public GetIndividualPersonByCpfUseCase(IPersonRepository personRepository, IAuditLogService auditLogService, IHttpContextAccessor httpContextAccessor, IAuthenticatedUserAccountService authenticatedUserService)
+    public GetIndividualPersonByCpfUseCase(
+        IPersonRepository personRepository, 
+        IAuditLogService auditLogService, 
+        IHttpContextAccessor httpContextAccessor, 
+        IAuthenticatedUserAccountService authenticatedUserService,
+        IContextProvider contextProvider) : base(auditLogService, httpContextAccessor, authenticatedUserService, contextProvider)
     {
         _personRepository = personRepository;
-        _auditLogService = auditLogService;
-        _httpContextAccessor = httpContextAccessor;
-        _authenticatedUserService = authenticatedUserService;
     }
 
-    public async Task<IndividualPersonEntity?> ExecuteAsync(string cpf)
+    public async Task<ApiResponseDto<IndividualPersonEntity?>> ExecuteAsync(string cpf)
     {
-        var person = await _personRepository.GetIndividualByCpfAsync(cpf);
+        var cleanedCpf = Cpf.Clean(cpf);
+        var validationError = Cpf.Validate(cleanedCpf);
 
-        // Captures information from the HTTP context
-        var httpContext = _httpContextAccessor.HttpContext;
-        var userIp = httpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown IP";
-        var userEmail = _authenticatedUserService.GetAuthenticatedUserEmail() ?? "Unknown User"; // Gets the authenticated email
+        if (validationError != null)
+            return await AuditLoginValidationErrorAsync<IndividualPersonEntity?>(
+                eventValue: cleanedCpf,
+                message: validationError
+            );
 
-        // Register audit log
-        await _auditLogService.RegisterLogAsync(new AuditLogDto
-        {
-            UserEmail = userEmail,
-            Action = "READ",
-            ContextName = nameof(IndividualPersonEntity),
-            EntityId = person?.Id,
-            EventData = null,
-            UserIp = userIp 
-        });
+        var person = await _personRepository.GetIndividualByCpfAsync(cleanedCpf);
 
-        return person;
+        if (person == null)
+            return await AuditNotFoundErrorAsync<IndividualPersonEntity?>(
+                eventValue: cpf,
+                message: "Individual person not found."
+            );
+
+        return await ReadSuccessWithAudit<IndividualPersonEntity?>(
+            eventValue: person,
+            message: "Individual person retrieved successfully.",
+            data: person
+        );
     }
 }
