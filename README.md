@@ -27,22 +27,6 @@ Para mais detalhes sobre a arquitetura e implementação do projeto, consulte a 
 
 ---
 
-## 📖 Diretrizes de Implementação  
-
-### ✅ **Padrões e Boas Práticas**  
-✔ Aplicação dos princípios **SOLID** e **DDD**.  
-✔ Separação de responsabilidades seguindo a Clean Architecture.  
-✔ Uso de **injeção de dependência** para desacoplamento.  
-✔ Versionamento de API com **Asp.Versioning.Mvc**.  
-✔ Logs de auditoria implementados para rastreamento de ações.  
-
-### ✅ **Definição de Repositórios e Camadas**  
-✔ **Repositórios** seguem o padrão **Repository Pattern** para abstração da camada de persistência.  
-✔ **Casos de uso (Use Cases)** encapsulam regras de negócio e orquestram operações.  
-✔ **Autenticação JWT** implementada na camada de configuração (**AppConfig**).  
-
----
-
 ## 📡 Endpoints Principais  
 
 ### 🔑 **Autenticação**
@@ -82,14 +66,6 @@ cd PeopleHub
 ```bash
 dotnet run --project 01-Presentation/PeopleHub.Api
 ```
-
----
-
-## 👨‍💻 Contribuição  
-Se deseja contribuir com melhorias, siga os seguintes passos:
-1. Faça um **fork** do projeto  
-2. Crie um **branch** com sua feature  
-3. Abra um **Pull Request**  
 
 ---
 
