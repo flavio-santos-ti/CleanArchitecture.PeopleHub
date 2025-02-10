@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Dtos.IndividualPerson;
+using PeopleHub.Application.Dtos.Response;
+using PeopleHub.Application.Interfaces.Common;
+using PeopleHub.Application.Interfaces.IndividualPerson;
+using PeopleHub.Application.Interfaces.Log;
+using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.UseCases.Base;
+using PeopleHub.Domain.Interfaces;
+using PeopleHub.Domain.ValueObjects;
+
+namespace PeopleHub.Application.UseCases.IndividualPerson;
+
+public class UpdateIndividualPersonUseCase : BaseAuditableUseCase, IUpdateIndividualPersonUseCase
+{
+    private readonly IPersonRepository _personRepository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UpdateIndividualPersonUseCase(
+        IPersonRepository personRepository, 
+        IUnitOfWork unitOfWork, 
+        IAuditLogService auditLogService, 
+        IHttpContextAccessor httpContextAccessor, 
+        IAuthenticatedUserAccountService authenticatedUserService,
+        IContextProvider contextProvider) : base(auditLogService, httpContextAccessor, authenticatedUserService, contextProvider)
+    {
+        _personRepository = personRepository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<ApiResponseDto<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request)
+    {
+        try
+        {
+            var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
+            if (person == null)
+                return await AuditNotFoundErrorAsync<bool>(
+                    eventValue: request,
+                    message: "Individual Person not found."
+                );
+
+
+
+            var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
+            var phone = new Phone(request.Phone);
+            var email = new Email(request.Email);
+            var cpf = new Cpf(request.Cpf);
+
+            person.UpdateIndividualPerson(
+                request.FullName,
+                request.BirthDate,
+                request.Gender,
+                address,
+                phone,
+                email
+            );
+
+            await _personRepository.UpdateIndividualAsync(person);
+            await _unitOfWork.CommitAsync();
+
+            return await UpdateSuccessWithAudit<bool>(
+                eventValue: request,
+                oldValue: person,
+                message: "Individual Person updated successfully."
+            );
+        }
+        catch (Exception ex)
+        {
+            return await AuditExceptionAsync<bool>(message: ex.Message);
+        }
+    }
+}
