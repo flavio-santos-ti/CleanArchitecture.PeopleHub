@@ -28,6 +28,47 @@ For more details on the project's architecture and implementation, refer to the 
 
 ---
 
+## 🐳 Docker Setup
+
+The containerization scripts for the database setup are located in the [`Container` folder](backend/Container/):
+
+- [`Dockerfile`](backend/Container/Dockerfile) – Defines the PostgreSQL container setup.
+- [`docker-compose.yaml`](backend/Container/docker-compose.yaml) – Manages the database container and volume.
+
+### 🚀 Running PostgreSQL with Docker Compose
+
+To start the database container, use:
+
+```bash
+docker compose -f backend/Container/docker-compose.yaml up -d
+
+This command will:
+
+- Build and run a PostgreSQL container with locale support for pt_BR.UTF-8.
+- Expose the database on port 5432.
+- Persist database data using Docker volumes.
+- Restart the container automatically in case of failure.
+
+To stop the container:
+
+```bash
+docker compose -f backend/Container/docker-compose.yaml down
+
+### 🖥️ Environment Setup
+
+This containerized setup was tested in the following environment:
+
+- 🖥️ Operating System: Windows 11 (32GB RAM)
+- 🐧 Docker Engine: Running on WSL2 Ubuntu
+- 🐘 Database Container: PostgreSQL (latest) with locale support configured
+
+### 🛠️ Verifying the Container
+
+To check if the PostgreSQL container is running:
+
+```bash
+docker ps
+
 ## 📡 Main Endpoints
 
 ### 🔑 **Authentication**
