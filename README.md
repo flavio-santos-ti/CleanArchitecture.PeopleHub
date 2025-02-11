@@ -41,6 +41,7 @@ To start the database container, use:
 
 ```bash
 docker compose -f backend/Container/docker-compose.yaml up -d
+```
 
 This command will:
 
@@ -53,6 +54,7 @@ To stop the container:
 
 ```bash
 docker compose -f backend/Container/docker-compose.yaml down
+```
 
 ### 🖥️ Environment Setup
 
@@ -68,6 +70,7 @@ To check if the PostgreSQL container is running:
 
 ```bash
 docker ps
+```
 
 ## 📡 Main Endpoints
 
