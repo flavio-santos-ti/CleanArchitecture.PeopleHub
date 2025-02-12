@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Log;
@@ -12,29 +15,51 @@ namespace PeopleHub.Application.UseCases.Base;
 public abstract class BaseLoggingUseCase : BaseUseCase
 {
     protected readonly IAuditLogService _auditLogService;
+    protected readonly ILogger<BaseLoggingUseCase> _logger;
     protected readonly string _contextName;
 
     protected BaseLoggingUseCase(
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider)
-        : base(httpContextAccessor, authenticatedUserService)
+        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
     {
         _auditLogService = auditLogService;
         _contextName = contextProvider.ContextName;
+
+        var serviceProvider = httpContextAccessor.HttpContext?.RequestServices;
+        if (serviceProvider != null)
+        {
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            _logger = loggerFactory?.CreateLogger<BaseLoggingUseCase>() ?? NullLogger<BaseLoggingUseCase>.Instance;
+        }
+        else
+        {
+            _logger = NullLogger<BaseLoggingUseCase>.Instance; 
+        }
     }
 
-    private async Task RegisterAuditLogAsync(string eventAction, string contextName, int httpStatusCode, object? eventData = null, string? userEmail = null)
+    private async Task RegisterLogAsync(LogAction eventAction, string contextName, int httpStatusCode, object? eventData = null, string? userEmail = null)
     {
         var log = new AuditLogDto
         {
             UserEmail = !string.IsNullOrEmpty(userEmail) ? userEmail : GetAuthenticatedUserEmail(), 
-            Action = eventAction,
+            Action = eventAction.Value,
             ContextName = contextName,
             HttpStatusCode = httpStatusCode,
             EventData = eventData != null ? JsonConvert.SerializeObject(eventData) : null,
             UserIp = GetUserIpAddress()
+        };
+
+        if (eventAction == LogAction.ERROR || eventAction == LogAction.NOT_FOUND || eventAction == LogAction.VALIDATION_ERROR)
+        {
+            _logger.LogError("[AUDIT ERROR] Action: {Action}, Context: {Context}, StatusCode: {Status}, User: {User}, Data: {Data}",
+                log.Action, log.ContextName, log.HttpStatusCode, log.UserEmail, log.EventData);
+        }
+        else
+        {
+            _logger.LogInformation("[AUDIT] Action: {Action}, Context: {Context}, StatusCode: {Status}, User: {User}, Data: {Data}",
+                log.Action, log.ContextName, log.HttpStatusCode, log.UserEmail, log.EventData);
         };
 
         await _auditLogService.RegisterLogAsync(log);
@@ -97,7 +122,7 @@ public abstract class BaseLoggingUseCase : BaseUseCase
             logData = new { Message = message, Response = eventValue };
         };
 
-        await RegisterAuditLogAsync(logAction.Value, _contextName, httpStatusCode, eventData: logData, userEmail);
-        return ApiResponseDto<T>.Success(_contextName, message, httpStatusCode, data);
+        await RegisterLogAsync(logAction, _contextName, httpStatusCode, eventData: logData, userEmail);
+        return ApiResponseDto<T>.Response(_contextName, message, httpStatusCode, data);
     }
 }
