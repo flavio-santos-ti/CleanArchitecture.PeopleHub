@@ -71,7 +71,56 @@ To check if the PostgreSQL container is running:
 ```bash
 docker ps
 ```
+---
+## 📌 Database Setup
 
+This project uses a PostgreSQL database and includes automated scripts to simplify the setup process.
+
+### 🛠️ Initializing the Database
+
+To create the database and its tables, run:
+
+```bash
+chmod +x setup-database.sh
+./setup-database.sh
+```
+
+This script checks if the database already exists and, if necessary, creates and configures all the tables.
+
+### 🔄 Resetting the Database
+
+If you need to drop the existing database and create a new one from scratch, run:
+
+```bash
+chmod +x drop-db.sh
+./drop-db.sh
+```
+
+Then, run:
+
+```bash
+./setup-database.sh
+```
+
+### 🔹 Creating the Database Manually
+
+If you only want to create the database without running the full setup, use:
+
+```bash
+chmod +x init-db.sh
+./init-db.sh
+```
+Htis will execute the `create-db-people_hub.sql` script on PostgreSQL.
+
+### 🚀 Script Summary
+
+| Script              | Function                                      |
+|---------------------|-----------------------------------------------|
+| `setup-database.sh` | Creates the database and configures tables.   |
+| `init-db.sh`        | Runs the database creatin script.             |
+| `drop-db.sh`        | Drops the existing database.                  |
+
+---
 ## 📡 Main Endpoints
 
 ### 🔑 **Authentication**
