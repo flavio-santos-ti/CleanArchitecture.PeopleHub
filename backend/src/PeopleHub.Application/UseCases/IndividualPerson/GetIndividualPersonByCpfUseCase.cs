@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -6,7 +7,6 @@ using PeopleHub.Application.Interfaces.IndividualPerson;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Base;
-using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
 
@@ -33,7 +33,8 @@ public class GetIndividualPersonByCpfUseCase : BaseAuditableUseCase, IGetIndivid
         var validationError = Cpf.Validate(cleanedCpf);
 
         if (validationError != null)
-            return await AuditLoginValidationErrorAsync<IndividualPersonDto?>(
+            return await ResponseAsync<IndividualPersonDto?>(
+                logAction: LogAction.VALIDATION_ERROR,
                 eventValue: cleanedCpf,
                 message: validationError
             );
@@ -41,14 +42,16 @@ public class GetIndividualPersonByCpfUseCase : BaseAuditableUseCase, IGetIndivid
         var person = await _personRepository.GetIndividualByCpfAsync(cleanedCpf);
 
         if (person == null)
-            return await AuditNotFoundErrorAsync<IndividualPersonDto?>(
+            return await ResponseAsync<IndividualPersonDto?>(
+                logAction: LogAction.NOT_FOUND,
                 eventValue: cpf,
-                message: "Individual person not found."
+                message: "Individual Person not found."
             );
 
         var personDto = new IndividualPersonDto(person);
 
-        return await ReadSuccessWithAudit<IndividualPersonDto?>(
+        return await ResponseAsync<IndividualPersonDto?>(
+            logAction: LogAction.READ,
             eventValue: person,
             message: "Individual person retrieved successfully.",
             data: personDto

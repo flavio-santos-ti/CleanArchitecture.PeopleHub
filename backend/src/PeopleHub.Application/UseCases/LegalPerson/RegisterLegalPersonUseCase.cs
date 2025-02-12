@@ -37,10 +37,13 @@ public class RegisterLegalPersonUseCase : BaseAuditableUseCase, IRegisterLegalPe
             var existingPerson = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
 
             if (existingPerson != null)
-                return await AuditValidationErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.VALIDATION_ERROR,
                     eventValue: request,
                     message: "Person already exists."
                 );
+
+
 
             var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
@@ -71,7 +74,7 @@ public class RegisterLegalPersonUseCase : BaseAuditableUseCase, IRegisterLegalPe
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
 
     }

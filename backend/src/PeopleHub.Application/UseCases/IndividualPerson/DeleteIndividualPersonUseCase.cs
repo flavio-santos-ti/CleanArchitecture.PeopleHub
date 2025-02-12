@@ -35,11 +35,11 @@ public class DeleteIndividualPersonUseCase : BaseAuditableUseCase, IDeleteIndivi
         {
             var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
             if (person == null)
-                if (person == null)
-                    return await AuditNotFoundErrorAsync<bool>(
-                        eventValue: request,
-                        message: "Individual Person not found."
-                    );
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
+                    eventValue: request,
+                    message: "Individual Person not found."
+                );
 
             await _personRepository.DeleteIndividualAsync(person);
             await _unitOfWork.CommitAsync();
@@ -53,7 +53,7 @@ public class DeleteIndividualPersonUseCase : BaseAuditableUseCase, IDeleteIndivi
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

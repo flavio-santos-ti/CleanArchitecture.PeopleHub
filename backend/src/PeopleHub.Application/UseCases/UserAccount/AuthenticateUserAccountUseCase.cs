@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
@@ -38,10 +39,10 @@ public class AuthenticateUserAccountUseCase : BaseAuditableUseCase, IAuthenticat
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                return await AuditLoginValidationErrorAsync<object>(
+                return await ResponseAsync<object>(
+                    logAction: LogAction.VALIDATION_ERROR,
                     eventValue: request,
-                    message: "Invalid email or password.",
-                    useEmail: request.Email
+                    message: "Invalid email or password."
                 );
 
             // JWT Configuration.
@@ -68,11 +69,16 @@ public class AuthenticateUserAccountUseCase : BaseAuditableUseCase, IAuthenticat
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var jwtToken = tokenHandler.WriteToken(token);
 
-            return await LoginSuccessWithAudit<object>(data: jwtToken, userEmail: request.Email);
+            return await ResponseAsync<object>(
+                logAction: LogAction.LOGIN_SUCCESS,
+                message: "Login successful.",
+                data: jwtToken,
+                userEmail: request.Email
+            );
         }
         catch (Exception ex)
         {
-            return await AuditLoginExceptionAsync<object>(message: ex.Message, request.Email);
+            return await ResponseAsync<object>(logAction: LogAction.ERROR, message: ex.Message, userEmail: request.Email);
         }
     } 
 }
