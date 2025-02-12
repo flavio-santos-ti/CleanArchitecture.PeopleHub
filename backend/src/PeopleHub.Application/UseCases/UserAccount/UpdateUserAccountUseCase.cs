@@ -11,7 +11,7 @@ using System;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class UpdateUserAccountUseCase : BaseAuditableUseCase, IUpdateUserAccountUseCase
+public class UpdateUserAccountUseCase : BaseLoggingUseCase, IUpdateUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;

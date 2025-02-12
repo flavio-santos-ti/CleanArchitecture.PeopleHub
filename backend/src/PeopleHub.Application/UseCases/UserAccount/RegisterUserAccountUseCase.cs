@@ -11,7 +11,7 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class RegisterUserAccountUseCase : BaseAuditableUseCase, IRegisterUserAccountUseCase
+public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;

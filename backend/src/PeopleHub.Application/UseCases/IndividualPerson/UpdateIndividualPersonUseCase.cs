@@ -12,7 +12,7 @@ using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.IndividualPerson;
 
-public class UpdateIndividualPersonUseCase : BaseAuditableUseCase, IUpdateIndividualPersonUseCase
+public class UpdateIndividualPersonUseCase : BaseLoggingUseCase, IUpdateIndividualPersonUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;

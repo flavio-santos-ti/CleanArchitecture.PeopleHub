@@ -11,7 +11,7 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.LegalPerson;
 
-public class DeleteLegalPersonUseCase : BaseAuditableUseCase, IDeleteLegalPersonUseCase
+public class DeleteLegalPersonUseCase : BaseLoggingUseCase, IDeleteLegalPersonUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;

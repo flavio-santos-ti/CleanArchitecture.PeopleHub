@@ -6,16 +6,15 @@ using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using System.Xml.Linq;
 
 namespace PeopleHub.Application.UseCases.Base;
 
-public abstract class BaseAuditableUseCase : BaseUseCase
+public abstract class BaseLoggingUseCase : BaseUseCase
 {
     protected readonly IAuditLogService _auditLogService;
     protected readonly string _contextName;
 
-    protected BaseAuditableUseCase(
+    protected BaseLoggingUseCase(
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
@@ -30,7 +29,7 @@ public abstract class BaseAuditableUseCase : BaseUseCase
     {
         var log = new AuditLogDto
         {
-            UserEmail = !string.IsNullOrEmpty(userEmail) ? userEmail : GetAuthenticatedUserEmail(), // Usa userEmail se fornecido, senão pega do usuário autenticado
+            UserEmail = !string.IsNullOrEmpty(userEmail) ? userEmail : GetAuthenticatedUserEmail(), 
             Action = eventAction,
             ContextName = contextName,
             HttpStatusCode = httpStatusCode,
