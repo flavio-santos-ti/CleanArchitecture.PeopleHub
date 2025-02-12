@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -62,7 +63,8 @@ public class RegisterLegalPersonUseCase : BaseAuditableUseCase, IRegisterLegalPe
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await CreateSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.CREATE,
                 eventValue: person,
                 message: "Legal Person successfully registered."
             );

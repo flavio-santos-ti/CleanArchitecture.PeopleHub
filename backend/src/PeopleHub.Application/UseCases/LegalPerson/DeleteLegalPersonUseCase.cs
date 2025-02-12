@@ -41,8 +41,8 @@ public class DeleteLegalPersonUseCase : BaseAuditableUseCase, IDeleteLegalPerson
             await _personRepository.DeleteLegalAsync(person);
             await _unitOfWork.CommitAsync();
 
-            // Register audit log
-            return await DeleteSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: Actions.LogAction.DELETE,
                 eventValue: request,
                 oldValue: person,
                 message: "Legal Person has been successfully removed."

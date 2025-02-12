@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -43,8 +44,8 @@ public class DeleteIndividualPersonUseCase : BaseAuditableUseCase, IDeleteIndivi
             await _personRepository.DeleteIndividualAsync(person);
             await _unitOfWork.CommitAsync();
 
-            // Register audit log
-            return await DeleteSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.DELETE,
                 eventValue: request,
                 oldValue: person,
                 message: "Legal Person has been successfully removed."

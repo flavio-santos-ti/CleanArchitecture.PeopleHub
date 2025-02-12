@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -59,7 +60,8 @@ public class RegisterIndividualPersonUseCase : BaseAuditableUseCase, IRegisterIn
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await CreateSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.CREATE,
                 eventValue: person,
                 message: "Individual Person successfully registered."
             );

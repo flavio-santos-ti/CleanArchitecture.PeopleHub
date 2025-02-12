@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Log;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
+using System.Xml.Linq;
 
 namespace PeopleHub.Application.UseCases.Base;
 
@@ -39,64 +41,35 @@ public abstract class BaseAuditableUseCase : BaseUseCase
         await _auditLogService.RegisterLogAsync(log);
     }
 
-    protected async Task<ApiResponseDto<T>> CreateSuccessWithAudit<T>(
-        object eventValue,
-        string message = "Success",
-        T? data = default)
+    protected async Task<ApiResponseDto<T>> ResponseAsync<T>(
+        LogAction logAction,
+        string message,
+        object? eventValue = default,
+        object? oldValue = default,
+        T? data = default,
+        string? userEmail = null)
     {
-        var logData = new
+        object? logData = null;
+        int httpStatusCode = 0;
+
+        if (logAction == LogAction.CREATE)
         {
-            Message = message,
-            Response = eventValue
-        };
-
-        await RegisterAuditLogAsync("CREATE", _contextName, 201, eventData: logData);
-        return ApiResponseDto<T>.Success(_contextName, message, 201, data);
-    }
-
-    protected async Task<ApiResponseDto<T>> CreateUploadSuccessWithAuditAsync<T>(
-        string message = "Success")
-    {
-        var logData = new
+            httpStatusCode = 201;
+            logData = new { Message = message, Response = eventValue };
+        }
+        else if (logAction == LogAction.CREATE_UPLOAD)
         {
-            Message = message
-        };
-
-        await RegisterAuditLogAsync("CREATE_UPLOAD", _contextName, 201, eventData: logData);
-        return ApiResponseDto<T>.Success(_contextName, message, 201);
-    }
-
-    protected async Task<ApiResponseDto<T>> CreateLoginSuccessWithAudit<T>(
-        object eventValue,
-        string message = "Success",
-        string userEmail = "",
-        T? data = default)
-    {
-        var logData = new
+            httpStatusCode = 201;
+            logData = new { Message = message };
+        }
+        else if (logAction == LogAction.DELETE)
         {
-            Message = message,
-            Response = eventValue
-        };
+            httpStatusCode = 200;
+            logData = new { Message = message, Request = eventValue, OldValue = oldValue };
+        }
 
-        await RegisterAuditLogAsync("CREATE", _contextName, 201, eventData: logData, userEmail);
-        return ApiResponseDto<T>.Success(_contextName, message, 201, data);
-    }
-
-    protected async Task<ApiResponseDto<T>> DeleteSuccessWithAudit<T>(
-    object eventValue,
-    object oldValue,
-    string message = "Success",
-    T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue,
-            OldValue = oldValue
-        };
-
-        await RegisterAuditLogAsync("DELETE", _contextName, 200, eventData: logData);
-        return ApiResponseDto<T>.Success(_contextName, message, 200, data);
+        await RegisterAuditLogAsync(logAction.Value, _contextName, httpStatusCode, eventData: logData, userEmail);
+        return ApiResponseDto<T>.Success(_contextName, message, httpStatusCode, data);
     }
 
     protected async Task<ApiResponseDto<T>> AuditExceptionAsync<T>(

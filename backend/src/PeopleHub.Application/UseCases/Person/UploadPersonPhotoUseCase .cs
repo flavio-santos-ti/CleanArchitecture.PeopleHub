@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Person;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -51,7 +52,8 @@ public class UploadPersonPhotoUseCase : BaseAuditableUseCase, IUploadPersonPhoto
                 individualPerson.UpdatePhoto(photoBytes);
                 await _personRepository.UpdateIndividualPhotoAsync(individualPerson);
                 await _unitOfWork.CommitAsync();
-                return await CreateUploadSuccessWithAuditAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.CREATE_UPLOAD,
                     message: "Photo Legal Person successfully registered."
                 );
             }
@@ -62,7 +64,9 @@ public class UploadPersonPhotoUseCase : BaseAuditableUseCase, IUploadPersonPhoto
             {
                 legalPerson.UpdatePhoto(photoBytes);
                 await _personRepository.UpdateLegalPhotoAsync(legalPerson);
-                return await CreateUploadSuccessWithAuditAsync<bool>(
+
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.CREATE_UPLOAD,
                     message: "Photo Individual Person successfully registered."
                 );
             }
