@@ -67,136 +67,38 @@ public abstract class BaseAuditableUseCase : BaseUseCase
             httpStatusCode = 200;
             logData = new { Message = message, Request = eventValue, OldValue = oldValue };
         }
+        else if (logAction == LogAction.ERROR)
+        {
+            httpStatusCode = 500;
+            logData = new { Error = message };
+        }
+        else if (logAction == LogAction.VALIDATION_ERROR)
+        {
+            httpStatusCode = 409;
+            logData = new { Message = message, Response = eventValue };
+        }
+        else if (logAction == LogAction.NOT_FOUND)
+        {
+            httpStatusCode = 404;
+            logData = new { Message = message, Response = eventValue };
+        }
+        else if (logAction == LogAction.UPDATE)
+        {
+            httpStatusCode = 200;
+            logData = new { Message = message, Request = eventValue, OldValue = oldValue };
+        }
+        else if (logAction == LogAction.LOGIN_SUCCESS)
+        {
+            httpStatusCode = 200;
+            logData = new { Token = data };
+        }
+        else if (logAction == LogAction.READ)
+        {
+            httpStatusCode = 200;
+            logData = new { Message = message, Response = eventValue };
+        };
 
         await RegisterAuditLogAsync(logAction.Value, _contextName, httpStatusCode, eventData: logData, userEmail);
         return ApiResponseDto<T>.Success(_contextName, message, httpStatusCode, data);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditExceptionAsync<T>(
-        string message = "Error",
-        T? data = default)
-    {
-        await RegisterAuditLogAsync("ERROR", _contextName, 500, eventData: new { Error = message });
-        return ApiResponseDto<T>.Fail(_contextName, message, 500);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditLoginExceptionAsync<T>(
-        string message,
-        string useEmail)
-    {
-        await RegisterAuditLogAsync("ERROR", _contextName, 500, eventData: new { Error = message });
-        return ApiResponseDto<T>.Fail(_contextName, message, 500);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditValidationErrorAsync<T>(
-        object eventValue,
-        string message = "Validation Error",
-        T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue
-        }; 
-
-        await RegisterAuditLogAsync("ERROR", _contextName, 409, eventData: logData);
-
-        return ApiResponseDto<T>.Fail(_contextName, message, 409);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditLoginValidationErrorAsync<T>(
-        object eventValue,
-        string message = "Validation Error",
-        string userEmail = "",
-        T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue
-        };
-
-        await RegisterAuditLogAsync("ERROR", _contextName, 409, eventData: logData, userEmail);
-
-        return ApiResponseDto<T>.Fail(_contextName, message, 409);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditNotFoundErrorAsync<T>(
-        object eventValue,
-        string message = "Validation Error",
-        T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue
-        };
-
-        await RegisterAuditLogAsync("NOT_FOUND", _contextName, 404, eventData: logData);
-
-        return ApiResponseDto<T>.Fail(_contextName, message, 404);
-    }
-
-    protected async Task<ApiResponseDto<T>> UpdateSuccessWithAudit<T>(
-        object eventValue,
-        object oldValue,
-        string message = "Success",
-        T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue,
-            OldValue = oldValue,
-        };
-
-        await RegisterAuditLogAsync("UPDATE", _contextName, 200, eventData: logData);
-        return ApiResponseDto<T>.Success(_contextName, message, 200, data);
-    }
-
-    protected async Task<ApiResponseDto<T>> LoginSuccessWithAudit<T>(
-        string userEmail,
-        T? data = default)
-    {
-        var message = "Login successful.";
-
-        var logData = new
-        {
-            Token = data
-        };
-
-        await RegisterAuditLogAsync("LOGIN_SUCCESS", _contextName, 200, eventData: logData, userEmail);
-        return ApiResponseDto<T>.Success(_contextName, message, 200, data);
-    }
-
-    protected async Task<ApiResponseDto<T>> AuditLoginValidationErrorAsync<T>(
-        object eventValue,
-        string message,
-        string useEmail)
-    {
-        var logData = new
-        {
-            Message = message,
-            Request = eventValue
-        };
-
-        await RegisterAuditLogAsync("ERROR", _contextName, 409, eventData: logData, useEmail);
-
-        return ApiResponseDto<T>.Fail(_contextName, message, 409);
-    }
-
-    protected async Task<ApiResponseDto<T>> ReadSuccessWithAudit<T>(
-        object eventValue,
-        string message = "Success",
-        T? data = default)
-    {
-        var logData = new
-        {
-            Message = message,
-            Response = eventValue
-        };
-
-        await RegisterAuditLogAsync("READ", _contextName, 200, eventData: logData);
-        return ApiResponseDto<T>.Success(_contextName, message, 200, data);
     }
 }

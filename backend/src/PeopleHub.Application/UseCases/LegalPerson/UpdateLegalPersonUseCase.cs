@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -34,7 +35,8 @@ public class UpdateLegalPersonUseCase : BaseAuditableUseCase, IUpdateLegalPerson
         {
             var person = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
             if (person == null)
-                return await AuditNotFoundErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
                     message: "Legal Person not found."
                 );
@@ -54,7 +56,8 @@ public class UpdateLegalPersonUseCase : BaseAuditableUseCase, IUpdateLegalPerson
             await _personRepository.UpdateLegalAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await UpdateSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.UPDATE,
                 eventValue: request,
                 oldValue: person,
                 message: "Legal Person updated successfully."
@@ -62,7 +65,7 @@ public class UpdateLegalPersonUseCase : BaseAuditableUseCase, IUpdateLegalPerson
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

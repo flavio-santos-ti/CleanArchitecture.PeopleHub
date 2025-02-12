@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -34,12 +35,11 @@ public class UpdateIndividualPersonUseCase : BaseAuditableUseCase, IUpdateIndivi
         {
             var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
             if (person == null)
-                return await AuditNotFoundErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
                     message: "Individual Person not found."
                 );
-
-
 
             var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
@@ -58,7 +58,8 @@ public class UpdateIndividualPersonUseCase : BaseAuditableUseCase, IUpdateIndivi
             await _personRepository.UpdateIndividualAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await UpdateSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.UPDATE,
                 eventValue: request,
                 oldValue: person,
                 message: "Individual Person updated successfully."
@@ -66,7 +67,7 @@ public class UpdateIndividualPersonUseCase : BaseAuditableUseCase, IUpdateIndivi
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

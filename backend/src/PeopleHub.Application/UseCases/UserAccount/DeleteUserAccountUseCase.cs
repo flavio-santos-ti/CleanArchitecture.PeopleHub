@@ -33,7 +33,8 @@ public class DeleteUserAccountUseCase : BaseAuditableUseCase, IDeleteUserAccount
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return await AuditNotFoundErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
                     message: "User not found."
                 );
@@ -53,7 +54,7 @@ public class DeleteUserAccountUseCase : BaseAuditableUseCase, IDeleteUserAccount
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

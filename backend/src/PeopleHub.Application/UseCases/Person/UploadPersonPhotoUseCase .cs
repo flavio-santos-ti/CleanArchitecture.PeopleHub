@@ -33,7 +33,8 @@ public class UploadPersonPhotoUseCase : BaseAuditableUseCase, IUploadPersonPhoto
         try
         {
             if (request.Photo == null || request.Photo.Length == 0)
-                return await AuditValidationErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.VALIDATION_ERROR,
                     eventValue: request,
                     message: "Photo is required."
                 );
@@ -71,14 +72,15 @@ public class UploadPersonPhotoUseCase : BaseAuditableUseCase, IUploadPersonPhoto
                 );
             }
 
-            return await AuditNotFoundErrorAsync<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.NOT_FOUND,
                 eventValue: request,
                 message: "Person not found."
             );
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }
