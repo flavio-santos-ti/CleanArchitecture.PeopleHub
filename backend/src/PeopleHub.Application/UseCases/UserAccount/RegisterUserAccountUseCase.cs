@@ -34,7 +34,8 @@ public class RegisterUserAccountUseCase : BaseAuditableUseCase, IRegisterUserAcc
         {
             var existingUser = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (existingUser != null)
-                return await AuditLoginValidationErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.VALIDATION_ERROR,
                     eventValue: request,
                     message: "User already exists.",
                     userEmail: request.Email
@@ -55,7 +56,7 @@ public class RegisterUserAccountUseCase : BaseAuditableUseCase, IRegisterUserAcc
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

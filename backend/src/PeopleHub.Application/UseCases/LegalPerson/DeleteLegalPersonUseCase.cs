@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
@@ -33,7 +34,8 @@ public class DeleteLegalPersonUseCase : BaseAuditableUseCase, IDeleteLegalPerson
         {
             var person = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
             if (person == null)
-                return await AuditNotFoundErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
                     message: "Legal Person not found."
                 );
@@ -50,7 +52,7 @@ public class DeleteLegalPersonUseCase : BaseAuditableUseCase, IDeleteLegalPerson
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }

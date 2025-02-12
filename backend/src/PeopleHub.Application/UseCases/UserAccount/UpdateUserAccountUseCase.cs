@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
@@ -6,6 +7,7 @@ using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Interfaces;
+using System;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
@@ -32,15 +34,17 @@ public class UpdateUserAccountUseCase : BaseAuditableUseCase, IUpdateUserAccount
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return await AuditNotFoundErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
                     message: "User not found."
                 );
 
             if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
-                return await AuditValidationErrorAsync<bool>(
+                return await ResponseAsync<bool>(
+                    logAction: LogAction.VALIDATION_ERROR,
                     eventValue: request,
-                    message: "Invalid email or password."
+                    message: "Invalid email or password.\""
                 );
 
             user.UpdatePassword(request.NewPassword);
@@ -48,7 +52,8 @@ public class UpdateUserAccountUseCase : BaseAuditableUseCase, IUpdateUserAccount
             await _userAccountRepository.UpdateAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return await UpdateSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.UPDATE,
                 eventValue: request,
                 oldValue: user,
                 message: "Password updated successfully."
@@ -56,7 +61,7 @@ public class UpdateUserAccountUseCase : BaseAuditableUseCase, IUpdateUserAccount
         }
         catch (Exception ex)
         {
-            return await AuditExceptionAsync<bool>(message: ex.Message);
+            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
     }
 }
