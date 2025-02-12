@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.IndividualPerson;
 using PeopleHub.Application.Interfaces.LegalPerson;
@@ -24,18 +25,6 @@ namespace PeopleHub.Application.Configuration
             services.AddScoped<IContextProvider>(provider => new FixedContextProvider("DefaultContext"));
 
             // Registration of UseCases
-            services.AddScoped<IRegisterLegalPersonUseCase>(provider =>
-            {
-                return new RegisterLegalPersonUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
-                    provider.GetRequiredService<IUnitOfWork>(),
-                    provider.GetRequiredService<IAuditLogService>(),
-                    provider.GetRequiredService<IHttpContextAccessor>(),
-                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
-                    new FixedContextProvider("LegalPerson") 
-                );
-            });
-
             services.AddScoped<IAuthenticateUserAccountUseCase>(provider =>
             {
                 return new AuthenticateUserAccountUseCase(
@@ -44,7 +33,7 @@ namespace PeopleHub.Application.Configuration
                     provider.GetRequiredService<IAuditLogService>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
-                    new FixedContextProvider("Login")  
+                    new FixedContextProvider("Login")
                 );
             });
 
@@ -57,6 +46,42 @@ namespace PeopleHub.Application.Configuration
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
                     new FixedContextProvider("UserAccount")
+                );
+            });
+
+            services.AddScoped<IUpdateUserAccountUseCase>(provider =>
+            {
+                return new UpdateUserAccountUseCase(
+                    provider.GetRequiredService<IUserAccountRepository>(),
+                    provider.GetRequiredService<IUnitOfWork>(),
+                    provider.GetRequiredService<IAuditLogService>(),
+                    provider.GetRequiredService<IHttpContextAccessor>(),
+                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
+                    new FixedContextProvider("UserAccount")
+                );
+            });
+
+            services.AddScoped<IDeleteUserAccountUseCase>(provider =>
+            {
+                return new DeleteUserAccountUseCase(
+                    provider.GetRequiredService<IUserAccountRepository>(),
+                    provider.GetRequiredService<IUnitOfWork>(),
+                    provider.GetRequiredService<IAuditLogService>(),
+                    provider.GetRequiredService<IHttpContextAccessor>(),
+                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
+                    new FixedContextProvider("UserAccount")
+                );
+            });
+
+            services.AddScoped<IRegisterLegalPersonUseCase>(provider =>
+            {
+                return new RegisterLegalPersonUseCase(
+                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IUnitOfWork>(),
+                    provider.GetRequiredService<IAuditLogService>(),
+                    provider.GetRequiredService<IHttpContextAccessor>(),
+                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
+                    new FixedContextProvider("LegalPerson") 
                 );
             });
 
@@ -120,6 +145,17 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
+            services.AddScoped<IGetIndividualPersonByCpfUseCase>(provider =>
+            {
+                return new GetIndividualPersonByCpfUseCase(
+                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IAuditLogService>(),
+                    provider.GetRequiredService<IHttpContextAccessor>(),
+                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
+                    new FixedContextProvider("individualPerson")
+                );
+            });
+
             services.AddScoped<IUploadPersonPhotoUseCase>(provider =>
             {
                 return new UploadPersonPhotoUseCase(
@@ -132,24 +168,12 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IGetIndividualPersonByCpfUseCase>(provider =>
-            {
-                return new GetIndividualPersonByCpfUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
-                    provider.GetRequiredService<IAuditLogService>(),
-                    provider.GetRequiredService<IHttpContextAccessor>(),
-                    provider.GetRequiredService<IAuthenticatedUserAccountService>(),
-                    new FixedContextProvider("individualPerson")
-                );
-            });
-
-            services.AddScoped<IUpdateUserAccountUseCase, UpdateUserAccountUseCase>();
-            services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
-
             // Registration of Services
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<IAuditLogService, AuditLogService>();
+
+            services.AddSingleton<ILoggerFactory, LoggerFactory>();
 
             return services;
         }

@@ -21,11 +21,8 @@ public class ApiResponseDto<T>
         Data = data;
     }
 
-    public static ApiResponseDto<T> Success(string contextName, string message = "Success", int statusCode = 200, T? data = default)
+    public static ApiResponseDto<T> Response(string contextName, string message = "Success", int statusCode = 200, T? data = default)
     {
         return new ApiResponseDto<T>(contextName, true, message, statusCode, data);
     }
-
-    public static ApiResponseDto<T> Fail(string contextName, string message, int statusCode = 400) =>
-        new ApiResponseDto<T>(contextName, false, message, statusCode, default);
 }
