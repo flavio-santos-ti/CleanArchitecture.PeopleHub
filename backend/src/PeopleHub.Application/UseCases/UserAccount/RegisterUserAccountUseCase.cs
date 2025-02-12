@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
@@ -45,7 +46,8 @@ public class RegisterUserAccountUseCase : BaseAuditableUseCase, IRegisterUserAcc
             await _userAccountRepository.AddAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return await CreateLoginSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.CREATE,
                 eventValue: user,
                 message: "User registered successfully.",
                 userEmail: request.Email

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
@@ -43,7 +44,8 @@ public class DeleteUserAccountUseCase : BaseAuditableUseCase, IDeleteUserAccount
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
 
-            return await DeleteSuccessWithAudit<bool>(
+            return await ResponseAsync<bool>(
+                logAction: LogAction.DELETE,
                 eventValue: request,
                 oldValue: user,
                 message: "Account has been successfully removed."
