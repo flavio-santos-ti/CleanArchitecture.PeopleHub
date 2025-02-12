@@ -12,7 +12,7 @@ using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.IndividualPerson;
 
-public class GetIndividualPersonByCpfUseCase : BaseAuditableUseCase, IGetIndividualPersonByCpfUseCase
+public class GetIndividualPersonByCpfUseCase : BaseLoggingUseCase, IGetIndividualPersonByCpfUseCase
 {
     private readonly IPersonRepository _personRepository;
 

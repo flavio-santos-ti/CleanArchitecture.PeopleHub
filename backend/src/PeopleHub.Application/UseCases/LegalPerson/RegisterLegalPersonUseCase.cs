@@ -13,7 +13,7 @@ using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.LegalPerson;
 
-public class RegisterLegalPersonUseCase : BaseAuditableUseCase, IRegisterLegalPersonUseCase
+public class RegisterLegalPersonUseCase : BaseLoggingUseCase, IRegisterLegalPersonUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;

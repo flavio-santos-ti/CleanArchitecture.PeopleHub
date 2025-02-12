@@ -11,7 +11,7 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.Person;
 
-public class UploadPersonPhotoUseCase : BaseAuditableUseCase, IUploadPersonPhotoUseCase
+public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPersonPhotoUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
