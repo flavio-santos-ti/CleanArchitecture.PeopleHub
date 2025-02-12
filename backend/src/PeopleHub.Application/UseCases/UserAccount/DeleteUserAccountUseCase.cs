@@ -10,7 +10,7 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class DeleteUserAccountUseCase : BaseAuditableUseCase, IDeleteUserAccountUseCase
+public class DeleteUserAccountUseCase : BaseLoggingUseCase, IDeleteUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;

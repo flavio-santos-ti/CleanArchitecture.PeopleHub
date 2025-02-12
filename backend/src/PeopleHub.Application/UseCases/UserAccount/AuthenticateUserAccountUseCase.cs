@@ -15,7 +15,7 @@ using System.Text;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class AuthenticateUserAccountUseCase : BaseAuditableUseCase, IAuthenticateUserAccountUseCase
+public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IConfiguration _configuration;
