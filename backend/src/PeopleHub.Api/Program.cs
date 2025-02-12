@@ -7,7 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Configura a AppConfig Layer
 builder.Services.AddAppConfigServices(builder.Configuration);
 
-builder.Services.AddLogging();
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders(); 
+    logging.AddConsole(); 
+    logging.SetMinimumLevel(LogLevel.Debug); 
+});
 
 // Adds support for API versioning
 builder.Services.AddApiVersioning(options =>

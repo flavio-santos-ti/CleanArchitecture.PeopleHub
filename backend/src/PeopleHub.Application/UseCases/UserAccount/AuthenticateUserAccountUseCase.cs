@@ -49,7 +49,8 @@ public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateU
             var secretKey = _configuration["Jwt:Secret"];
 
             if (string.IsNullOrEmpty(secretKey))
-                return ApiResponseDto<object>.Fail("SignIn", "JWT SecretKey is missing in configuration.", 500); // HTTP 500 - Internal Server Error
+                return await ResponseAsync<object>(logAction: LogAction.ERROR, message: "JWT SecretKey is missing in configuration.", userEmail: request.Email);
+
 
             var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
