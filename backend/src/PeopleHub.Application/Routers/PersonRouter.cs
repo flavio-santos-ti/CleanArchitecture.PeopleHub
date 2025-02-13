@@ -5,11 +5,10 @@ using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.IndividualPerson;
 using PeopleHub.Application.Interfaces.LegalPerson;
 using PeopleHub.Application.Interfaces.Person;
-using PeopleHub.Domain.Entities;
 
-namespace PeopleHub.Application.Services;
+namespace PeopleHub.Application.Routers;
 
-public class PersonService : IPersonService
+public class PersonRouter : IPersonRouter
 {
     private readonly IRegisterIndividualPersonUseCase _registerIndividualPersonUseCase;
     private readonly IRegisterLegalPersonUseCase _registerLegalPersonUseCase;
@@ -20,7 +19,7 @@ public class PersonService : IPersonService
     private readonly IUpdateLegalPersonUseCase _updateLegalPersonUseCase;
     private readonly IDeleteLegalPersonUseCase _deleteLegalPersonUseCase;
 
-    public PersonService(
+    public PersonRouter(
         IRegisterIndividualPersonUseCase registerIndividualPersonUseCase,
         IRegisterLegalPersonUseCase registerLegalPersonUseCase,
         IGetIndividualPersonByCpfUseCase getIndividualPersonByCpfUseCase,
