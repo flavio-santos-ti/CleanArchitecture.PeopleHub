@@ -2,11 +2,10 @@
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
 using PeopleHub.Application.Dtos.Response;
-using PeopleHub.Domain.Entities;
 
-namespace PeopleHub.Application.Interfaces.Person;
+namespace PeopleHub.Application.Routers;
 
-public interface IPersonService
+public interface IPersonRouter
 {
     Task<ApiResponseDto<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
     Task<ApiResponseDto<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);

@@ -25,9 +25,6 @@ public class AuthController : ControllerBase
     {
         var response = await _userAccountService.RegisterAsync(request);
 
-        if (!response.IsSuccess)
-            return StatusCode(response.StatusCode, response);
-
         return StatusCode(response.StatusCode, response);
     }
 
@@ -37,9 +34,6 @@ public class AuthController : ControllerBase
     {
         var response = await _userAccountService.AuthenticateAsync(request);
 
-        if (!response.IsSuccess)
-            return StatusCode(response.StatusCode, response);
-
         return StatusCode(response.StatusCode, response);
     }
 
@@ -48,9 +42,6 @@ public class AuthController : ControllerBase
     {
         var response = await _userAccountService.UpdateAsync(request);
 
-        if (!response.IsSuccess)
-            return StatusCode(response.StatusCode, response);
-
         return StatusCode(response.StatusCode, response);
     }
 
@@ -58,9 +49,6 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Delete([FromBody] DeleteUserAccountDto request)
     {
         var response = await _userAccountService.DeleteAsync(request);
-
-        if (!response.IsSuccess)
-            return StatusCode(response.StatusCode, response);
 
         return StatusCode(response.StatusCode, response);
     }

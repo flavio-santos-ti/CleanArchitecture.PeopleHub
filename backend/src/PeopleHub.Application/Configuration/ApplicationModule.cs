@@ -9,6 +9,7 @@ using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.Person;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.Providers;
+using PeopleHub.Application.Routers;
 using PeopleHub.Application.Services;
 using PeopleHub.Application.UseCases.IndividualPerson;
 using PeopleHub.Application.UseCases.LegalPerson;
@@ -169,7 +170,7 @@ namespace PeopleHub.Application.Configuration
             });
 
             // Registration of Services
-            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonRouter, PersonRouter>();
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<IAuditLogService, AuditLogService>();
 
