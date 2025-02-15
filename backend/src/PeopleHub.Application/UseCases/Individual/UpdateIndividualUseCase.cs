@@ -1,24 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Actions;
-using PeopleHub.Application.Dtos.LegalPerson;
+using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.LegalPerson;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Base;
-using PeopleHub.Domain.Entities;
+using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
 
-namespace PeopleHub.Application.UseCases.LegalPerson;
+namespace PeopleHub.Application.UseCases.Individual;
 
-public class RegisterLegalPersonUseCase : BaseLoggingUseCase, IRegisterLegalPersonUseCase
+public class UpdateIndividualUseCase : BaseLoggingUseCase, IUpdateIndividualUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public RegisterLegalPersonUseCase(
+    public UpdateIndividualUseCase(
         IPersonRepository personRepository, 
         IUnitOfWork unitOfWork, 
         IAuditLogService auditLogService, 
@@ -30,52 +29,45 @@ public class RegisterLegalPersonUseCase : BaseLoggingUseCase, IRegisterLegalPers
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request)
+    public async Task<ApiResponseDto<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request)
     {
         try
         {
-            var existingPerson = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
-
-            if (existingPerson != null)
+            var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
+            if (person == null)
                 return await ResponseAsync<bool>(
-                    logAction: LogAction.VALIDATION_ERROR,
+                    logAction: LogAction.NOT_FOUND,
                     eventValue: request,
-                    message: "Person already exists."
+                    message: "Individual Person not found."
                 );
-
-
 
             var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
             var email = new Email(request.Email);
-            var cnpj = new Cnpj(request.Cnpj);
-            var cpf = new Cpf(request.LegalRepresentativeCpf);
+            var cpf = new Cpf(request.Cpf);
 
-            var person = new LegalPersonEntity(
-                request.LegalName,
-                request.TradeName,
-                cnpj,
-                request.StateRegistration,
-                request.MunicipalRegistration,
+            person.UpdateIndividualPerson(
+                request.FullName,
+                request.BirthDate,
+                request.Gender,
                 address,
                 phone,
-                email,
-                request.LegalRepresentativeName,
-                cpf);
+                email
+            );
 
-            await _personRepository.AddAsync(person);
+            await _personRepository.UpdateIndividualAsync(person);
             await _unitOfWork.CommitAsync();
 
             return await ResponseAsync<bool>(
-                logAction: LogAction.CREATE,
-                eventValue: person,
-                message: "Legal Person successfully registered."
+                logAction: LogAction.UPDATE,
+                eventValue: request,
+                oldValue: person,
+                message: "Individual Person updated successfully."
             );
         }
         catch (Exception ex)
         {
             return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
         }
-
     }
 }

@@ -1,9 +1,9 @@
 ﻿using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 
-namespace PeopleHub.Application.Interfaces.IndividualPerson;
+namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
-public interface IDeleteIndividualPersonUseCase
+public interface IDeleteIndividualUseCase
 {
     Task<ApiResponseDto<bool>> ExecuteAsync(DeleteIndividualPersonDto request);
 }

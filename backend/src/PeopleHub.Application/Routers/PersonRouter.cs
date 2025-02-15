@@ -2,32 +2,32 @@
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
 using PeopleHub.Application.Dtos.Response;
-using PeopleHub.Application.Interfaces.IndividualPerson;
-using PeopleHub.Application.Interfaces.LegalPerson;
 using PeopleHub.Application.Interfaces.Person;
+using PeopleHub.Application.UseCases.Individual.Interfaces;
+using PeopleHub.Application.UseCases.Legal.Interfaces;
 
 namespace PeopleHub.Application.Routers;
 
 public class PersonRouter : IPersonRouter
 {
-    private readonly IRegisterIndividualPersonUseCase _registerIndividualPersonUseCase;
-    private readonly IRegisterLegalPersonUseCase _registerLegalPersonUseCase;
-    private readonly IGetIndividualPersonByCpfUseCase _getIndividualPersonByCpfUseCase;
+    private readonly IRegisterIndividualUseCase _registerIndividualPersonUseCase;
+    private readonly IRegisterLegalUseCase _registerLegalPersonUseCase;
+    private readonly IGetIndividualByCpfUseCase _getIndividualPersonByCpfUseCase;
     private readonly IUploadPersonPhotoUseCase _uploadPhotoUseCase;
-    private readonly IUpdateIndividualPersonUseCase _updateIndividualPersonUseCase;
-    private readonly IDeleteIndividualPersonUseCase _deleteIndividualPersonUseCase;
-    private readonly IUpdateLegalPersonUseCase _updateLegalPersonUseCase;
-    private readonly IDeleteLegalPersonUseCase _deleteLegalPersonUseCase;
+    private readonly IUpdateIndividualUseCase _updateIndividualPersonUseCase;
+    private readonly IDeleteIndividualUseCase _deleteIndividualPersonUseCase;
+    private readonly IUpdateLegalUseCase _updateLegalPersonUseCase;
+    private readonly IDeleteLegalUseCase _deleteLegalPersonUseCase;
 
     public PersonRouter(
-        IRegisterIndividualPersonUseCase registerIndividualPersonUseCase,
-        IRegisterLegalPersonUseCase registerLegalPersonUseCase,
-        IGetIndividualPersonByCpfUseCase getIndividualPersonByCpfUseCase,
+        IRegisterIndividualUseCase registerIndividualPersonUseCase,
+        IRegisterLegalUseCase registerLegalPersonUseCase,
+        IGetIndividualByCpfUseCase getIndividualPersonByCpfUseCase,
         IUploadPersonPhotoUseCase uploadPhotoUseCase,
-        IUpdateIndividualPersonUseCase updateIndividualPersonUseCase,
-        IDeleteIndividualPersonUseCase deleteIndividualPersonUseCase,
-        IUpdateLegalPersonUseCase updateLegalPersonUseCase,
-        IDeleteLegalPersonUseCase deleteLegalPersonUseCase)
+        IUpdateIndividualUseCase updateIndividualPersonUseCase,
+        IDeleteIndividualUseCase deleteIndividualPersonUseCase,
+        IUpdateLegalUseCase updateLegalPersonUseCase,
+        IDeleteLegalUseCase deleteLegalPersonUseCase)
     {
         _registerIndividualPersonUseCase = registerIndividualPersonUseCase;
         _registerLegalPersonUseCase = registerLegalPersonUseCase;
