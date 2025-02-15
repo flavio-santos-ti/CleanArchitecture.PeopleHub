@@ -1,9 +1,9 @@
 ﻿using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Response;
 
-namespace PeopleHub.Application.Interfaces.LegalPerson;
+namespace PeopleHub.Application.UseCases.Legal.Interfaces;
 
-public interface IDeleteLegalPersonUseCase
+public interface IDeleteLegalUseCase
 {
     Task<ApiResponseDto<bool>> ExecuteAsync(DeleteLegalPersonDto request);
 }

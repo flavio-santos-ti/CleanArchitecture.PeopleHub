@@ -3,16 +3,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.IndividualPerson;
-using PeopleHub.Application.Interfaces.LegalPerson;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.Person;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.Providers;
 using PeopleHub.Application.Routers;
 using PeopleHub.Application.Services;
-using PeopleHub.Application.UseCases.IndividualPerson;
-using PeopleHub.Application.UseCases.LegalPerson;
+using PeopleHub.Application.UseCases.Individual;
+using PeopleHub.Application.UseCases.Individual.Interfaces;
+using PeopleHub.Application.UseCases.Legal;
+using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Application.UseCases.Person;
 using PeopleHub.Application.UseCases.UserAccount;
 using PeopleHub.Domain.Interfaces;
@@ -74,9 +74,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IRegisterLegalPersonUseCase>(provider =>
+            services.AddScoped<IRegisterLegalUseCase>(provider =>
             {
-                return new RegisterLegalPersonUseCase(
+                return new RegisterLegalUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),
@@ -86,9 +86,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IDeleteLegalPersonUseCase>(provider =>
+            services.AddScoped<IDeleteLegalUseCase>(provider =>
             {
-                return new DeleteLegalPersonUseCase(
+                return new DeleteLegalUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),
@@ -98,9 +98,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IUpdateLegalPersonUseCase>(provider =>
+            services.AddScoped<IUpdateLegalUseCase>(provider =>
             {
-                return new UpdateLegalPersonUseCase(
+                return new UpdateLegalUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),
@@ -110,9 +110,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IRegisterIndividualPersonUseCase>(provider =>
+            services.AddScoped<IRegisterIndividualUseCase>(provider =>
             {
-                return new RegisterIndividualPersonUseCase(
+                return new RegisterIndividualUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),
@@ -122,9 +122,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IUpdateIndividualPersonUseCase>(provider =>
+            services.AddScoped<IUpdateIndividualUseCase>(provider =>
             {
-                return new UpdateIndividualPersonUseCase(
+                return new UpdateIndividualUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),
@@ -134,9 +134,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IDeleteIndividualPersonUseCase>(provider =>
+            services.AddScoped<IDeleteIndividualUseCase>(provider =>
             {
-                return new DeleteIndividualPersonUseCase(
+                return new DeleteIndividualUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -146,9 +146,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IGetIndividualPersonByCpfUseCase>(provider =>
+            services.AddScoped<IGetIndividualByCpfUseCase>(provider =>
             {
-                return new GetIndividualPersonByCpfUseCase(
+                return new GetIndividualByCpfUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IAuditLogService>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),

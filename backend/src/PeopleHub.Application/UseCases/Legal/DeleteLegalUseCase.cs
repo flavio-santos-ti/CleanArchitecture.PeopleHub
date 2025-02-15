@@ -1,51 +1,50 @@
 ﻿using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Actions;
-using PeopleHub.Application.Dtos.IndividualPerson;
+using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.IndividualPerson;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Base;
+using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Domain.Interfaces;
 
-namespace PeopleHub.Application.UseCases.IndividualPerson;
+namespace PeopleHub.Application.UseCases.Legal;
 
-public class DeleteIndividualPersonUseCase : BaseLoggingUseCase, IDeleteIndividualPersonUseCase
+public class DeleteLegalUseCase : BaseLoggingUseCase, IDeleteLegalUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-
-    public DeleteIndividualPersonUseCase(
+    public DeleteLegalUseCase(
         IPersonRepository personRepository, 
         IUnitOfWork unitOfWork, 
-        IAuthenticatedUserAccountService authenticatedUserService, 
+        IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
-        IAuditLogService auditLogService,
+        IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider) : base(auditLogService, httpContextAccessor, authenticatedUserService, contextProvider)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(DeleteIndividualPersonDto request)
+    public async Task<ApiResponseDto<bool>> ExecuteAsync(DeleteLegalPersonDto request)
     {
         try
         {
-            var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
+            var person = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
             if (person == null)
                 return await ResponseAsync<bool>(
                     logAction: LogAction.NOT_FOUND,
                     eventValue: request,
-                    message: "Individual Person not found."
+                    message: "Legal Person not found."
                 );
 
-            await _personRepository.DeleteIndividualAsync(person);
+            await _personRepository.DeleteLegalAsync(person);
             await _unitOfWork.CommitAsync();
 
             return await ResponseAsync<bool>(
-                logAction: LogAction.DELETE,
+                logAction: Actions.LogAction.DELETE,
                 eventValue: request,
                 oldValue: person,
                 message: "Legal Person has been successfully removed."
