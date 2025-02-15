@@ -1,9 +1,9 @@
 ﻿using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.Response;
 
-namespace PeopleHub.Application.Interfaces.IndividualPerson;
+namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
-public interface IUpdateIndividualPersonUseCase
+public interface IUpdateIndividualUseCase
 {
     Task<ApiResponseDto<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request);
 }
