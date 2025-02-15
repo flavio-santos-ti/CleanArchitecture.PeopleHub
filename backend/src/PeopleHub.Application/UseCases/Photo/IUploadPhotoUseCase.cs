@@ -1,9 +1,9 @@
 ﻿using PeopleHub.Application.Dtos.Person;
 using PeopleHub.Application.Dtos.Response;
 
-namespace PeopleHub.Application.Interfaces.Person;
+namespace PeopleHub.Application.UseCases.Photo;
 
-public interface IUploadPersonPhotoUseCase
+public interface IUploadPhotoUseCase
 {
     Task<ApiResponseDto<bool>> ExecuteAsync(UploadPersonPhotoDto request);
 }
