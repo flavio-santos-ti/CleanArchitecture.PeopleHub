@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
-using PeopleHub.Application.Interfaces.Person;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.Providers;
 using PeopleHub.Application.Routers;
@@ -13,7 +12,7 @@ using PeopleHub.Application.UseCases.Individual;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Application.UseCases.Legal;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
-using PeopleHub.Application.UseCases.Person;
+using PeopleHub.Application.UseCases.Photo;
 using PeopleHub.Application.UseCases.UserAccount;
 using PeopleHub.Domain.Interfaces;
 
@@ -157,7 +156,7 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IUploadPersonPhotoUseCase>(provider =>
+            services.AddScoped<IUploadPhotoUseCase>(provider =>
             {
                 return new UploadPersonPhotoUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
