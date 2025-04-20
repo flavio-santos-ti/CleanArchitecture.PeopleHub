@@ -4,6 +4,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)
 ![Clean Architecture](https://img.shields.io/badge/Clean%20Architecture-Design%20Pattern-blue)
 ![SOLID](https://img.shields.io/badge/SOLID-Design%20Principles-orange)
+![Entity Framework Core](https://img.shields.io/badge/-Entity_Framework_Core-777?logo=Microsoft&logoColor=0078D7&style=flat)
 
 ## 📌 About the Project
 **PeopleHub** is a Proof of Concept (PoC) for an API developed in **.NET 8**, following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)** to ensure a modular, testable, and easily maintainable codebase. 
