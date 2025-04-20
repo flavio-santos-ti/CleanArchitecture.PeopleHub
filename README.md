@@ -1,6 +1,7 @@
 # Clean Architecture – Implementation in .NET
 
 ![.NET Core](https://img.shields.io/badge/.NET%20Core-8.0-blueviolet?style=flat&logo=dotnet) 
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?logo=postgresql)
 
 ## 📌 About the Project
 **PeopleHub** is a Proof of Concept (PoC) for an API developed in **.NET 8**, following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)** to ensure a modular, testable, and easily maintainable codebase. 
