@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PeopleHub.Application.Actions;
@@ -32,25 +34,20 @@ public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateU
         _configuration = configuration;
     }
 
-    public async Task<ApiResponseDto<object>> ExecuteAsync(UserAccountLoginDto request)
+    public async Task<Response<object>> ExecuteAsync(UserAccountLoginDto request)
     {
         try
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                return await ResponseAsync<object>(
-                    logAction: LogAction.VALIDATION_ERROR,
-                    eventValue: request,
-                    message: "Invalid email or password."
-                );
+                return Result.CreateValidationError<object>("Invalid email or password.");
 
             // JWT Configuration.
             var secretKey = _configuration["Jwt:Secret"];
 
             if (string.IsNullOrEmpty(secretKey))
-                return await ResponseAsync<object>(logAction: LogAction.ERROR, message: "JWT SecretKey is missing in configuration.", userEmail: request.Email);
-
+                return Result.CreateValidationError<object>("JWT SecretKey is missing in configuration.");
 
             var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -70,16 +67,12 @@ public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateU
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var jwtToken = tokenHandler.WriteToken(token);
 
-            return await ResponseAsync<object>(
-                logAction: LogAction.LOGIN_SUCCESS,
-                message: "Login successful.",
-                data: jwtToken,
-                userEmail: request.Email
-            );
+            return Result.CreateLoginSuccess<object>(jwtToken);
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<object>(logAction: LogAction.ERROR, message: ex.Message, userEmail: request.Email);
+            string msg = $"An unexpected error occurred: {ex.Message}"; 
+            return Result.CreateError<object>(msg);
         }
     } 
 }
