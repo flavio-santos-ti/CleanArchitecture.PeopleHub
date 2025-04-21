@@ -7,6 +7,7 @@
 ![Entity Framework Core](https://img.shields.io/badge/-Entity_Framework_Core-777?logo=Microsoft&logoColor=0078D7&style=flat)
 ![Docker](https://img.shields.io/badge/Docker-Container_Platform-blue?logo=docker)
 ![BCrypt.Net-Next](https://img.shields.io/badge/BCrypt.Net--Next-4.0.3-blueviolet?style=flat&logo=nuget)
+![NuGet](https://img.shields.io/nuget/v/Flavio.Santos.NetCore.ApiResponse.svg)
 
 
 ## 📌 About the Project
