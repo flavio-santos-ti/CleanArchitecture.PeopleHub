@@ -7,9 +7,10 @@
 ![Entity Framework Core](https://img.shields.io/badge/-Entity_Framework_Core-777?logo=Microsoft&logoColor=0078D7&style=flat)
 ![Docker](https://img.shields.io/badge/Docker-Container_Platform-blue?logo=docker)
 ![BCrypt.Net-Next](https://img.shields.io/badge/BCrypt.Net--Next-4.0.3-blueviolet?style=flat&logo=nuget)
-![NuGet Api Response](https://img.shields.io/nuget/v/Flavio.Santos.NetCore.ApiResponse.svg)
-![NuGet Api Response Downloads](https://img.shields.io/nuget/dt/Flavio.Santos.NetCore.ApiResponse.svg)
-
+![NuGet Api Response](https://img.shields.io/badge/NuGet_Api_Response-v1.0.16-blue?logo=nuget)
+![NuGet Api Response Downloads](https://img.shields.io/badge/NuGet_Api_Response_Downloads-3.6k-brightgreen?logo=nuget)
+[![NuGet](https://img.shields.io/nuget/v/Flavio.Santos.NetCore.ApiResponse.svg)](https://www.nuget.org/packages/Flavio.Santos.NetCore.ApiResponse/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Flavio.Santos.NetCore.ApiResponse.svg)](https://www.nuget.org/packages/Flavio.Santos.NetCore.ApiResponse/)
 
 ## 📌 About the Project
 **PeopleHub** is a Proof of Concept (PoC) for an API developed in **.NET 8**, following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)** to ensure a modular, testable, and easily maintainable codebase. 
