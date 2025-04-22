@@ -1,9 +1,9 @@
-﻿using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
 using PeopleHub.Application.Dtos.UserAccount;
 
 namespace PeopleHub.Application.Interfaces.UserAccount;
 
 public interface IDeleteUserAccountUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(DeleteUserAccountDto request);
+    Task<Response<bool>> ExecuteAsync(DeleteUserAccountDto request);
 }
