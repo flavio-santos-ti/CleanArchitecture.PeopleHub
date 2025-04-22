@@ -39,7 +39,7 @@ public class UserAccountService : IUserAccountService
         return  await _updateUserAccountUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> DeleteAsync(DeleteUserAccountDto request)
+    public async Task<Response<bool>> DeleteAsync(DeleteUserAccountDto request)
     {
         return await _deleteUserAccountUseCase.ExecuteAsync(request);
     }
