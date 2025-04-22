@@ -9,5 +9,5 @@ public interface IUserAccountService
     Task<ApiResponseDto<bool>> RegisterAsync(RegisterUserAccountDto request);
     Task<Response<object>> AuthenticateAsync(UserAccountLoginDto request);
     Task<ApiResponseDto<bool>> UpdateAsync(UpdateUserAccountDto request);
-    Task<ApiResponseDto<bool>> DeleteAsync(DeleteUserAccountDto request);
+    Task<Response<bool>> DeleteAsync(DeleteUserAccountDto request);
 }

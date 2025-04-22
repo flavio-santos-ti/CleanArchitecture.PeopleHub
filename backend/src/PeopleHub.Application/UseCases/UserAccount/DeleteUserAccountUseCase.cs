@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Actions;
-using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
@@ -27,17 +27,13 @@ public class DeleteUserAccountUseCase : BaseLoggingUseCase, IDeleteUserAccountUs
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(DeleteUserAccountDto request)
+    public async Task<Response<bool>> ExecuteAsync(DeleteUserAccountDto request)
     {
         try
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.NOT_FOUND,
-                    eventValue: request,
-                    message: "User not found."
-                );
+                return Result.CreateNotFound<bool>("User not found.");
 
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
@@ -45,16 +41,11 @@ public class DeleteUserAccountUseCase : BaseLoggingUseCase, IDeleteUserAccountUs
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
 
-            return await ResponseAsync<bool>(
-                logAction: LogAction.DELETE,
-                eventValue: request,
-                oldValue: user,
-                message: "Account has been successfully removed."
-            );
+            return Result.CreateRemove<bool>("Account has been successfully removed.");
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
+            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
         }
     }
 }
