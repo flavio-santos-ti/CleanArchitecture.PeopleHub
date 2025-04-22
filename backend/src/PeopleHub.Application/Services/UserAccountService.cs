@@ -1,4 +1,5 @@
-﻿using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.UserAccount;
 
@@ -28,7 +29,7 @@ public class UserAccountService : IUserAccountService
         return await _registerUserAccountUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<object>> AuthenticateAsync(UserAccountLoginDto request)
+    public async Task<Response<object>> AuthenticateAsync(UserAccountLoginDto request)
     {
         return await _authenticateUserAccountUseCase.ExecuteAsync(request);
     }
