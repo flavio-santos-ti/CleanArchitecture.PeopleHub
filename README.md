@@ -8,7 +8,7 @@
 ![Docker](https://img.shields.io/badge/Docker-Container_Platform-blue?logo=docker)
 ![BCrypt.Net-Next](https://img.shields.io/badge/BCrypt.Net--Next-4.0.3-blueviolet?style=flat&logo=nuget)
 [![NuGet ApiResponse](https://img.shields.io/nuget/v/Flavio.Santos.NetCore.ApiResponse?label=NuGet%20ApiResponse)](https://www.nuget.org/packages/Flavio.Santos.NetCore.ApiResponse/)
-![NuGet Api Response Downloads](https://img.shields.io/badge/NuGet_Api_Response_Downloads-3.6k-brightgreen?logo=nuget)
+![Nuget ApiResponse Downloads](https://img.shields.io/nuget/dt/Flavio.Santos.NetCore.ApiResponse?label=Downloads%20ApiResponse)
 [![NuGet](https://img.shields.io/nuget/v/Flavio.Santos.NetCore.ApiResponse.svg)](https://www.nuget.org/packages/Flavio.Santos.NetCore.ApiResponse/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Flavio.Santos.NetCore.ApiResponse.svg)](https://www.nuget.org/packages/Flavio.Santos.NetCore.ApiResponse/)
 
