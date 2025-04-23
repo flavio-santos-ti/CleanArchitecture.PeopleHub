@@ -1,8 +1,6 @@
 ﻿using FDS.NetCore.ApiResponse.Models;
 using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Actions;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
