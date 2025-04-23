@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
@@ -28,18 +30,14 @@ public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccou
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(RegisterUserAccountDto request)
+    public async Task<Response<UserAccountEntity>> ExecuteAsync(RegisterUserAccountDto request)
     {
         try
         {
             var existingUser = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (existingUser != null)
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.VALIDATION_ERROR,
-                    eventValue: request,
-                    message: "User already exists.",
-                    userEmail: request.Email
-                );
+                return Result.CreateValidationError<UserAccountEntity>("User already exists.");
+
 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
             var user = new UserAccountEntity(request.Email, hashedPassword);
@@ -47,16 +45,11 @@ public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccou
             await _userAccountRepository.AddAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return await ResponseAsync<bool>(
-                logAction: LogAction.CREATE,
-                eventValue: user,
-                message: "User registered successfully.",
-                userEmail: request.Email
-            );
+            return Result.CreateAdd("User registered successfully.", user);
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
+            return Result.CreateError<UserAccountEntity>($"An unexpected error occurred: {ex.Message}");
         }
     }
 }
