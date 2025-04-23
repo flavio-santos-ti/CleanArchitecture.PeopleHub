@@ -1,9 +1,11 @@
-﻿using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
+using PeopleHub.Domain.Entities;
 
 namespace PeopleHub.Application.Interfaces.UserAccount;
 
 public interface IRegisterUserAccountUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(RegisterUserAccountDto request);
+    Task<Response<UserAccountEntity>> ExecuteAsync(RegisterUserAccountDto request);
 }

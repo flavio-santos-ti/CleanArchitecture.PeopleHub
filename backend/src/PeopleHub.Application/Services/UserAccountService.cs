@@ -2,6 +2,7 @@
 using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Domain.Entities;
 
 namespace PeopleHub.Application.Services;
 
@@ -24,7 +25,7 @@ public class UserAccountService : IUserAccountService
         _deleteUserAccountUseCase = deleteUserAccountUseCase;
     }
 
-    public async Task<ApiResponseDto<bool>> RegisterAsync(RegisterUserAccountDto request)
+    public async Task<Response<UserAccountEntity>> RegisterAsync(RegisterUserAccountDto request)
     {
         return await _registerUserAccountUseCase.ExecuteAsync(request);
     }
