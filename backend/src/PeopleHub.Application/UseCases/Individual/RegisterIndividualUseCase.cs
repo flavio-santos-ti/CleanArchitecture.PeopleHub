@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Actions;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.IndividualPerson;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
@@ -37,13 +37,7 @@ public class RegisterIndividualUseCase : BaseLoggingUseCase, IRegisterIndividual
             var existingPerson = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
 
             if (existingPerson != null)
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.VALIDATION_ERROR,
-                    eventValue: request,
-                    message: "Person already exists."
-                );
-
-
+                return Result.CreateValidationError<bool>("Person already exists.");
 
             var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
@@ -63,15 +57,11 @@ public class RegisterIndividualUseCase : BaseLoggingUseCase, IRegisterIndividual
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await ResponseAsync<bool>(
-                logAction: LogAction.CREATE,
-                eventValue: person,
-                message: "Individual Person successfully registered."
-            );
+            return Result.CreateAdd<bool>("User registered successfully.");
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
+            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
         }
     }
 }
