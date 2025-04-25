@@ -1,5 +1,5 @@
-﻿using PeopleHub.Application.Dtos.IndividualPerson;
-using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.IndividualPerson;
 
 namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
