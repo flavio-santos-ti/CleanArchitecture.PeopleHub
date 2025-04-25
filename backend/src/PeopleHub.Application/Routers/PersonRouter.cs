@@ -59,7 +59,7 @@ public class PersonRouter : IPersonRouter
         return await _uploadPhotoUseCase.ExecuteAsync(request);
     }
 
-    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
+    public async Task<Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
     {
         return await _updateIndividualPersonUseCase.ExecuteAsync(request);
     }
