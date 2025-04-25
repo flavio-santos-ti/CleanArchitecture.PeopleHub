@@ -7,7 +7,7 @@ namespace PeopleHub.Application.Routers;
 
 public interface IPersonRouter
 {
-    Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
+    Task<Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);
     Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);
