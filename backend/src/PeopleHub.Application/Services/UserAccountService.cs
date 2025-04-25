@@ -1,5 +1,4 @@
 ﻿using FDS.NetCore.ApiResponse.Models;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Domain.Entities;
@@ -25,22 +24,22 @@ public class UserAccountService : IUserAccountService
         _deleteUserAccountUseCase = deleteUserAccountUseCase;
     }
 
-    public async Task<Response<UserAccountEntity>> RegisterAsync(RegisterUserAccountDto request)
+    public async Task<FDS.NetCore.ApiResponse.Models.Response<UserAccountEntity>> RegisterAsync(RegisterUserAccountDto request)
     {
         return await _registerUserAccountUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<object>> AuthenticateAsync(UserAccountLoginDto request)
+    public async Task<FDS.NetCore.ApiResponse.Models.Response<object>> AuthenticateAsync(UserAccountLoginDto request)
     {
         return await _authenticateUserAccountUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> UpdateAsync(UpdateUserAccountDto request)
+    public async Task<Response<bool>> UpdateAsync(UpdateUserAccountDto request)
     {
         return  await _updateUserAccountUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> DeleteAsync(DeleteUserAccountDto request)
+    public async Task<FDS.NetCore.ApiResponse.Models.Response<bool>> DeleteAsync(DeleteUserAccountDto request)
     {
         return await _deleteUserAccountUseCase.ExecuteAsync(request);
     }

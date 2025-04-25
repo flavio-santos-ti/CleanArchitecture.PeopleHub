@@ -29,7 +29,7 @@ public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(UpdateLegalPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(UpdateLegalPersonRequestDto request)
     {
         try
         {

@@ -1,9 +1,9 @@
-﻿using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
 using PeopleHub.Application.Dtos.UserAccount;
 
 namespace PeopleHub.Application.Interfaces.UserAccount;
 
 public interface IUpdateUserAccountUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(UpdateUserAccountDto request);
+    Task<Response<bool>> ExecuteAsync(UpdateUserAccountDto request);
 }

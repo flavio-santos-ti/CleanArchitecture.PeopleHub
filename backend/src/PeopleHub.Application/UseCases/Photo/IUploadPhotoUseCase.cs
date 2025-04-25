@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Photo;
 
 public interface IUploadPhotoUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(UploadPersonPhotoDto request);
+    Task<Response<bool>> ExecuteAsync(UploadPersonPhotoDto request);
 }

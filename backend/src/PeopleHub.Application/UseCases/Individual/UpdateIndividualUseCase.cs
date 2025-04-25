@@ -29,7 +29,7 @@ public class UpdateIndividualUseCase : BaseLoggingUseCase, IUpdateIndividualUseC
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request)
     {
         try
         {

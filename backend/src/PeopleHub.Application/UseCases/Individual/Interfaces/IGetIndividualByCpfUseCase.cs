@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
 public interface IGetIndividualByCpfUseCase
 {
-    Task<ApiResponseDto<IndividualPersonDto?>> ExecuteAsync(string cpf);
+    Task<Response<IndividualPersonDto?>> ExecuteAsync(string cpf);
 }
