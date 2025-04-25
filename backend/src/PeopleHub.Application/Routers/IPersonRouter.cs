@@ -1,18 +1,18 @@
-﻿using PeopleHub.Application.Dtos.IndividualPerson;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
-using PeopleHub.Application.Dtos.Response;
 
 namespace PeopleHub.Application.Routers;
 
 public interface IPersonRouter
 {
-    Task<Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
-    Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);
-    Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
-    Task<Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);
-    Task<Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request);
     Task<Response<bool>> DeleteIndividualAsync(DeleteIndividualPersonDto request);
-    Task<Response<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request);
-    Task<Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request);
+    Task<PeopleHub.Application.Dtos.Response.Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request);
 }

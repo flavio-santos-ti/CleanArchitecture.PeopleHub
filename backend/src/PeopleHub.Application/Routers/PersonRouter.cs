@@ -1,7 +1,7 @@
-﻿using PeopleHub.Application.Dtos.IndividualPerson;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Application.UseCases.Photo;
@@ -39,27 +39,27 @@ public class PersonRouter : IPersonRouter
         _deleteLegalPersonUseCase = deleteLegalPersonUseCase;
     }
 
-    public async Task<Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request)
     {
         return await _registerIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
     {
         return await _registerLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
     {
         return await _getIndividualPersonByCpfUseCase.ExecuteAsync(cpf);
     }
 
-    public async Task<Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
     {
         return await _uploadPhotoUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
     {
         return await _updateIndividualPersonUseCase.ExecuteAsync(request);
     }
@@ -69,12 +69,12 @@ public class PersonRouter : IPersonRouter
         return await _deleteIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request)
     {
         return await _updateLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
+    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
     {
         return await _deleteLegalPersonUseCase.ExecuteAsync(request);
     }
