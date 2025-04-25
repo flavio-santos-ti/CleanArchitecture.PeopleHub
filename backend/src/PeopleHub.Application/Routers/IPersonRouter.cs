@@ -9,7 +9,7 @@ public interface IPersonRouter
 {
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request);
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request);
-    Task<PeopleHub.Application.Dtos.Response.Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
+    Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);
     Task<PeopleHub.Application.Dtos.Response.Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request);
     Task<Response<bool>> DeleteIndividualAsync(DeleteIndividualPersonDto request);
