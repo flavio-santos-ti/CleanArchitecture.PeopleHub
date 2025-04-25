@@ -74,7 +74,7 @@ public class PersonRouter : IPersonRouter
         return await _updateLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
+    public async Task<Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
     {
         return await _deleteLegalPersonUseCase.ExecuteAsync(request);
     }
