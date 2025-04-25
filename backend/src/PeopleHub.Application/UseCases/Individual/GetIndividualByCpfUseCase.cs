@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.IndividualPerson;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
@@ -33,28 +34,15 @@ public class GetIndividualByCpfUseCase : BaseLoggingUseCase, IGetIndividualByCpf
         var validationError = Cpf.Validate(cleanedCpf);
 
         if (validationError != null)
-            return await ResponseAsync<IndividualPersonDto?>(
-                logAction: LogAction.VALIDATION_ERROR,
-                eventValue: cleanedCpf,
-                message: validationError
-            );
+            return Result.CreateValidationError<IndividualPersonDto?>(validationError);
 
         var person = await _personRepository.GetIndividualByCpfAsync(cleanedCpf);
 
         if (person == null)
-            return await ResponseAsync<IndividualPersonDto?>(
-                logAction: LogAction.NOT_FOUND,
-                eventValue: cpf,
-                message: "Individual Person not found."
-            );
+            return Result.CreateNotFound<IndividualPersonDto?>("Individual Person not found.");
 
         var personDto = new IndividualPersonDto(person);
 
-        return await ResponseAsync<IndividualPersonDto?>(
-            logAction: LogAction.READ,
-            eventValue: person,
-            message: "Individual person retrieved successfully.",
-            data: personDto
-        );
+        return Result.CreateGet<IndividualPersonDto?>("Individual person retrieved successfully.", personDto);
     }
 }
