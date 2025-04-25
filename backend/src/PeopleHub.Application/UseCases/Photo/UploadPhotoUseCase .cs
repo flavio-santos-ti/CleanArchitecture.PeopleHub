@@ -27,7 +27,7 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(UploadPersonPhotoDto request)
+    public async Task<Response<bool>> ExecuteAsync(UploadPersonPhotoDto request)
     {
         try
         {

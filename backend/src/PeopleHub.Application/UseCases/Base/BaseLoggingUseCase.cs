@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.Log;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
@@ -65,7 +64,7 @@ public abstract class BaseLoggingUseCase : BaseUseCase
         await _auditLogService.RegisterLogAsync(log);
     }
 
-    protected async Task<ApiResponseDto<T>> ResponseAsync<T>(
+    protected async Task<PeopleHub.Application.Dtos.Response.Response<T>> ResponseAsync<T>(
         LogAction logAction,
         string message,
         object? eventValue = default,
@@ -123,6 +122,6 @@ public abstract class BaseLoggingUseCase : BaseUseCase
         };
 
         await RegisterLogAsync(logAction, _contextName, httpStatusCode, eventData: logData, userEmail);
-        return ApiResponseDto<T>.Response(_contextName, message, httpStatusCode, data);
+        return PeopleHub.Application.Dtos.Response.Response<T>.Create(_contextName, message, httpStatusCode, data);
     }
 }

@@ -39,42 +39,42 @@ public class PersonRouter : IPersonRouter
         _deleteLegalPersonUseCase = deleteLegalPersonUseCase;
     }
 
-    public async Task<ApiResponseDto<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request)
     {
         return await _registerIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
     {
         return await _registerLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
+    public async Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
     {
         return await _getIndividualPersonByCpfUseCase.ExecuteAsync(cpf);
     }
 
-    public async Task<ApiResponseDto<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
+    public async Task<Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
     {
         return await _uploadPhotoUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
+    public async Task<Response<bool>> UpdateIndividualAsync(UpdateIndividualPersonRequestDto request)
     {
         return await _updateIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> DeleteIndividualAsync(DeleteIndividualPersonDto request)
+    public async Task<Response<bool>> DeleteIndividualAsync(DeleteIndividualPersonDto request)
     {
         return await _deleteIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request)
+    public async Task<Response<bool>> UpdateLegalAsync(UpdateLegalPersonRequestDto request)
     {
         return await _updateLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<ApiResponseDto<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
+    public async Task<Response<bool>> DeleteLegalAsync(DeleteLegalPersonDto request)
     {
         return await _deleteLegalPersonUseCase.ExecuteAsync(request);
     }

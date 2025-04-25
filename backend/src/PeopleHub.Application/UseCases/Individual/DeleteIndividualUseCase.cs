@@ -29,7 +29,7 @@ public class DeleteIndividualUseCase : BaseLoggingUseCase, IDeleteIndividualUseC
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(DeleteIndividualPersonDto request)
+    public async Task<Response<bool>> ExecuteAsync(DeleteIndividualPersonDto request)
     {
         try
         {

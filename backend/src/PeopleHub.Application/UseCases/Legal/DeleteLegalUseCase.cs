@@ -28,7 +28,7 @@ public class DeleteLegalUseCase : BaseLoggingUseCase, IDeleteLegalUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(DeleteLegalPersonDto request)
+    public async Task<Response<bool>> ExecuteAsync(DeleteLegalPersonDto request)
     {
         try
         {

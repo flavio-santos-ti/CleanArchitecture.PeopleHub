@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Legal.Interfaces;
 
 public interface IDeleteLegalUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(DeleteLegalPersonDto request);
+    Task<Response<bool>> ExecuteAsync(DeleteLegalPersonDto request);
 }
