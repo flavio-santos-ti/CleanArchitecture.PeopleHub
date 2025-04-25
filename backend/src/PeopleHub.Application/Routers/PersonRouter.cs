@@ -49,7 +49,7 @@ public class PersonRouter : IPersonRouter
         return await _registerLegalPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<PeopleHub.Application.Dtos.Response.Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
+    public async Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)
     {
         return await _getIndividualPersonByCpfUseCase.ExecuteAsync(cpf);
     }
