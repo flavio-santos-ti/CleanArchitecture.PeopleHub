@@ -30,7 +30,7 @@ public class RegisterLegalUseCase : BaseLoggingUseCase, IRegisterLegalUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request)
     {
         try
         {

@@ -27,7 +27,7 @@ public class GetIndividualByCpfUseCase : BaseLoggingUseCase, IGetIndividualByCpf
         _personRepository = personRepository;
     }
 
-    public async Task<ApiResponseDto<IndividualPersonDto?>> ExecuteAsync(string cpf)
+    public async Task<Response<IndividualPersonDto?>> ExecuteAsync(string cpf)
     {
         var cleanedCpf = Cpf.Clean(cpf);
         var validationError = Cpf.Validate(cleanedCpf);

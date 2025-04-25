@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
 public interface IUpdateIndividualUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request);
+    Task<Response<bool>> ExecuteAsync(UpdateIndividualPersonRequestDto request);
 }

@@ -2,7 +2,7 @@
 
 namespace PeopleHub.Application.Dtos.Response;
 
-public class ApiResponseDto<T>
+public class Response<T>
 {
     public string ContextName { get; }
     public bool IsSuccess { get; }
@@ -12,7 +12,7 @@ public class ApiResponseDto<T>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public T? Data { get; }
 
-    public ApiResponseDto(string contextName, bool isSuccess, string message, int statusCode, T? data = default)
+    public Response(string contextName, bool isSuccess, string message, int statusCode, T? data = default)
     {
         ContextName = contextName;
         IsSuccess = isSuccess;
@@ -21,8 +21,8 @@ public class ApiResponseDto<T>
         Data = data;
     }
 
-    public static ApiResponseDto<T> Response(string contextName, string message = "Success", int statusCode = 200, T? data = default)
+    public static Response<T> Create(string contextName, string message = "Success", int statusCode = 200, T? data = default)
     {
-        return new ApiResponseDto<T>(contextName, true, message, statusCode, data);
+        return new Response<T>(contextName, true, message, statusCode, data);
     }
 }

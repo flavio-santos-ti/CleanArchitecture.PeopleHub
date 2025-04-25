@@ -30,7 +30,7 @@ public class RegisterIndividualUseCase : BaseLoggingUseCase, IRegisterIndividual
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ApiResponseDto<bool>> ExecuteAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(RegisterIndividualPersonRequestDto request)
     { 
         try
         {

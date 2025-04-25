@@ -1,5 +1,4 @@
 ﻿using FDS.NetCore.ApiResponse.Models;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Domain.Entities;
 

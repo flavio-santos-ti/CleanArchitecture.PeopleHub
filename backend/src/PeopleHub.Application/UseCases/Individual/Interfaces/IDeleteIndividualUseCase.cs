@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
 public interface IDeleteIndividualUseCase
 {
-    Task<ApiResponseDto<bool>> ExecuteAsync(DeleteIndividualPersonDto request);
+    Task<Response<bool>> ExecuteAsync(DeleteIndividualPersonDto request);
 }
