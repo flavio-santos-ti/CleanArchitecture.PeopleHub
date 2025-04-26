@@ -20,9 +20,4 @@ public class Response<T>
         StatusCode = statusCode;
         Data = data;
     }
-
-    public static Response<T> Create(string contextName, string message = "Success", int statusCode = 200, T? data = default)
-    {
-        return new Response<T>(contextName, true, message, statusCode, data);
-    }
 }
