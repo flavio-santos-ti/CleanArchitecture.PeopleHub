@@ -54,7 +54,7 @@ public class PersonRouter : IPersonRouter
         return await _getIndividualPersonByCpfUseCase.ExecuteAsync(cpf);
     }
 
-    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
+    public async Task<Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request)
     {
         return await _uploadPhotoUseCase.ExecuteAsync(request);
     }

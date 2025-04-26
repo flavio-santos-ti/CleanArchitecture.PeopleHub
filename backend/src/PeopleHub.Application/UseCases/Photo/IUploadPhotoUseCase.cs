@@ -1,5 +1,5 @@
-﻿using PeopleHub.Application.Dtos.Person;
-using PeopleHub.Application.Dtos.Response;
+﻿using FDS.NetCore.ApiResponse.Models;
+using PeopleHub.Application.Dtos.Person;
 
 namespace PeopleHub.Application.UseCases.Photo;
 
