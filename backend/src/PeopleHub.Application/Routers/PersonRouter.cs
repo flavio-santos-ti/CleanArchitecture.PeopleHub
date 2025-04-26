@@ -44,7 +44,7 @@ public class PersonRouter : IPersonRouter
         return await _registerIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<PeopleHub.Application.Dtos.Response.Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
     {
         return await _registerLegalPersonUseCase.ExecuteAsync(request);
     }
