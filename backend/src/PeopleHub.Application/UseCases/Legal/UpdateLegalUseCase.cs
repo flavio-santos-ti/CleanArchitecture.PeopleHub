@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.LegalPerson;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
@@ -35,11 +36,7 @@ public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
         {
             var person = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
             if (person == null)
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.NOT_FOUND,
-                    eventValue: request,
-                    message: "Legal Person not found."
-                );
+                return Result.CreateNotFound<bool>("Legal Person not found.");
 
             person.UpdateLegalPerson(
                 request.LegalName,
@@ -56,16 +53,11 @@ public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
             await _personRepository.UpdateLegalAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return await ResponseAsync<bool>(
-                logAction: LogAction.UPDATE,
-                eventValue: request,
-                oldValue: person,
-                message: "Legal Person updated successfully."
-            );
+            return Result.CreateModify<bool>("Legal Person updated successfully.");
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
+            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
         }
     }
 }
