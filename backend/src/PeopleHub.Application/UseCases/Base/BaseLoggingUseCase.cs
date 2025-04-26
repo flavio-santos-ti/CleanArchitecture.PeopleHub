@@ -37,30 +37,4 @@ public abstract class BaseLoggingUseCase : BaseUseCase
             _logger = NullLogger<BaseLoggingUseCase>.Instance; 
         }
     }
-
-    private async Task RegisterLogAsync(LogAction eventAction, string contextName, int httpStatusCode, object? eventData = null, string? userEmail = null)
-    {
-        var log = new AuditLogDto
-        {
-            UserEmail = !string.IsNullOrEmpty(userEmail) ? userEmail : GetAuthenticatedUserEmail(), 
-            Action = eventAction.Value,
-            ContextName = contextName,
-            HttpStatusCode = httpStatusCode,
-            EventData = eventData != null ? JsonConvert.SerializeObject(eventData) : null,
-            UserIp = GetUserIpAddress()
-        };
-
-        if (eventAction == LogAction.ERROR || eventAction == LogAction.NOT_FOUND || eventAction == LogAction.VALIDATION_ERROR)
-        {
-            _logger.LogError("[AUDIT ERROR] Action: {Action}, Context: {Context}, StatusCode: {Status}, User: {User}, Data: {Data}",
-                log.Action, log.ContextName, log.HttpStatusCode, log.UserEmail, log.EventData);
-        }
-        else
-        {
-            _logger.LogInformation("[AUDIT] Action: {Action}, Context: {Context}, StatusCode: {Status}, User: {User}, Data: {Data}",
-                log.Action, log.ContextName, log.HttpStatusCode, log.UserEmail, log.EventData);
-        };
-
-        await _auditLogService.RegisterLogAsync(log);
-    }
 }
