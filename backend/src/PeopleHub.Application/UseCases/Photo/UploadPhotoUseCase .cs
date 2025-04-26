@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Actions;
+﻿using FDS.NetCore.ApiResponse.Models;
+using FDS.NetCore.ApiResponse.Results;
+using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.Person;
-using PeopleHub.Application.Dtos.Response;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
@@ -32,11 +32,7 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
         try
         {
             if (request.Photo == null || request.Photo.Length == 0)
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.VALIDATION_ERROR,
-                    eventValue: request,
-                    message: "Photo is required."
-                );
+                return Result.CreateValidationError<bool>("Photo is required.");
 
             byte[] photoBytes;
             using (var memoryStream = new MemoryStream())
@@ -52,10 +48,8 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
                 individualPerson.UpdatePhoto(photoBytes);
                 await _personRepository.UpdateIndividualPhotoAsync(individualPerson);
                 await _unitOfWork.CommitAsync();
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.CREATE_UPLOAD,
-                    message: "Photo Legal Person successfully registered."
-                );
+
+                return Result.CreateUpload<bool>("Photo Legal Person successfully registered.");
             }
 
             // If it's not an individual person, try to find the legal entity by CNPJ
@@ -65,21 +59,14 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
                 legalPerson.UpdatePhoto(photoBytes);
                 await _personRepository.UpdateLegalPhotoAsync(legalPerson);
 
-                return await ResponseAsync<bool>(
-                    logAction: LogAction.CREATE_UPLOAD,
-                    message: "Photo Individual Person successfully registered."
-                );
+                return Result.CreateUpload<bool>("Photo Individual Person successfully registered.");
             }
 
-            return await ResponseAsync<bool>(
-                logAction: LogAction.NOT_FOUND,
-                eventValue: request,
-                message: "Person not found."
-            );
+            return Result.CreateNotFound<bool>("Person not found.");
         }
         catch (Exception ex)
         {
-            return await ResponseAsync<bool>(logAction: LogAction.ERROR, message: ex.Message);
+            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
         }
     }
 }
