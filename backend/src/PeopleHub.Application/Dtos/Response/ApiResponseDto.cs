@@ -11,13 +11,4 @@ public class Response<T>
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public T? Data { get; }
-
-    public Response(string contextName, bool isSuccess, string message, int statusCode, T? data = default)
-    {
-        ContextName = contextName;
-        IsSuccess = isSuccess;
-        Message = message;
-        StatusCode = statusCode;
-        Data = data;
-    }
 }
