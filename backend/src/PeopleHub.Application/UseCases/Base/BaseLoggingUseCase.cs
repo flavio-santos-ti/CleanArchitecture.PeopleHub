@@ -14,10 +14,8 @@ public abstract class BaseLoggingUseCase
 
     protected BaseLoggingUseCase(
         IHttpContextAccessor httpContextAccessor,
-        IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) 
+        IAuthenticatedUserAccountService authenticatedUserService) 
     {
-        _contextName = contextProvider.ContextName;
 
         var serviceProvider = httpContextAccessor.HttpContext?.RequestServices;
         if (serviceProvider != null)
