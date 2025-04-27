@@ -5,14 +5,13 @@ using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.Individual;
 
-public class UpdateIndividualUseCase : BaseLoggingUseCase, IUpdateIndividualUseCase
+public class UpdateIndividualUseCase : IUpdateIndividualUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +22,7 @@ public class UpdateIndividualUseCase : BaseLoggingUseCase, IUpdateIndividualUseC
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider) 
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;

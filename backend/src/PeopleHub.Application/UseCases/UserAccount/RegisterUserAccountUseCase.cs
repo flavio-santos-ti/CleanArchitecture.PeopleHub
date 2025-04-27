@@ -5,13 +5,12 @@ using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccountUseCase
+public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -22,7 +21,7 @@ public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccou
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider)
     {
         _userAccountRepository = userAccountRepository;
         _unitOfWork = unitOfWork;

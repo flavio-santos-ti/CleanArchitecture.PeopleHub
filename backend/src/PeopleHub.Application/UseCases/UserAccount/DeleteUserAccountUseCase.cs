@@ -5,12 +5,11 @@ using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class DeleteUserAccountUseCase : BaseLoggingUseCase, IDeleteUserAccountUseCase
+public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +20,7 @@ public class DeleteUserAccountUseCase : BaseLoggingUseCase, IDeleteUserAccountUs
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider)
     {
         _userAccountRepository = userAccountRepository;
         _unitOfWork = unitOfWork;

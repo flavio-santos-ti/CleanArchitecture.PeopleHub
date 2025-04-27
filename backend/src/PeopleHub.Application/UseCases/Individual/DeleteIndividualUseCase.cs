@@ -3,15 +3,13 @@ using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.Individual;
 
-public class DeleteIndividualUseCase : BaseLoggingUseCase, IDeleteIndividualUseCase
+public class DeleteIndividualUseCase : IDeleteIndividualUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;

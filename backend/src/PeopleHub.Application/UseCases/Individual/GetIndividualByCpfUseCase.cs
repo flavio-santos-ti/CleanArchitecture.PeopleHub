@@ -5,14 +5,13 @@ using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.Individual;
 
-public class GetIndividualByCpfUseCase : BaseLoggingUseCase, IGetIndividualByCpfUseCase
+public class GetIndividualByCpfUseCase : IGetIndividualByCpfUseCase
 {
     private readonly IPersonRepository _personRepository;
 
@@ -22,7 +21,7 @@ public class GetIndividualByCpfUseCase : BaseLoggingUseCase, IGetIndividualByCpf
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider) 
     {
         _personRepository = personRepository;
     }

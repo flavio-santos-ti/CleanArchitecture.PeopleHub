@@ -5,12 +5,11 @@ using PeopleHub.Application.Dtos.Person;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.Photo;
 
-public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
+public class UploadPersonPhotoUseCase : IUploadPhotoUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +20,7 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;
