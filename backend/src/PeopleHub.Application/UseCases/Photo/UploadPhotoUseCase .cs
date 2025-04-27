@@ -21,7 +21,7 @@ public class UploadPersonPhotoUseCase : BaseLoggingUseCase, IUploadPhotoUseCase
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
+        IContextProvider contextProvider) : base(httpContextAccessor)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;

@@ -22,7 +22,7 @@ public class RegisterUserAccountUseCase : BaseLoggingUseCase, IRegisterUserAccou
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
+        IContextProvider contextProvider) : base(httpContextAccessor)
     {
         _userAccountRepository = userAccountRepository;
         _unitOfWork = unitOfWork;
