@@ -22,7 +22,7 @@ public class DeleteLegalUseCase : BaseLoggingUseCase, IDeleteLegalUseCase
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService, contextProvider)
+        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;
