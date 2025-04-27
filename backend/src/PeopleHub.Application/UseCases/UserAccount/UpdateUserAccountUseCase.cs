@@ -5,12 +5,11 @@ using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class UpdateUserAccountUseCase : BaseLoggingUseCase, IUpdateUserAccountUseCase
+public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;
