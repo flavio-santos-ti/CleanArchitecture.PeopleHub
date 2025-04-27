@@ -22,7 +22,7 @@ public class GetIndividualByCpfUseCase : BaseLoggingUseCase, IGetIndividualByCpf
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor)
+        IContextProvider contextProvider) : base()
     {
         _personRepository = personRepository;
     }
