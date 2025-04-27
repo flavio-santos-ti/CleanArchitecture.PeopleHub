@@ -7,7 +7,6 @@ using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Domain.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,7 +14,7 @@ using System.Text;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateUserAccountUseCase
+public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IConfiguration _configuration;
@@ -26,7 +25,7 @@ public class AuthenticateUserAccountUseCase : BaseLoggingUseCase, IAuthenticateU
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider) 
     {
         _userAccountRepository = userAccountRepository;
         _configuration = configuration;

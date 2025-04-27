@@ -1,19 +1,17 @@
 ﻿using FDS.NetCore.ApiResponse.Models;
 using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
-using PeopleHub.Application.Actions;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.Legal;
 
-public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
+public class UpdateLegalUseCase : IUpdateLegalUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -24,7 +22,7 @@ public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;

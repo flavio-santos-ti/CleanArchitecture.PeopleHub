@@ -5,7 +5,6 @@ using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
-using PeopleHub.Application.UseCases.Base;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
@@ -13,7 +12,7 @@ using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.Individual;
 
-public class RegisterIndividualUseCase : BaseLoggingUseCase, IRegisterIndividualUseCase
+public class RegisterIndividualUseCase : IRegisterIndividualUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -24,7 +23,7 @@ public class RegisterIndividualUseCase : BaseLoggingUseCase, IRegisterIndividual
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base()
+        IContextProvider contextProvider) 
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;
