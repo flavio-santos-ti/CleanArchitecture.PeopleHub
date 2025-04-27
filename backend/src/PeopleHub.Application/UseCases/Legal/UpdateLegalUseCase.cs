@@ -24,7 +24,7 @@ public class UpdateLegalUseCase : BaseLoggingUseCase, IUpdateLegalUseCase
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(auditLogService, httpContextAccessor, authenticatedUserService, contextProvider)
+        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService, contextProvider)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;

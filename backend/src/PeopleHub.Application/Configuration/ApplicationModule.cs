@@ -140,7 +140,6 @@ namespace PeopleHub.Application.Configuration
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
-                    provider.GetRequiredService<IAuditLogService>(),
                     new FixedContextProvider("IndividualPerson")
                 );
             });
