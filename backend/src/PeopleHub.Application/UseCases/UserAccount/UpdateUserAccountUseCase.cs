@@ -21,7 +21,7 @@ public class UpdateUserAccountUseCase : BaseLoggingUseCase, IUpdateUserAccountUs
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService, contextProvider)
+        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
     {
         _userAccountRepository = userAccountRepository;
         _unitOfWork = unitOfWork;
