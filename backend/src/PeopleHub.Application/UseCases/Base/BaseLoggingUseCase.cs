@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.UserAccount;
 
 namespace PeopleHub.Application.UseCases.Base;
 
@@ -13,8 +11,7 @@ public abstract class BaseLoggingUseCase
     protected readonly string _contextName;
 
     protected BaseLoggingUseCase(
-        IHttpContextAccessor httpContextAccessor,
-        IAuthenticatedUserAccountService authenticatedUserService) 
+        IHttpContextAccessor httpContextAccessor) 
     {
 
         var serviceProvider = httpContextAccessor.HttpContext?.RequestServices;
