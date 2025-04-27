@@ -10,19 +10,9 @@ public abstract class BaseLoggingUseCase
     protected readonly ILogger<BaseLoggingUseCase> _logger;
     protected readonly string _contextName;
 
-    protected BaseLoggingUseCase(
-        IHttpContextAccessor httpContextAccessor) 
+    protected BaseLoggingUseCase() 
     {
 
-        var serviceProvider = httpContextAccessor.HttpContext?.RequestServices;
-        if (serviceProvider != null)
-        {
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-            _logger = loggerFactory?.CreateLogger<BaseLoggingUseCase>() ?? NullLogger<BaseLoggingUseCase>.Instance;
-        }
-        else
-        {
-            _logger = NullLogger<BaseLoggingUseCase>.Instance; 
-        }
+        _logger = NullLogger<BaseLoggingUseCase>.Instance; 
     }
 }
