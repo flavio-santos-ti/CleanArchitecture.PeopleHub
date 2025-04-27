@@ -13,9 +13,4 @@ public abstract class BaseUseCase
         _httpContextAccessor = httpContextAccessor;
         _authenticatedUserService = authenticatedUserService;
     }
-
-    protected string GetAuthenticatedUserEmail()
-    {
-        return _authenticatedUserService.GetAuthenticatedUserEmail() ?? "Trying a New User";
-    }
 }
