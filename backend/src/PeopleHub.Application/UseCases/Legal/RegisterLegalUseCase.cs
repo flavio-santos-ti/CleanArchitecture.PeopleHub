@@ -24,7 +24,7 @@ public class RegisterLegalUseCase : BaseLoggingUseCase, IRegisterLegalUseCase
         IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor)
+        IContextProvider contextProvider) : base()
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;
