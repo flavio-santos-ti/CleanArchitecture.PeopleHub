@@ -8,7 +8,7 @@ using PeopleHub.Application.Interfaces.UserAccount;
 
 namespace PeopleHub.Application.UseCases.Base;
 
-public abstract class BaseLoggingUseCase : BaseUseCase
+public abstract class BaseLoggingUseCase  
 {
     protected readonly IAuditLogService _auditLogService;
     protected readonly ILogger<BaseLoggingUseCase> _logger;
@@ -18,7 +18,7 @@ public abstract class BaseLoggingUseCase : BaseUseCase
         IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
-        IContextProvider contextProvider) : base(httpContextAccessor, authenticatedUserService)
+        IContextProvider contextProvider) 
     {
         _auditLogService = auditLogService;
         _contextName = contextProvider.ContextName;
