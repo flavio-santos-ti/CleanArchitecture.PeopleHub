@@ -5,5 +5,5 @@ namespace PeopleHub.Application.UseCases.Legal.Interfaces;
 
 public interface IAddLegalUseCase
 {
-    Task<Response<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request);
+    Task<Response<bool>> ExecuteAsync(AddLegalPersonRequestDto request);
 }

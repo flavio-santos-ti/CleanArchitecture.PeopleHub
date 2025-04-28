@@ -58,7 +58,7 @@ public class PersonController : ControllerBase
     }
 
     [HttpPost("legal")]
-    public async Task<IActionResult> RegisterLegal([FromBody] RegisterLegalPersonRequestDto request)
+    public async Task<IActionResult> RegisterLegal([FromBody] AddLegalPersonRequestDto request)
     {
         var response = await _personService.AddLegalAsync(request);
 
