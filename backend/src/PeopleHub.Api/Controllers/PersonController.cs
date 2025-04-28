@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
-using PeopleHub.Application.Routers;
+using PeopleHub.Application.Interfaces.Person;
 
 namespace PeopleHub.Api.Controllers;
 
@@ -14,18 +14,18 @@ namespace PeopleHub.Api.Controllers;
 [Authorize]
 public class PersonController : ControllerBase
 {
-    private readonly IPersonRouter _personRouter;
+    private readonly IPersonService _personService;
 
-    public PersonController(IPersonRouter personService)
+    public PersonController(IPersonService personService)
     {
-        _personRouter = personService;
+        _personService = personService;
     }
 
     [HttpPost("individual")]
     [Authorize]
     public async Task<IActionResult> RegisterIndividual([FromBody] RegisterIndividualPersonRequestDto request)
     {
-        var response = await _personRouter.AddIndividualAsync(request);
+        var response = await _personService.AddIndividualAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -34,7 +34,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> UpdateIndividual([FromBody] UpdateIndividualPersonRequestDto request)
     {
-        var response = await _personRouter.UpdateIndividualAsync(request);
+        var response = await _personService.UpdateIndividualAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -43,7 +43,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> DeleteIndividual([FromBody] DeleteIndividualPersonDto request)
     {
-        var response = await _personRouter.DeleteIndividualAsync(request);
+        var response = await _personService.DeleteIndividualAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -52,7 +52,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetIndividualByCpf(string cpf)
     {
-        var response = await _personRouter.GetIndividualByCpfAsync(cpf);
+        var response = await _personService.GetIndividualByCpfAsync(cpf);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -60,7 +60,7 @@ public class PersonController : ControllerBase
     [HttpPost("legal")]
     public async Task<IActionResult> RegisterLegal([FromBody] RegisterLegalPersonRequestDto request)
     {
-        var response = await _personRouter.AddLegalAsync(request);
+        var response = await _personService.AddLegalAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -69,7 +69,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> UploadPhoto([FromForm] UploadPersonPhotoDto request)
     {
-        var response = await _personRouter.UploadPhotoAsync(request);
+        var response = await _personService.UploadPhotoAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -78,7 +78,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> UpdateLegal([FromBody] UpdateLegalPersonRequestDto request)
     {
-        var response = await _personRouter.UpdateLegalAsync(request);
+        var response = await _personService.UpdateLegalAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -87,7 +87,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> DeleteLegal([FromBody] DeleteLegalPersonDto request)
     {
-        var response = await _personRouter.DeleteLegalAsync(request);
+        var response = await _personService.DeleteLegalAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }

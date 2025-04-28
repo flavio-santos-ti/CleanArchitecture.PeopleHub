@@ -3,9 +3,9 @@ using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
 
-namespace PeopleHub.Application.Routers;
+namespace PeopleHub.Application.Interfaces.Person;
 
-public interface IPersonRouter
+public interface IPersonService
 {
     Task<Response<bool>> AddIndividualAsync(RegisterIndividualPersonRequestDto request);
     Task<Response<bool>> AddLegalAsync(RegisterLegalPersonRequestDto request);

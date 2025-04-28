@@ -2,13 +2,14 @@
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Dtos.Person;
+using PeopleHub.Application.Interfaces.Person;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Application.UseCases.Photo;
 
-namespace PeopleHub.Application.Routers;
+namespace PeopleHub.Application.Services;
 
-public class PersonRouter : IPersonRouter
+public class PersonService : IPersonService
 {
     private readonly IAddIndividualUseCase _addIndividualPersonUseCase;
     private readonly IAddLegalUseCase _addLegalPersonUseCase;
@@ -19,7 +20,7 @@ public class PersonRouter : IPersonRouter
     private readonly IUpdateLegalUseCase _updateLegalPersonUseCase;
     private readonly IDeleteLegalUseCase _deleteLegalPersonUseCase;
 
-    public PersonRouter(
+    public PersonService(
         IAddIndividualUseCase addIndividualPersonUseCase,
         IAddLegalUseCase addLegalPersonUseCase,
         IGetIndividualByCpfUseCase getIndividualPersonByCpfUseCase,
