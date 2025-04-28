@@ -3,7 +3,6 @@ using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Domain.Entities;
@@ -20,7 +19,6 @@ public class AddLegalUseCase : IAddLegalUseCase
     public AddLegalUseCase(
         IPersonRepository personRepository, 
         IUnitOfWork unitOfWork, 
-        IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider)

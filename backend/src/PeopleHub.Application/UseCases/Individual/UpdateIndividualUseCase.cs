@@ -3,7 +3,6 @@ using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
@@ -19,7 +18,6 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
     public UpdateIndividualUseCase(
         IPersonRepository personRepository, 
         IUnitOfWork unitOfWork, 
-        IAuditLogService auditLogService, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider) 
