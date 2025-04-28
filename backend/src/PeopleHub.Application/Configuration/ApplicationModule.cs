@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.Log;
+using PeopleHub.Application.Interfaces.Person;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Application.Providers;
-using PeopleHub.Application.Routers;
 using PeopleHub.Application.Services;
 using PeopleHub.Application.UseCases.Individual;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
@@ -168,7 +168,7 @@ namespace PeopleHub.Application.Configuration
             });
 
             // Registration of Services
-            services.AddScoped<IPersonRouter, PersonRouter>();
+            services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserAccountService, UserAccountService>();
             services.AddScoped<IAuditLogService, AuditLogService>();
 
