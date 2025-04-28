@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Domain.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,7 +21,6 @@ public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
     public AuthenticateUserAccountUseCase(
         IUserAccountRepository userAccountRepository,
         IConfiguration configuration,
-        IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider) 
