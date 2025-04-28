@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace PeopleHub.Application.Dtos.IndividualPerson;
 
-public class RegisterIndividualPersonRequestDto
+public class AddIndividualPersonRequestDto
 {
     private string _cpf = string.Empty;
 
