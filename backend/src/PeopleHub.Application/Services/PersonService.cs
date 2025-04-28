@@ -45,7 +45,7 @@ public class PersonService : IPersonService
         return await _addIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> AddLegalAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> AddLegalAsync(AddLegalPersonRequestDto request)
     {
         return await _addLegalPersonUseCase.ExecuteAsync(request);
     }

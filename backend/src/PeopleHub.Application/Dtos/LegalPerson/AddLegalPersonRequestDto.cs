@@ -2,7 +2,7 @@
 
 namespace PeopleHub.Application.Dtos.LegalPerson;
 
-public class RegisterLegalPersonRequestDto
+public class AddLegalPersonRequestDto
 {
     private string _cnpj = string.Empty;
     private string _cpf = string.Empty;
