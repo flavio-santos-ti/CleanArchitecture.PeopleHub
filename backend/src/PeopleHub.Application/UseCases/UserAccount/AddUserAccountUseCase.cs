@@ -10,12 +10,12 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Application.UseCases.UserAccount;
 
-public class RegisterUserAccountUseCase : IRegisterUserAccountUseCase
+public class AddUserAccountUseCase : IAddUserAccountUseCase
 {
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public RegisterUserAccountUseCase(
+    public AddUserAccountUseCase(
         IUserAccountRepository userAccountRepository,
         IUnitOfWork unitOfWork,
         IAuditLogService auditLogService,

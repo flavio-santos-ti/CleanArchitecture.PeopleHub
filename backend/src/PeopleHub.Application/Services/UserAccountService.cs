@@ -7,18 +7,18 @@ namespace PeopleHub.Application.Services;
 
 public class UserAccountService : IUserAccountService
 {
-    private readonly IRegisterUserAccountUseCase _registerUserAccountUseCase;
+    private readonly IAddUserAccountUseCase _addUserAccountUseCase;
     private readonly IAuthenticateUserAccountUseCase _authenticateUserAccountUseCase;
     private readonly IUpdateUserAccountUseCase _updateUserAccountUseCase;
     private readonly IDeleteUserAccountUseCase _deleteUserAccountUseCase;
 
     public UserAccountService(
-        IRegisterUserAccountUseCase registerUserAccountUseCase,
+        IAddUserAccountUseCase addUserAccountUseCase,
         IAuthenticateUserAccountUseCase authenticateUserAccountUseCase,
         IUpdateUserAccountUseCase updateUserAccountUseCase,
         IDeleteUserAccountUseCase deleteUserAccountUseCase)
     {
-        _registerUserAccountUseCase = registerUserAccountUseCase;
+        _addUserAccountUseCase = addUserAccountUseCase;
         _authenticateUserAccountUseCase = authenticateUserAccountUseCase;
         _updateUserAccountUseCase = updateUserAccountUseCase;
         _deleteUserAccountUseCase = deleteUserAccountUseCase;
@@ -26,7 +26,7 @@ public class UserAccountService : IUserAccountService
 
     public async Task<FDS.NetCore.ApiResponse.Models.Response<UserAccountEntity>> RegisterAsync(RegisterUserAccountDto request)
     {
-        return await _registerUserAccountUseCase.ExecuteAsync(request);
+        return await _addUserAccountUseCase.ExecuteAsync(request);
     }
 
     public async Task<FDS.NetCore.ApiResponse.Models.Response<object>> AuthenticateAsync(UserAccountLoginDto request)

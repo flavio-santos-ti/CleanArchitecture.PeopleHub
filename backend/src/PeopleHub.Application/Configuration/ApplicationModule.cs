@@ -37,9 +37,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IRegisterUserAccountUseCase>(provider =>
+            services.AddScoped<IAddUserAccountUseCase>(provider =>
             {
-                return new RegisterUserAccountUseCase(
+                return new AddUserAccountUseCase(
                     provider.GetRequiredService<IUserAccountRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),

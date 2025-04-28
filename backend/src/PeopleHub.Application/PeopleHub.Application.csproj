@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UseCases\Base\**" />
+    <EmbeddedResource Remove="UseCases\Base\**" />
+    <None Remove="UseCases\Base\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Flavio.Santos.NetCore.ApiResponse" Version="1.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
@@ -22,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Person\" />
-    <Folder Include="UseCases\Base\" />
   </ItemGroup>
 
 </Project>
