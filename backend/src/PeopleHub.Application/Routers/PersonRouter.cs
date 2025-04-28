@@ -10,7 +10,7 @@ namespace PeopleHub.Application.Routers;
 
 public class PersonRouter : IPersonRouter
 {
-    private readonly IRegisterIndividualUseCase _registerIndividualPersonUseCase;
+    private readonly IAddIndividualUseCase _addIndividualPersonUseCase;
     private readonly IRegisterLegalUseCase _registerLegalPersonUseCase;
     private readonly IGetIndividualByCpfUseCase _getIndividualPersonByCpfUseCase;
     private readonly IUploadPhotoUseCase _uploadPhotoUseCase;
@@ -20,7 +20,7 @@ public class PersonRouter : IPersonRouter
     private readonly IDeleteLegalUseCase _deleteLegalPersonUseCase;
 
     public PersonRouter(
-        IRegisterIndividualUseCase registerIndividualPersonUseCase,
+        IAddIndividualUseCase addIndividualPersonUseCase,
         IRegisterLegalUseCase registerLegalPersonUseCase,
         IGetIndividualByCpfUseCase getIndividualPersonByCpfUseCase,
         IUploadPhotoUseCase uploadPhotoUseCase,
@@ -29,7 +29,7 @@ public class PersonRouter : IPersonRouter
         IUpdateLegalUseCase updateLegalPersonUseCase,
         IDeleteLegalUseCase deleteLegalPersonUseCase)
     {
-        _registerIndividualPersonUseCase = registerIndividualPersonUseCase;
+        _addIndividualPersonUseCase = addIndividualPersonUseCase;
         _registerLegalPersonUseCase = registerLegalPersonUseCase;
         _getIndividualPersonByCpfUseCase = getIndividualPersonByCpfUseCase;
         _uploadPhotoUseCase = uploadPhotoUseCase;
@@ -39,9 +39,9 @@ public class PersonRouter : IPersonRouter
         _deleteLegalPersonUseCase = deleteLegalPersonUseCase;
     }
 
-    public async Task<Response<bool>> RegisterIndividualAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<Response<bool>> AddIndividualAsync(RegisterIndividualPersonRequestDto request)
     {
-        return await _registerIndividualPersonUseCase.ExecuteAsync(request);
+        return await _addIndividualPersonUseCase.ExecuteAsync(request);
     }
 
     public async Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)

@@ -109,9 +109,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IRegisterIndividualUseCase>(provider =>
+            services.AddScoped<IAddIndividualUseCase>(provider =>
             {
-                return new RegisterIndividualUseCase(
+                return new AddIndividualUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),

@@ -12,12 +12,12 @@ using PeopleHub.Domain.ValueObjects;
 
 namespace PeopleHub.Application.UseCases.Individual;
 
-public class RegisterIndividualUseCase : IRegisterIndividualUseCase
+public class AddIndividualUseCase : IAddIndividualUseCase
 {
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public RegisterIndividualUseCase(
+    public AddIndividualUseCase(
         IPersonRepository personRepository,
         IUnitOfWork unitOfWork,
         IAuditLogService auditLogService,

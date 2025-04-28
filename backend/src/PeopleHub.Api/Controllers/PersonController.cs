@@ -25,7 +25,7 @@ public class PersonController : ControllerBase
     [Authorize]
     public async Task<IActionResult> RegisterIndividual([FromBody] RegisterIndividualPersonRequestDto request)
     {
-        var response = await _personRouter.RegisterIndividualAsync(request);
+        var response = await _personRouter.AddIndividualAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
