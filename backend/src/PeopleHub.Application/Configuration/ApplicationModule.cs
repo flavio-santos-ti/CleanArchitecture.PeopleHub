@@ -73,9 +73,9 @@ namespace PeopleHub.Application.Configuration
                 );
             });
 
-            services.AddScoped<IRegisterLegalUseCase>(provider =>
+            services.AddScoped<IAddLegalUseCase>(provider =>
             {
-                return new RegisterLegalUseCase(
+                return new AddLegalUseCase(
                     provider.GetRequiredService<IPersonRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuditLogService>(),

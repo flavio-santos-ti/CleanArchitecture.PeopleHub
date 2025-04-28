@@ -11,7 +11,7 @@ namespace PeopleHub.Application.Routers;
 public class PersonRouter : IPersonRouter
 {
     private readonly IAddIndividualUseCase _addIndividualPersonUseCase;
-    private readonly IRegisterLegalUseCase _registerLegalPersonUseCase;
+    private readonly IAddLegalUseCase _addLegalPersonUseCase;
     private readonly IGetIndividualByCpfUseCase _getIndividualPersonByCpfUseCase;
     private readonly IUploadPhotoUseCase _uploadPhotoUseCase;
     private readonly IUpdateIndividualUseCase _updateIndividualPersonUseCase;
@@ -21,7 +21,7 @@ public class PersonRouter : IPersonRouter
 
     public PersonRouter(
         IAddIndividualUseCase addIndividualPersonUseCase,
-        IRegisterLegalUseCase registerLegalPersonUseCase,
+        IAddLegalUseCase addLegalPersonUseCase,
         IGetIndividualByCpfUseCase getIndividualPersonByCpfUseCase,
         IUploadPhotoUseCase uploadPhotoUseCase,
         IUpdateIndividualUseCase updateIndividualPersonUseCase,
@@ -30,7 +30,7 @@ public class PersonRouter : IPersonRouter
         IDeleteLegalUseCase deleteLegalPersonUseCase)
     {
         _addIndividualPersonUseCase = addIndividualPersonUseCase;
-        _registerLegalPersonUseCase = registerLegalPersonUseCase;
+        _addLegalPersonUseCase = addLegalPersonUseCase;
         _getIndividualPersonByCpfUseCase = getIndividualPersonByCpfUseCase;
         _uploadPhotoUseCase = uploadPhotoUseCase;
         _updateIndividualPersonUseCase = updateIndividualPersonUseCase;
@@ -44,9 +44,9 @@ public class PersonRouter : IPersonRouter
         return await _addIndividualPersonUseCase.ExecuteAsync(request);
     }
 
-    public async Task<Response<bool>> RegisterLegalAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> AddLegalAsync(RegisterLegalPersonRequestDto request)
     {
-        return await _registerLegalPersonUseCase.ExecuteAsync(request);
+        return await _addLegalPersonUseCase.ExecuteAsync(request);
     }
 
     public async Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf)

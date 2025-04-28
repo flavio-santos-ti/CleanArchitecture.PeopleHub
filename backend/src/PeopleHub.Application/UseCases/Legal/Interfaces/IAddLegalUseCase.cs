@@ -3,7 +3,7 @@ using PeopleHub.Application.Dtos.LegalPerson;
 
 namespace PeopleHub.Application.UseCases.Legal.Interfaces;
 
-public interface IRegisterLegalUseCase
+public interface IAddLegalUseCase
 {
     Task<Response<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request);
 }
