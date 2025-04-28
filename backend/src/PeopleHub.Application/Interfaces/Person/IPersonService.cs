@@ -7,7 +7,7 @@ namespace PeopleHub.Application.Interfaces.Person;
 
 public interface IPersonService
 {
-    Task<Response<bool>> AddIndividualAsync(RegisterIndividualPersonRequestDto request);
+    Task<Response<bool>> AddIndividualAsync(AddIndividualPersonRequestDto request);
     Task<Response<bool>> AddLegalAsync(RegisterLegalPersonRequestDto request);
     Task<Response<IndividualPersonDto?>> GetIndividualByCpfAsync(string cpf);
     Task<Response<bool>> UploadPhotoAsync(UploadPersonPhotoDto request);

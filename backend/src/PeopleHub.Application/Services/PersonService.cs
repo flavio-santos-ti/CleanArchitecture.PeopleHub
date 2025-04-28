@@ -40,7 +40,7 @@ public class PersonService : IPersonService
         _deleteLegalPersonUseCase = deleteLegalPersonUseCase;
     }
 
-    public async Task<Response<bool>> AddIndividualAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<Response<bool>> AddIndividualAsync(AddIndividualPersonRequestDto request)
     {
         return await _addIndividualPersonUseCase.ExecuteAsync(request);
     }
