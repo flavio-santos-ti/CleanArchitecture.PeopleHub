@@ -29,7 +29,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Response<bool>> ExecuteAsync(RegisterIndividualPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(AddIndividualPersonRequestDto request)
     { 
         try
         {

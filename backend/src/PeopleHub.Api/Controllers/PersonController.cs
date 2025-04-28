@@ -23,7 +23,7 @@ public class PersonController : ControllerBase
 
     [HttpPost("individual")]
     [Authorize]
-    public async Task<IActionResult> RegisterIndividual([FromBody] RegisterIndividualPersonRequestDto request)
+    public async Task<IActionResult> RegisterIndividual([FromBody] AddIndividualPersonRequestDto request)
     {
         var response = await _personService.AddIndividualAsync(request);
 
