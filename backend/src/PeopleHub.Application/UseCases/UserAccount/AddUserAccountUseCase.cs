@@ -3,7 +3,6 @@ using FDS.NetCore.ApiResponse.Results;
 using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
-using PeopleHub.Application.Interfaces.Log;
 using PeopleHub.Application.Interfaces.UserAccount;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
@@ -18,7 +17,6 @@ public class AddUserAccountUseCase : IAddUserAccountUseCase
     public AddUserAccountUseCase(
         IUserAccountRepository userAccountRepository,
         IUnitOfWork unitOfWork,
-        IAuditLogService auditLogService,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider)
