@@ -60,7 +60,7 @@ public class PersonController : ControllerBase
     [HttpPost("legal")]
     public async Task<IActionResult> RegisterLegal([FromBody] RegisterLegalPersonRequestDto request)
     {
-        var response = await _personRouter.RegisterLegalAsync(request);
+        var response = await _personRouter.AddLegalAsync(request);
 
         return StatusCode(response.StatusCode, response);
     }
