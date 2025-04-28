@@ -29,7 +29,7 @@ public class AddLegalUseCase : IAddLegalUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Response<bool>> ExecuteAsync(RegisterLegalPersonRequestDto request)
+    public async Task<Response<bool>> ExecuteAsync(AddLegalPersonRequestDto request)
     {
         try
         {
