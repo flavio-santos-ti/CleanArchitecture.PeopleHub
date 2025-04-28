@@ -4,7 +4,7 @@ using PeopleHub.Domain.Entities;
 
 namespace PeopleHub.Application.Interfaces.UserAccount;
 
-public interface IRegisterUserAccountUseCase
+public interface IAddUserAccountUseCase
 {
     Task<Response<UserAccountEntity>> ExecuteAsync(RegisterUserAccountDto request);
 }
