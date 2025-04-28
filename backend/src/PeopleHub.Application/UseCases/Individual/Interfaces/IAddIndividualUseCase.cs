@@ -3,7 +3,7 @@ using PeopleHub.Application.Dtos.IndividualPerson;
 
 namespace PeopleHub.Application.UseCases.Individual.Interfaces;
 
-public interface IRegisterIndividualUseCase
+public interface IAddIndividualUseCase
 {
     Task<Response<bool>> ExecuteAsync(RegisterIndividualPersonRequestDto request);
 }
