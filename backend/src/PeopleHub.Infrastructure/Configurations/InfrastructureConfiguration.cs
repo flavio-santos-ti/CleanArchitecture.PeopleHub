@@ -9,7 +9,7 @@ using PeopleHub.Infrastructure.Services;
 
 namespace PeopleHub.Infrastructure.Configurations;
 
-public static class InfrastructureModule
+public static class InfrastructureConfiguration
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
