@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace PeopleHub.AppConfig.Configuration
+namespace PeopleHub.Configuration.Configurations
 {
     public class JwtConfiguration
     {
