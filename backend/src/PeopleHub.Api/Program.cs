@@ -1,6 +1,6 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.HttpOverrides;
-using PeopleHub.AppConfig.Configuration;
+using PeopleHub.Configuration.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
