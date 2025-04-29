@@ -4,11 +4,11 @@ using System.Security.Claims;
 
 namespace PeopleHub.Infrastructure.Services
 {
-    public class AuthenticatedUserService : IAuthenticatedUserAccountService
+    public class AuthenticatedUserAccountService : IAuthenticatedUserAccountService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthenticatedUserService(IHttpContextAccessor httpContextAccessor)
+        public AuthenticatedUserAccountService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }

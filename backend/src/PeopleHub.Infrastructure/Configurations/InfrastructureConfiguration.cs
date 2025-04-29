@@ -20,7 +20,7 @@ public static class InfrastructureConfiguration
         // Repositories
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<IUserAccountRepository, UserAccountRepository>();
-        services.AddScoped<IAuthenticatedUserAccountService, AuthenticatedUserService>();
+        services.AddScoped<IAuthenticatedUserAccountService, AuthenticatedUserAccountService>();
         
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
