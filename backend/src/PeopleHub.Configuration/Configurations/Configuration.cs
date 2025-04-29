@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace PeopleHub.Configuration.Configurations;
 
-public static class AppConfigModule
+public static class Configuration
 {
     public static IServiceCollection AddAppConfigServices(this IServiceCollection services, IConfiguration configuration)
     {
