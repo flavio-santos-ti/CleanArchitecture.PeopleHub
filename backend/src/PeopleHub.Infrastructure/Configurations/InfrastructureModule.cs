@@ -20,7 +20,6 @@ public static class InfrastructureModule
         // Repositories
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<IUserAccountRepository, UserAccountRepository>();
-        services.AddScoped<IAuditLogRepository, AuditLogRepository>();
         services.AddScoped<IAuthenticatedUserAccountService, AuthenticatedUserService>();
         
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
