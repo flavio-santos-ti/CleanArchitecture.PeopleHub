@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleHub.Application", "Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleHub.Infrastructure", "PeopleHub.Infrastructure\PeopleHub.Infrastructure.csproj", "{58CF82E3-83CD-475B-90FA-988042F29832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleHub.AppConfig", "PeopleHub.AppConfig\PeopleHub.AppConfig.csproj", "{7667649F-E15B-4C30-96D8-56D576904B36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleHub.Configuration", "PeopleHub.Configuration\PeopleHub.Configuration.csproj", "{7667649F-E15B-4C30-96D8-56D576904B36}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Presentation", "01 - Presentation", "{1D180F2D-051E-497E-BE84-67CE717558A9}"
 EndProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - Domain", "04 - Domain"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Infrastructure", "02 - Infrastructure", "{ADA9BFD8-BF29-42A8-9B0B-C8FDD3DC5780}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Config", "05 - Config", "{AEAB910E-D8E7-4A03-ADFE-58AD96DC519F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Configuration", "05 - Configuration", "{AEAB910E-D8E7-4A03-ADFE-58AD96DC519F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

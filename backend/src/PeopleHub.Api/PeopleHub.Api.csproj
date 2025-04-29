@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeopleHub.AppConfig\PeopleHub.AppConfig.csproj" />
+    <ProjectReference Include="..\PeopleHub.AppConfig\PeopleHub.Configuration.csproj" />
     <ProjectReference Include="..\PeopleHub.Application\PeopleHub.Application.csproj" />
   </ItemGroup>
 
