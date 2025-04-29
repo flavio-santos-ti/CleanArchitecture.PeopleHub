@@ -15,9 +15,9 @@ using PeopleHub.Application.UseCases.Photo;
 using PeopleHub.Application.UseCases.UserAccount;
 using PeopleHub.Domain.Interfaces;
 
-namespace PeopleHub.Application.Configuration
+namespace PeopleHub.Application.Configurations
 {
-    public static class ApplicationModule
+    public static class ApplicationConfiguration
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
