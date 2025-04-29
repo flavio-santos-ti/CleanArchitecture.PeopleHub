@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace PeopleHub.AppConfig.Configuration;
+namespace PeopleHub.Configuration.Configurations;
 
 public static class AppConfigModule
 {
