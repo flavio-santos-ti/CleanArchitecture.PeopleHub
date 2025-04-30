@@ -55,15 +55,15 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteIndividualAsync(IndividualPersonEntity person)
+    public async Task UpdateAsync(LegalPersonEntity person)
     {
-        _context.IndividualPersons.Remove(person);
+        _context.LegalPersons.Update(person);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateLegalAsync(LegalPersonEntity person)
+    public async Task DeleteIndividualAsync(IndividualPersonEntity person)
     {
-        _context.LegalPersons.Update(person);
+        _context.IndividualPersons.Remove(person);
         await _context.SaveChangesAsync();
     }
 

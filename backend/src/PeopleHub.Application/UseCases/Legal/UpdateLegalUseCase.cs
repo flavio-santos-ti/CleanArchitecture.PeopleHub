@@ -46,7 +46,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
                 new Cpf(request.LegalRepresentativeCpf)
             );
 
-            await _personRepository.UpdateLegalAsync(person);
+            await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
             return Result.CreateModify<bool>("Legal Person updated successfully.");
