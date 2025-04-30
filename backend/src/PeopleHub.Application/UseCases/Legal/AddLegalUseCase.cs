@@ -31,7 +31,7 @@ public class AddLegalUseCase : IAddLegalUseCase
     {
         try
         {
-            var existingPerson = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
+            var existingPerson = await _personRepository.GetByCnpjAsync(request.Cnpj);
 
             if (existingPerson != null)
                 return Result.CreateValidationError<bool>("Person already exists.");
