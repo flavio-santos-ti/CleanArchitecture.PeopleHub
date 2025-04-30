@@ -31,7 +31,7 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
     {
         try
         {
-            var person = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
+            var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
                 return Result.CreateNotFound<bool>("Individual Person not found.");
 

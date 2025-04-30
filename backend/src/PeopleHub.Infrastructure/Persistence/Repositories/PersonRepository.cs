@@ -23,7 +23,7 @@ public class PersonRepository : IPersonRepository
         await _context.LegalPersons.AddAsync(person);
     }
 
-    public async Task<IndividualPersonEntity?> GetIndividualByCpfAsync(string cpf)
+    public async Task<IndividualPersonEntity?> GetByCpfAsync(string cpf)
     {
         return await _context.IndividualPersons
             .AsNoTracking()

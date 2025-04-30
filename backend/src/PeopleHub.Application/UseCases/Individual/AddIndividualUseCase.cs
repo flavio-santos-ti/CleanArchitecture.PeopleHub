@@ -31,7 +31,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
     { 
         try
         {
-            var existingPerson = await _personRepository.GetIndividualByCpfAsync(request.Cpf);
+            var existingPerson = await _personRepository.GetByCpfAsync(request.Cpf);
 
             if (existingPerson != null)
                 return Result.CreateValidationError<bool>("Person already exists.");
