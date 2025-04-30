@@ -10,7 +10,7 @@ public interface IPersonRepository
     Task<LegalPersonEntity?> GetByCnpjAsync(string cnpj);
     Task UpdateAsync(IndividualPersonEntity person);
     Task UpdateLegalPhotoAsync(LegalPersonEntity person);
-    Task UpdateIndividualPhotoAsync(IndividualPersonEntity person);
+    Task UploadProfilePictureAsync(IndividualPersonEntity person);
     Task DeleteAsync(IndividualPersonEntity person);
     Task UpdateAsync(LegalPersonEntity person);
     Task DeleteAsync(LegalPersonEntity person);

@@ -37,7 +37,7 @@ public class PersonRepository : IPersonRepository
             .FirstOrDefaultAsync(p => p.Cnpj == cnpj);
     }
 
-    public async Task UpdateIndividualPhotoAsync(IndividualPersonEntity person)
+    public async Task UploadProfilePictureAsync(IndividualPersonEntity person)
     {
         _context.IndividualPersons.Update(person);
         await _context.SaveChangesAsync();
