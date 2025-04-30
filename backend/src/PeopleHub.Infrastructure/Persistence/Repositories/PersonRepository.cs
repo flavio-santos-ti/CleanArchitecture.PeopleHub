@@ -67,7 +67,7 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteLegalAsync(LegalPersonEntity person)
+    public async Task DeleteAsync(LegalPersonEntity person)
     {
         _context.LegalPersons.Remove(person);
         await _context.SaveChangesAsync();

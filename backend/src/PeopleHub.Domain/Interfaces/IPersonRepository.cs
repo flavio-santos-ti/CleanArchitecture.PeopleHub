@@ -13,5 +13,5 @@ public interface IPersonRepository
     Task UpdateIndividualPhotoAsync(IndividualPersonEntity person);
     Task DeleteAsync(IndividualPersonEntity person);
     Task UpdateAsync(LegalPersonEntity person);
-    Task DeleteLegalAsync(LegalPersonEntity person);
+    Task DeleteAsync(LegalPersonEntity person);
 }

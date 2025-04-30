@@ -33,7 +33,7 @@ public class DeleteLegalUseCase : IDeleteLegalUseCase
             if (person == null)
                 return Result.CreateNotFound<bool>("Legal Person not found.");
 
-            await _personRepository.DeleteLegalAsync(person);
+            await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
             return Result.CreateRemove<bool>("Legal Person has been successfully removed.");
