@@ -7,7 +7,7 @@ public interface IPersonRepository
     Task AddAsync(IndividualPersonEntity person);
     Task AddAsync(LegalPersonEntity person);
     Task<IndividualPersonEntity?> GetByCpfAsync(string cpf);
-    Task<LegalPersonEntity?> GetLegalByCnpjAsync(string cnpj);
+    Task<LegalPersonEntity?> GetByCnpjAsync(string cnpj);
     Task UpdateIndividualAsync(IndividualPersonEntity person);
     Task UpdateLegalPhotoAsync(LegalPersonEntity person);
     Task UpdateIndividualPhotoAsync(IndividualPersonEntity person);

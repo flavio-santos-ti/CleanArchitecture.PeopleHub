@@ -50,7 +50,7 @@ public class UploadPersonPhotoUseCase : IUploadPhotoUseCase
             }
 
             // If it's not an individual person, try to find the legal entity by CNPJ
-            var legalPerson = await _personRepository.GetLegalByCnpjAsync(request.Identifier);
+            var legalPerson = await _personRepository.GetByCnpjAsync(request.Identifier);
             if (legalPerson != null)
             {
                 legalPerson.UpdatePhoto(photoBytes);

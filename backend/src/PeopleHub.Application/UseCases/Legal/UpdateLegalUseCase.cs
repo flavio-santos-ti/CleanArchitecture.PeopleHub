@@ -30,7 +30,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
     {
         try
         {
-            var person = await _personRepository.GetLegalByCnpjAsync(request.Cnpj);
+            var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
                 return Result.CreateNotFound<bool>("Legal Person not found.");
 
