@@ -49,7 +49,7 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateIndividualAsync(IndividualPersonEntity person)
+    public async Task UpdateAsync(IndividualPersonEntity person)
     {
         _context.IndividualPersons.Update(person);
         await _context.SaveChangesAsync();
