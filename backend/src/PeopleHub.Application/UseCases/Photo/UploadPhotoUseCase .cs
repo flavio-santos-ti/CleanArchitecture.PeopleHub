@@ -39,7 +39,7 @@ public class UploadPersonPhotoUseCase : IUploadPhotoUseCase
             }
 
             // Try to find the individual person by CPF
-            var individualPerson = await _personRepository.GetIndividualByCpfAsync(request.Identifier);
+            var individualPerson = await _personRepository.GetByCpfAsync(request.Identifier);
             if (individualPerson != null)
             {
                 individualPerson.UpdatePhoto(photoBytes);
