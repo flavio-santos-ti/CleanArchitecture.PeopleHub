@@ -61,7 +61,7 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteIndividualAsync(IndividualPersonEntity person)
+    public async Task DeleteAsync(IndividualPersonEntity person)
     {
         _context.IndividualPersons.Remove(person);
         await _context.SaveChangesAsync();
