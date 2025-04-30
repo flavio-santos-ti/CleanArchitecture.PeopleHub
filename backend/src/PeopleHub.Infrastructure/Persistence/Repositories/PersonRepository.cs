@@ -30,7 +30,7 @@ public class PersonRepository : IPersonRepository
             .FirstOrDefaultAsync(p => p.Cpf == cpf);
     }
 
-    public async Task<LegalPersonEntity?> GetLegalByCnpjAsync(string cnpj)
+    public async Task<LegalPersonEntity?> GetByCnpjAsync(string cnpj)
     {
         return await _context.LegalPersons
             .AsNoTracking()
