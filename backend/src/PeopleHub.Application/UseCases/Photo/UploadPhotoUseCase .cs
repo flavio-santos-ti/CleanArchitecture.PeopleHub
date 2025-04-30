@@ -43,7 +43,7 @@ public class UploadPersonPhotoUseCase : IUploadPhotoUseCase
             if (individualPerson != null)
             {
                 individualPerson.UpdatePhoto(photoBytes);
-                await _personRepository.UpdateIndividualPhotoAsync(individualPerson);
+                await _personRepository.UploadProfilePictureAsync(individualPerson);
                 await _unitOfWork.CommitAsync();
 
                 return Result.CreateUpload<bool>("Photo Legal Person successfully registered.");
