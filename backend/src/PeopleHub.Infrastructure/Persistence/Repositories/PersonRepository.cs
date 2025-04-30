@@ -43,7 +43,7 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateLegalPhotoAsync(LegalPersonEntity person)
+    public async Task UploadCompanyLogoPhotoAsync(LegalPersonEntity person)
     {
         _context.LegalPersons.Update(person);
         await _context.SaveChangesAsync();

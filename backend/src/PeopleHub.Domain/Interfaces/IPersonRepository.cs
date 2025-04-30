@@ -9,7 +9,7 @@ public interface IPersonRepository
     Task<IndividualPersonEntity?> GetByCpfAsync(string cpf);
     Task<LegalPersonEntity?> GetByCnpjAsync(string cnpj);
     Task UpdateAsync(IndividualPersonEntity person);
-    Task UpdateLegalPhotoAsync(LegalPersonEntity person);
+    Task UploadCompanyLogoPhotoAsync(LegalPersonEntity person);
     Task UploadProfilePictureAsync(IndividualPersonEntity person);
     Task DeleteAsync(IndividualPersonEntity person);
     Task UpdateAsync(LegalPersonEntity person);
