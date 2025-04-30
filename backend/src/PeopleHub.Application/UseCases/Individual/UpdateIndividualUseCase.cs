@@ -48,7 +48,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
                 email
             );
 
-            await _personRepository.UpdateIndividualAsync(person);
+            await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
             return Result.CreateModify<bool>("Individual Person updated successfully.");
