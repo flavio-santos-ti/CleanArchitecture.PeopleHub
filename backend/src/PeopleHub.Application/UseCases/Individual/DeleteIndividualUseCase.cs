@@ -35,7 +35,7 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
             if (person == null)
                 return Result.CreateNotFound<bool>("Individual Person not found.");
 
-            await _personRepository.DeleteIndividualAsync(person);
+            await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
             return Result.CreateRemove<bool>("Legal Person has been successfully removed.");
