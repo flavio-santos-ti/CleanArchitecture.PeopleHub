@@ -32,7 +32,7 @@ public class GetIndividualByCpfUseCase : IGetIndividualByCpfUseCase
         if (validationError != null)
             return Result.CreateValidationError<IndividualPersonDto?>(validationError);
 
-        var person = await _personRepository.GetIndividualByCpfAsync(cleanedCpf);
+        var person = await _personRepository.GetByCpfAsync(cleanedCpf);
 
         if (person == null)
             return Result.CreateNotFound<IndividualPersonDto?>("Individual Person not found.");
