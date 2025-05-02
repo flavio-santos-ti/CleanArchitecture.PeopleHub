@@ -144,13 +144,14 @@ FOREIGN KEY (person_id) REFERENCES person(id);
 ----------------------------------------------------------------------------------------------------------
 -- Tabela de usuários autenticáveis do sistema
 -- Table of system-authenticated users
-
 CREATE TABLE users (
-    email VARCHAR(255) PRIMARY KEY,                  -- E-mail do usuário / User email (primary key)
-    password_hash TEXT NOT NULL,                     -- Senha em hash / Hashed user password
-    person_id UUID NOT NULL,                         -- Referência para a pessoa associada / Linked person
-    is_active BOOLEAN NOT NULL DEFAULT TRUE,         -- Usuário ativo? / Is the user active?
-    created_at TIMESTAMP                             -- Data de criação fornecida pela aplicação / Creation timestamp set by application
+    id UUID PRIMARY KEY,                                -- Identificador único / Unique identifier
+    email VARCHAR(255) UNIQUE NOT NULL,                 -- E-mail de login / Login email
+    password_hash TEXT NOT NULL,                        -- Senha em hash / Hashed user password
+    person_id UUID NOT NULL,                            -- Pessoa associada / Linked person
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,            -- Usuário ativo? / Is the user active?
+    created_at TIMESTAMP,                               -- Data de criação / Creation date
+    updated_at TIMESTAMP                                -- Data de atualização / Update date
 );
 
 -- Restrição de chave estrangeira para person
