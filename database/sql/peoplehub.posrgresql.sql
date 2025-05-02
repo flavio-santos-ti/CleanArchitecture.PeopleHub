@@ -111,3 +111,21 @@ CREATE TABLE legal_person (
 -- Índice para otimizar buscas por CNPJ
 -- Index to optimize CNPJ searches
 CREATE INDEX idx_legal_person_cnpj ON legal_person (cnpj);
+
+----------------------------------------------------------------------------------------------------------
+-- Tabela de pessoa física vinculada à tabela person
+-- Table of individual person linked to person table
+
+CREATE TABLE individual_person (
+    person_id UUID PRIMARY KEY REFERENCES person(id),      -- Referência para a pessoa base / Reference to base person
+    full_name VARCHAR(150) NOT NULL,                       -- Nome completo / Full name
+    cpf CHAR(11) UNIQUE NOT NULL,                          -- CPF único / Unique CPF
+    birth_date DATE NOT NULL,                              -- Data de nascimento / Birth date
+    gender SMALLINT NOT NULL,                              -- Gênero (0: indefinido, 1: masc, 2: fem, etc.) / Gender
+    photo BYTEA,                                           -- Foto da pessoa / Person photo
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP         -- Data de criação / Creation timestamp
+);
+
+-- Índice para otimizar buscas por CPF
+-- Index to optimize CPF searches
+CREATE INDEX idx_individual_person_cpf ON individual_person (cpf);
