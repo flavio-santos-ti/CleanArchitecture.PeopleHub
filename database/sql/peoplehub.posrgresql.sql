@@ -133,3 +133,19 @@ CREATE TABLE individual_person (
 -- Índice para otimizar buscas por CPF
 -- Index to optimize CPF searches
 CREATE INDEX idx_individual_person_cpf ON individual_person (cpf);
+
+----------------------------------------------------------------------------------------------------------
+-- Tabela de usuários autenticáveis do sistema
+-- Table of system-authenticated users
+CREATE TABLE users (
+    email VARCHAR(255) PRIMARY KEY,                 -- E-mail do usuário / User email (primary key)
+    password_hash TEXT NOT NULL,                    -- Senha em hash / Hashed user password
+    person_id UUID NOT NULL,                        -- Referência para a pessoa associada / Linked person
+    is_active BOOLEAN NOT NULL DEFAULT TRUE         -- Usuário ativo? / Is the user active?
+);
+
+-- Restrição de chave estrangeira para person
+-- Foreign key constraint to person
+ALTER TABLE users
+ADD CONSTRAINT fk_users_person
+FOREIGN KEY (person_id) REFERENCES person(id);
