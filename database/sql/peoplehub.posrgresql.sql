@@ -142,20 +142,46 @@ ADD CONSTRAINT fk_individual_person_person
 FOREIGN KEY (person_id) REFERENCES person(id);
 
 ----------------------------------------------------------------------------------------------------------
--- Tabela de usuários autenticáveis do sistema
--- Table of system-authenticated users
-CREATE TABLE users (
-    id UUID PRIMARY KEY,                                -- Identificador único / Unique identifier
-    email VARCHAR(255) UNIQUE NOT NULL,                 -- E-mail de login / Login email
-    password_hash TEXT NOT NULL,                        -- Senha em hash / Hashed user password
-    person_id UUID NOT NULL,                            -- Pessoa associada / Linked person
-    is_active BOOLEAN NOT NULL DEFAULT TRUE,            -- Usuário ativo? / Is the user active?
-    created_at TIMESTAMP,                               -- Data de criação / Creation date
-    updated_at TIMESTAMP                                -- Data de atualização / Update date
+-- Tabela de contas de usuário do sistema
+-- Table of system user accounts
+CREATE TABLE user_account (
+    id UUID PRIMARY KEY,                     -- Identificador único / Unique identifier
+    email VARCHAR(255) UNIQUE NOT NULL,      -- E-mail de login / Login email
+    password_hash TEXT NOT NULL,             -- Senha em hash / Hashed user password
+    person_id UUID NOT NULL,                 -- Pessoa vinculada / Linked person
+    is_active BOOLEAN NOT NULL DEFAULT TRUE, -- Conta ativa? / Is the account active?
+    created_at TIMESTAMP,                    -- Data de criação / Creation timestamp
+    updated_at TIMESTAMP                     -- Data de atualização / Update timestamp
 );
 
--- Restrição de chave estrangeira para person
--- Foreign key constraint to person
-ALTER TABLE users
-ADD CONSTRAINT fk_users_person
+-- FK para pessoa
+ALTER TABLE user_account
+ADD CONSTRAINT fk_user_account_person
 FOREIGN KEY (person_id) REFERENCES person(id);
+
+----------------------------------------------------------------------------------------------------------
+-- Tabela de histórico de status de ativação de usuários
+-- Table of user activation status history
+CREATE TABLE user_status_history (
+    id UUID PRIMARY KEY,                                  -- Identificador único do histórico / Unique history record ID
+
+    user_id UUID NOT NULL,                                -- ID do usuário afetado / Affected user ID
+    changed_by UUID NOT NULL,                             -- Pessoa que realizou a alteração / Person who made the change
+
+    old_status BOOLEAN NOT NULL,                          -- Status anterior / Previous status
+    new_status BOOLEAN NOT NULL,                          -- Novo status / New status
+
+    changed_at TIMESTAMP NOT NULL                         -- Data da alteração / Change timestamp
+);
+
+-- Restrição de chave estrangeira para usuário
+-- Foreign key constraint to user
+ALTER TABLE user_status_history
+ADD CONSTRAINT fk_user_status_user
+FOREIGN KEY (user_id) REFERENCES users(id);
+
+-- Restrição de chave estrangeira para quem alterou (pessoa)
+-- Foreign key constraint to person (who changed)
+ALTER TABLE user_status_history
+ADD CONSTRAINT fk_user_status_changed_by
+FOREIGN KEY (changed_by) REFERENCES person(id);
