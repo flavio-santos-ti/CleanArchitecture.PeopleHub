@@ -97,23 +97,27 @@ CREATE INDEX idx_person_address_type ON person_address (address_type);
 ----------------------------------------------------------------------------------------------------------
 -- Tabela de pessoa jurídica vinculada à tabela person
 -- Table of legal entity linked to person table
-
 CREATE TABLE legal_person (
-    person_id UUID PRIMARY KEY REFERENCES person(id),  -- Referência para a pessoa base / Reference to base person
-    legal_name VARCHAR(200) NOT NULL,                  -- Razão social / Legal name
-    trade_name VARCHAR(200) NOT NULL,                  -- Nome fantasia / Trade name
-    cnpj CHAR(14) UNIQUE NOT NULL,                     -- CNPJ único / Unique CNPJ
-    state_registration VARCHAR(50),                    -- Inscrição estadual / State registration
-    municipal_registration VARCHAR(50),                -- Inscrição municipal / Municipal registration
-    legal_representative_name VARCHAR(150) NOT NULL,   -- Nome do representante legal / Legal representative name
-    legal_representative_cpf CHAR(11) NOT NULL,        -- CPF do representante / Representative CPF
-    logo BYTEA,                                        -- Logotipo da empresa / Company logo
-    created_at TIMESTAMP                               -- Data de criação / Creation timestamp
+    person_id UUID PRIMARY KEY,                             -- Referência para a pessoa base / Reference to base person
+    legal_name VARCHAR(200) NOT NULL,                       -- Razão social / Legal name
+    trade_name VARCHAR(200) NOT NULL,                       -- Nome fantasia / Trade name
+    cnpj CHAR(14) UNIQUE NOT NULL,                          -- CNPJ único / Unique CNPJ
+    state_registration VARCHAR(50),                         -- Inscrição estadual / State registration
+    municipal_registration VARCHAR(50),                     -- Inscrição municipal / Municipal registration
+    legal_representative_name VARCHAR(150) NOT NULL,        -- Nome do representante legal / Legal representative name
+    legal_representative_cpf CHAR(11) NOT NULL,             -- CPF do representante / Representative CPF
+    logo BYTEA,                                             -- Logotipo da empresa / Company logo
+    created_at TIMESTAMP                                    -- Data de criação definida pela aplicação / Creation timestamp set by application
 );
+
+-- Restrição de chave estrangeira para person
+-- Foreign key constraint to person
+ALTER TABLE legal_person
+ADD CONSTRAINT fk_legal_person_person
+FOREIGN KEY (person_id) REFERENCES person(id);
 
 -- Índice para otimizar buscas por CNPJ
 -- Index to optimize CNPJ searches
-
 CREATE INDEX idx_legal_person_cnpj ON legal_person (cnpj);
 
 ----------------------------------------------------------------------------------------------------------
