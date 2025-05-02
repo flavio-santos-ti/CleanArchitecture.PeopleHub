@@ -50,6 +50,7 @@ INSERT INTO address_type (code, description) VALUES
 ----------------------------------------------------------------------------------------------------------
 -- Tabela de endereços associados a uma pessoa
 -- Table of addresses linked to a person
+
 CREATE TABLE person_address (
     id UUID PRIMARY KEY,                                -- Identificador único / Unique identifier
 
@@ -89,3 +90,24 @@ CREATE INDEX idx_person_address_person_id ON person_address (person_id);
 -- Índice para otimizar buscas por tipo de endereço
 -- Index to optimize searches by address type
 CREATE INDEX idx_person_address_type ON person_address (address_type);
+
+----------------------------------------------------------------------------------------------------------
+-- Tabela de pessoa jurídica vinculada à tabela person
+-- Table of legal entity linked to person table
+
+CREATE TABLE legal_person (
+    person_id UUID PRIMARY KEY REFERENCES person(id),      -- Referência para a pessoa base / Reference to base person
+    legal_name VARCHAR(200) NOT NULL,                      -- Razão social / Legal name
+    trade_name VARCHAR(200) NOT NULL,                      -- Nome fantasia / Trade name
+    cnpj CHAR(14) UNIQUE NOT NULL,                         -- CNPJ único / Unique CNPJ
+    state_registration VARCHAR(50),                        -- Inscrição estadual / State registration
+    municipal_registration VARCHAR(50),                    -- Inscrição municipal / Municipal registration
+    legal_representative_name VARCHAR(150) NOT NULL,       -- Nome do representante legal / Legal representative name
+    legal_representative_cpf CHAR(11) NOT NULL,            -- CPF do representante / Representative CPF
+    logo BYTEA,                                            -- Logotipo da empresa / Company logo
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP         -- Data de criação / Creation timestamp
+);
+
+-- Índice para otimizar buscas por CNPJ
+-- Index to optimize CNPJ searches
+CREATE INDEX idx_legal_person_cnpj ON legal_person (cnpj);
