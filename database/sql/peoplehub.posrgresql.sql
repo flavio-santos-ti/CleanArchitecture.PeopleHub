@@ -137,11 +137,13 @@ CREATE INDEX idx_individual_person_cpf ON individual_person (cpf);
 ----------------------------------------------------------------------------------------------------------
 -- Tabela de usuários autenticáveis do sistema
 -- Table of system-authenticated users
+
 CREATE TABLE users (
-    email VARCHAR(255) PRIMARY KEY,                 -- E-mail do usuário / User email (primary key)
-    password_hash TEXT NOT NULL,                    -- Senha em hash / Hashed user password
-    person_id UUID NOT NULL,                        -- Referência para a pessoa associada / Linked person
-    is_active BOOLEAN NOT NULL DEFAULT TRUE         -- Usuário ativo? / Is the user active?
+    email VARCHAR(255) PRIMARY KEY,                  -- E-mail do usuário / User email (primary key)
+    password_hash TEXT NOT NULL,                     -- Senha em hash / Hashed user password
+    person_id UUID NOT NULL,                         -- Referência para a pessoa associada / Linked person
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,         -- Usuário ativo? / Is the user active?
+    created_at TIMESTAMP                             -- Data de criação fornecida pela aplicação / Creation timestamp set by application
 );
 
 -- Restrição de chave estrangeira para person
