@@ -11,6 +11,7 @@ public class PeopleHubDbContext : DbContext
     public DbSet<IndividualPersonEntity> IndividualPersons { get; set; }
     public DbSet<LegalPersonEntity> LegalPersons { get; set; }
     public DbSet<UserAccountEntity> UserAccounts { get; set; }
+    public DbSet<PersonEntity> Persons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
