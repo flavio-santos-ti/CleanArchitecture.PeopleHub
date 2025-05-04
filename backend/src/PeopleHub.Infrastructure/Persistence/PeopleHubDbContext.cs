@@ -14,6 +14,7 @@ public class PeopleHubDbContext : DbContext
     public DbSet<PersonEntity> Persons { get; set; }
     public DbSet<PersonTypeEntity> PersonTypes { get; set; }
     public DbSet<AddressTypeEntity> AddressTypes { get; set; }
+    public DbSet<PersonAddressEntity> PersonAddresses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
