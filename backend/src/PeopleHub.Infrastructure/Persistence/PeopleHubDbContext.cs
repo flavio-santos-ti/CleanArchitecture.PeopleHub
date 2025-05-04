@@ -13,6 +13,7 @@ public class PeopleHubDbContext : DbContext
     public DbSet<UserAccountEntity> UserAccounts { get; set; }
     public DbSet<PersonEntity> Persons { get; set; }
     public DbSet<PersonTypeEntity> PersonTypes { get; set; }
+    public DbSet<AddressTypeEntity> AddressTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
