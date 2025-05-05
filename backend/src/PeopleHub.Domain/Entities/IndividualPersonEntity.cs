@@ -61,8 +61,7 @@ public class IndividualPersonEntity
         string fullName,
         DateTime birthDate,
         Gender gender,
-        Address address,
-        Email email)
+        Address address)
     {
         FullName = fullName;
         BirthDate = birthDate;
