@@ -12,8 +12,8 @@ public class LegalPersonMap : IEntityTypeConfiguration<LegalPersonEntity>
     {
         builder.ToTable("legal_person");
 
-        builder.HasKey(e => e.Id);
-        builder.Property(e => e.Id)
+        builder.HasKey(e => e.PersonId);
+        builder.Property(e => e.PersonId)
             .HasColumnName("id");
 
         builder.Property(e => e.LegalName)
