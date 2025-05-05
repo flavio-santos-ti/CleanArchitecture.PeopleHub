@@ -18,7 +18,7 @@ public class IndividualPersonDto
 
     public IndividualPersonDto(IndividualPersonEntity entity)
     {
-        Id = entity.Id;
+        Id = entity.PersonId;
         FullName = entity.FullName;
         Cpf = entity.Cpf;
         BirthDate = entity.BirthDate;

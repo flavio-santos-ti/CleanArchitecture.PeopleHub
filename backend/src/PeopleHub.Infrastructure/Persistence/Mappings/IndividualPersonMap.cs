@@ -12,8 +12,8 @@ public class IndividualPersonMap : IEntityTypeConfiguration<IndividualPersonEnti
     {
         builder.ToTable("individual_person");
 
-        builder.HasKey(e => e.Id);
-        builder.Property(e => e.Id)
+        builder.HasKey(e => e.PersonId);
+        builder.Property(e => e.PersonId)
             .HasColumnName("id")
             .HasDefaultValueSql("gen_random_uuid()");
 
