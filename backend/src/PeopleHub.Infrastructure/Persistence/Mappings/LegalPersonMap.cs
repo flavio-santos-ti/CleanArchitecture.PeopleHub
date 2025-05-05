@@ -14,8 +14,7 @@ public class LegalPersonMap : IEntityTypeConfiguration<LegalPersonEntity>
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)
-            .HasColumnName("id")
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasColumnName("id");
 
         builder.Property(e => e.LegalName)
             .IsRequired()
