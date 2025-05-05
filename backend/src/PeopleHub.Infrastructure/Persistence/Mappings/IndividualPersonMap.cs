@@ -12,10 +12,8 @@ public class IndividualPersonMap : IEntityTypeConfiguration<IndividualPersonEnti
     {
         builder.ToTable("individual_person");
 
-        builder.HasKey(e => e.PersonId);
         builder.Property(e => e.PersonId)
-            .HasColumnName("id")
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasColumnName("person_id");
 
         builder.Property(e => e.FullName)
             .IsRequired()
@@ -32,9 +30,6 @@ public class IndividualPersonMap : IEntityTypeConfiguration<IndividualPersonEnti
             .HasMaxLength(11)
             .HasColumnName("cpf")
             .HasConversion(cpfConverter);
-
-        builder.HasIndex(e => e.Cpf)
-            .IsUnique();
 
         builder.Property(e => e.BirthDate)
             .IsRequired()
