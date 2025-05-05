@@ -4,11 +4,11 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Infrastructure.Persistence.Repositories;
 
-public class PersonRepository : IPersonRepository
+public class PersonOldRepository : IPersonRepository
 {
     private readonly PeopleHubDbContext _context;
 
-    public PersonRepository(PeopleHubDbContext context)
+    public PersonOldRepository(PeopleHubDbContext context)
     {
         _context = context;
     }
