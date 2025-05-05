@@ -11,12 +11,12 @@ namespace PeopleHub.Application.UseCases.Individual;
 
 public class DeleteIndividualUseCase : IDeleteIndividualUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
 
     public DeleteIndividualUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IUnitOfWork unitOfWork, 
         IAuthenticatedUserAccountService authenticatedUserService, 
         IHttpContextAccessor httpContextAccessor, 

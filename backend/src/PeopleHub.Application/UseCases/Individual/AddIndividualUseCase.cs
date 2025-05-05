@@ -13,11 +13,11 @@ namespace PeopleHub.Application.UseCases.Individual;
 
 public class AddIndividualUseCase : IAddIndividualUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public AddIndividualUseCase(
-        IPersonRepository personRepository,
+        IPersonOldRepository personRepository,
         IUnitOfWork unitOfWork,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,

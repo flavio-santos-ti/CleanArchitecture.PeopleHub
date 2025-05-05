@@ -2,7 +2,7 @@
 
 namespace PeopleHub.Domain.Interfaces;
 
-public interface IPersonRepository
+public interface IPersonOldRepository
 {
     Task AddAsync(IndividualPersonEntity person);
     Task AddAsync(LegalPersonEntity person);
