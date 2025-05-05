@@ -62,7 +62,6 @@ public class IndividualPersonEntity
         DateTime birthDate,
         Gender gender,
         Address address,
-        Phone phone,
         Email email)
     {
         FullName = fullName;
