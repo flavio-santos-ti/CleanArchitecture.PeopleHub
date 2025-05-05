@@ -5,7 +5,7 @@ namespace PeopleHub.Domain.Entities;
 
 public class IndividualPersonEntity
 {
-    public Guid Id { get; private set; }
+    public Guid PersonId { get; private set; }
     public string FullName { get; private set; }
     public Cpf Cpf { get; private set; }
     public DateTime BirthDate { get; private set; }
@@ -18,7 +18,7 @@ public class IndividualPersonEntity
     // Parameterless constructor required for Entity Framework Core
     private IndividualPersonEntity()
     {
-        Id = Guid.NewGuid();
+        PersonId = Guid.NewGuid();
         FullName = string.Empty;
         Cpf = null!; 
         BirthDate = DateTime.MinValue;
@@ -33,7 +33,7 @@ public class IndividualPersonEntity
     // Main constructor
     public IndividualPersonEntity(string fullName, Cpf cpf, DateTime birthDate, Gender gender, Address address, Phone phone, Email email)
     {
-        Id = Guid.NewGuid();
+        PersonId = Guid.NewGuid();
         FullName = fullName;
         Cpf = cpf;
         BirthDate = birthDate;
