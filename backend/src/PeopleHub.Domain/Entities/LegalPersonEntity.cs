@@ -4,7 +4,7 @@ namespace PeopleHub.Domain.Entities;
 
 public class LegalPersonEntity
 {
-    public Guid Id { get; private set; }
+    public Guid PersonId { get; private set; }
     public string LegalName { get; private set; } = string.Empty;
     public string TradeName { get; private set; } = string.Empty;
     public Cnpj Cnpj { get; private set; } = default!;
@@ -31,7 +31,7 @@ public class LegalPersonEntity
         string legalRepresentativeName,
         Cpf legalRepresentativeCpf)
     {
-        Id = Guid.NewGuid();
+        PersonId = Guid.NewGuid();
         LegalName = legalName;
         TradeName = tradeName;
         Cnpj = cnpj ?? throw new ArgumentNullException(nameof(cnpj));
