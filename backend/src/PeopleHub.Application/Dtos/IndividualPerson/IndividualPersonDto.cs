@@ -12,7 +12,6 @@ public class IndividualPersonDto
     public DateTime BirthDate { get; set; }
     public Gender Gender { get; set; }
     public Address Address { get; set; }
-    public Email Email { get; set; }
     public string? Photo { get; set; } 
 
     public IndividualPersonDto(IndividualPersonEntity entity)
@@ -23,7 +22,6 @@ public class IndividualPersonDto
         BirthDate = entity.BirthDate;
         Gender = entity.Gender;
         Address = entity.Address;
-        Email = entity.Email;
         Photo = entity.Photo is { Length: > 0 } ? ConvertPhotoToSvg(entity.Photo) : null;
     }
 
