@@ -44,7 +44,6 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
                 request.BirthDate,
                 request.Gender,
                 address,
-                phone,
                 email
             );
 
