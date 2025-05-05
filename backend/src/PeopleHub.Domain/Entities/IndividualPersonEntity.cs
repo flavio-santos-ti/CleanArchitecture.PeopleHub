@@ -11,7 +11,6 @@ public class IndividualPersonEntity
     public DateTime BirthDate { get; private set; }
     public Gender Gender { get; private set; }
     public Address Address { get; private set; }
-    public Phone Phone { get; private set; }
     public Email Email { get; private set; }
     public byte[] Photo { get; private set; }
 
@@ -25,7 +24,6 @@ public class IndividualPersonEntity
         Gender = Gender.Other;
 
         Address = null!; 
-        Phone = null!;
         Email = null!;
         Photo = null!;
     }
@@ -39,7 +37,6 @@ public class IndividualPersonEntity
         BirthDate = birthDate;
         Gender = gender;
         Address = address;
-        Phone = phone;
         Email = email;
         Photo = Array.Empty<byte>();
 
@@ -75,7 +72,6 @@ public class IndividualPersonEntity
         BirthDate = birthDate;
         Gender = gender;
         Address = address;
-        Phone = phone;
         Email = email;
 
         Validate(); 
