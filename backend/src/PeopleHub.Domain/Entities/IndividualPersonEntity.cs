@@ -11,7 +11,6 @@ public class IndividualPersonEntity
     public DateTime BirthDate { get; private set; }
     public Gender Gender { get; private set; }
     public Address Address { get; private set; }
-    public Email Email { get; private set; }
     public byte[] Photo { get; private set; }
 
     // Parameterless constructor required for Entity Framework Core
@@ -24,7 +23,6 @@ public class IndividualPersonEntity
         Gender = Gender.Other;
 
         Address = null!; 
-        Email = null!;
         Photo = null!;
     }
 
@@ -37,7 +35,6 @@ public class IndividualPersonEntity
         BirthDate = birthDate;
         Gender = gender;
         Address = address;
-        Email = email;
         Photo = Array.Empty<byte>();
 
         Validate();
@@ -72,7 +69,6 @@ public class IndividualPersonEntity
         BirthDate = birthDate;
         Gender = gender;
         Address = address;
-        Email = email;
 
         Validate(); 
     }

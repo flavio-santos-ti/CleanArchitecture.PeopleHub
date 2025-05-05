@@ -59,9 +59,5 @@ public class IndividualPersonMap : IEntityTypeConfiguration<IndividualPersonEnti
             address.Property(a => a.ZipCode).IsRequired().HasMaxLength(20).HasColumnName("zip_code");
         });
 
-        builder.OwnsOne(e => e.Email, email =>
-        {
-            email.Property(e => e.Value).IsRequired().HasMaxLength(255).HasColumnName("email");
-        });
     }
 }
