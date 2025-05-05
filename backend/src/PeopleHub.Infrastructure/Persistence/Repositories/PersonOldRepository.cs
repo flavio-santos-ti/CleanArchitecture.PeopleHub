@@ -4,7 +4,7 @@ using PeopleHub.Domain.Interfaces;
 
 namespace PeopleHub.Infrastructure.Persistence.Repositories;
 
-public class PersonOldRepository : IPersonRepository
+public class PersonOldRepository : IPersonOldRepository
 {
     private readonly PeopleHubDbContext _context;
 

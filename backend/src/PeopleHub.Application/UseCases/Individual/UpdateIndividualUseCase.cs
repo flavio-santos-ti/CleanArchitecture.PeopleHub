@@ -12,11 +12,11 @@ namespace PeopleHub.Application.UseCases.Individual;
 
 public class UpdateIndividualUseCase : IUpdateIndividualUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public UpdateIndividualUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IUnitOfWork unitOfWork, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,

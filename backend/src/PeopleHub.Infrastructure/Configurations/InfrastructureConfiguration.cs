@@ -18,7 +18,7 @@ public static class InfrastructureConfiguration
         services.AddDatabaseConfiguration(configuration);
 
         // Repositories
-        services.AddScoped<IPersonRepository, PersonOldRepository>();
+        services.AddScoped<IPersonOldRepository, PersonOldRepository>();
         services.AddScoped<IUserAccountRepository, UserAccountRepository>();
         services.AddScoped<IAuthenticatedUserAccountService, AuthenticatedUserAccountService>();
         
