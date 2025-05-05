@@ -71,7 +71,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IAddLegalUseCase>(provider =>
             {
                 return new AddLegalUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -82,7 +82,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IDeleteLegalUseCase>(provider =>
             {
                 return new DeleteLegalUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -93,7 +93,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IUpdateLegalUseCase>(provider =>
             {
                 return new UpdateLegalUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -104,7 +104,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IAddIndividualUseCase>(provider =>
             {
                 return new AddIndividualUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -115,7 +115,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IUpdateIndividualUseCase>(provider =>
             {
                 return new UpdateIndividualUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
@@ -126,7 +126,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IDeleteIndividualUseCase>(provider =>
             {
                 return new DeleteIndividualUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
@@ -137,7 +137,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IGetIndividualByCpfUseCase>(provider =>
             {
                 return new GetIndividualByCpfUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),
                     new FixedContextProvider("individualPerson")
@@ -147,7 +147,7 @@ namespace PeopleHub.Application.Configurations
             services.AddScoped<IUploadPhotoUseCase>(provider =>
             {
                 return new UploadPersonPhotoUseCase(
-                    provider.GetRequiredService<IPersonRepository>(),
+                    provider.GetRequiredService<IPersonOldRepository>(),
                     provider.GetRequiredService<IUnitOfWork>(),
                     provider.GetRequiredService<IHttpContextAccessor>(),
                     provider.GetRequiredService<IAuthenticatedUserAccountService>(),

@@ -13,11 +13,11 @@ namespace PeopleHub.Application.UseCases.Legal;
 
 public class AddLegalUseCase : IAddLegalUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public AddLegalUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IUnitOfWork unitOfWork, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,

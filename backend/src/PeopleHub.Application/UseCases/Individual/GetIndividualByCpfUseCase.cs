@@ -12,11 +12,11 @@ namespace PeopleHub.Application.UseCases.Individual;
 
 public class GetIndividualByCpfUseCase : IGetIndividualByCpfUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
 
 
     public GetIndividualByCpfUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,
         IContextProvider contextProvider) 

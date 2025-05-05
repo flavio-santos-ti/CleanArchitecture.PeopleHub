@@ -12,11 +12,11 @@ namespace PeopleHub.Application.UseCases.Legal;
 
 public class UpdateLegalUseCase : IUpdateLegalUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public UpdateLegalUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IUnitOfWork unitOfWork, 
         IHttpContextAccessor httpContextAccessor, 
         IAuthenticatedUserAccountService authenticatedUserService,

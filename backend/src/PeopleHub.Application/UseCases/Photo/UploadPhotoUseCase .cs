@@ -10,11 +10,11 @@ namespace PeopleHub.Application.UseCases.Photo;
 
 public class UploadPersonPhotoUseCase : IUploadPhotoUseCase
 {
-    private readonly IPersonRepository _personRepository;
+    private readonly IPersonOldRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public UploadPersonPhotoUseCase(
-        IPersonRepository personRepository, 
+        IPersonOldRepository personRepository, 
         IUnitOfWork unitOfWork,
         IHttpContextAccessor httpContextAccessor,
         IAuthenticatedUserAccountService authenticatedUserService,
