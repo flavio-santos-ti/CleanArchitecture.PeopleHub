@@ -48,7 +48,6 @@ public class AddLegalUseCase : IAddLegalUseCase
                 cnpj,
                 request.StateRegistration,
                 request.MunicipalRegistration,
-                email,
                 request.LegalRepresentativeName,
                 cpf);
 
