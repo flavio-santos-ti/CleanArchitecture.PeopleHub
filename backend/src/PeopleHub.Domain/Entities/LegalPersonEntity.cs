@@ -61,7 +61,6 @@ public class LegalPersonEntity
         string tradeName,
         string stateRegistration,
         string municipalRegistration,
-        Address address,
         Phone phone,
         Email email,
         string legalRepresentativeName,
