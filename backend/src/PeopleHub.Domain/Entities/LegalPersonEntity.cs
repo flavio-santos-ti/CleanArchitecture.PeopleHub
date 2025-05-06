@@ -24,7 +24,6 @@ public class LegalPersonEntity
         Cnpj cnpj,
         string stateRegistration,
         string municipalRegistration,
-        Address address,
         Phone phone,
         Email email,
         string legalRepresentativeName,
