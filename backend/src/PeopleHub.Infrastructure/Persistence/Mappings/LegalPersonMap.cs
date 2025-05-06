@@ -68,11 +68,6 @@ public class LegalPersonMap : IEntityTypeConfiguration<LegalPersonEntity>
             .HasColumnType("bytea")
             .HasColumnName("logo");
 
-        builder.OwnsOne(e => e.Phone, phone =>
-        {
-            phone.Property(p => p.Number).IsRequired().HasMaxLength(20).HasColumnName("phone");
-        });
-
         builder.OwnsOne(e => e.Email, email =>
         {
             email.Property(e => e.Value).IsRequired().HasMaxLength(255).HasColumnName("email");
