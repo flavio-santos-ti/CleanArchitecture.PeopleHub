@@ -36,8 +36,6 @@ public class AddLegalUseCase : IAddLegalUseCase
             if (existingPerson != null)
                 return Result.CreateValidationError<bool>("Person already exists.");
 
-            var phone = new Phone(request.Phone);
-            var email = new Email(request.Email);
             var cnpj = new Cnpj(request.Cnpj);
             var cpf = new Cpf(request.LegalRepresentativeCpf);
 
