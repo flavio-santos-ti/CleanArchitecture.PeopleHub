@@ -55,7 +55,6 @@ public class LegalPersonEntity
         string tradeName,
         string stateRegistration,
         string municipalRegistration,
-        Phone phone,
         Email email,
         string legalRepresentativeName,
         Cpf legalRepresentativeCpf)

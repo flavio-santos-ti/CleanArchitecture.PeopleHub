@@ -39,7 +39,6 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
                 request.TradeName,
                 request.StateRegistration,
                 request.MunicipalRegistration,
-                new Phone(request.Phone),
                 new Email(request.Email),
                 request.LegalRepresentativeName,
                 new Cpf(request.LegalRepresentativeCpf)
