@@ -22,7 +22,6 @@ public class LegalPersonEntity
         Cnpj cnpj,
         string stateRegistration,
         string municipalRegistration,
-        Phone phone,
         Email email,
         string legalRepresentativeName,
         Cpf legalRepresentativeCpf)
