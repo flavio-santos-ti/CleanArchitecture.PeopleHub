@@ -16,8 +16,6 @@ public class AddLegalPersonRequestDto
     }
     public string StateRegistration { get; set; } = string.Empty;
     public string MunicipalRegistration { get; set; } = string.Empty;
-    public string Phone { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
     public string LegalRepresentativeName { get; set; } = string.Empty;
     public string LegalRepresentativeCpf
     {
