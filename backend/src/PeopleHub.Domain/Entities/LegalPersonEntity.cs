@@ -10,7 +10,6 @@ public class LegalPersonEntity
     public Cnpj Cnpj { get; private set; } = default!;
     public string StateRegistration { get; private set; } = string.Empty;
     public string MunicipalRegistration { get; private set; } = string.Empty;
-    public Phone? Phone { get; private set; }
     public Email? Email { get; private set; }
     public string LegalRepresentativeName { get; private set; } = string.Empty;
     public Cpf? LegalRepresentativeCpf { get; private set; }
@@ -35,7 +34,6 @@ public class LegalPersonEntity
         Cnpj = cnpj ?? throw new ArgumentNullException(nameof(cnpj));
         StateRegistration = stateRegistration;
         MunicipalRegistration = municipalRegistration;
-        Phone = phone;
         Email = email;
         LegalRepresentativeName = legalRepresentativeName;
         LegalRepresentativeCpf = legalRepresentativeCpf ?? throw new ArgumentNullException(nameof(legalRepresentativeCpf));
@@ -70,7 +68,6 @@ public class LegalPersonEntity
         TradeName = tradeName;
         StateRegistration = stateRegistration;
         MunicipalRegistration = municipalRegistration;
-        Phone = phone;
         Email = email;
         LegalRepresentativeName = legalRepresentativeName;
         LegalRepresentativeCpf = legalRepresentativeCpf;
