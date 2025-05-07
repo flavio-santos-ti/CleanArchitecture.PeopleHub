@@ -10,7 +10,6 @@ public class IndividualPersonEntity
     public Cpf Cpf { get; private set; }
     public DateTime BirthDate { get; private set; }
     public Gender Gender { get; private set; }
-    public Address Address { get; private set; }
     public byte[] Photo { get; private set; }
 
     // Parameterless constructor required for Entity Framework Core
@@ -22,7 +21,6 @@ public class IndividualPersonEntity
         BirthDate = DateTime.MinValue;
         Gender = Gender.Other;
 
-        Address = null!; 
         Photo = null!;
     }
 
@@ -34,7 +32,6 @@ public class IndividualPersonEntity
         Cpf = cpf;
         BirthDate = birthDate;
         Gender = gender;
-        Address = address;
         Photo = Array.Empty<byte>();
 
         Validate();
@@ -66,9 +63,7 @@ public class IndividualPersonEntity
         FullName = fullName;
         BirthDate = birthDate;
         Gender = gender;
-        Address = address;
 
         Validate(); 
     }
-
 }

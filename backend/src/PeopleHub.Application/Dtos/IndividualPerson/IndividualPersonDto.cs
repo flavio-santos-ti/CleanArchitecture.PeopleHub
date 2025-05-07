@@ -11,7 +11,6 @@ public class IndividualPersonDto
     public Cpf Cpf { get; set; }
     public DateTime BirthDate { get; set; }
     public Gender Gender { get; set; }
-    public Address Address { get; set; }
     public string? Photo { get; set; } 
 
     public IndividualPersonDto(IndividualPersonEntity entity)
@@ -21,7 +20,6 @@ public class IndividualPersonDto
         Cpf = entity.Cpf;
         BirthDate = entity.BirthDate;
         Gender = entity.Gender;
-        Address = entity.Address;
         Photo = entity.Photo is { Length: > 0 } ? ConvertPhotoToSvg(entity.Photo) : null;
     }
 
