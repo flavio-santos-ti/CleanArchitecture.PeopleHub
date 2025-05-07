@@ -36,7 +36,6 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             if (existingPerson != null)
                 return Result.CreateValidationError<bool>("Person already exists.");
 
-            var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
             var email = new Email(request.Email);
             var cpf = new Cpf(request.Cpf);
