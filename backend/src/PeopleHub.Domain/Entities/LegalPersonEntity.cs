@@ -50,7 +50,7 @@ public class LegalPersonEntity
             throw new ArgumentException("Legal representative CPF is required.");
     }
 
-    public void UpdateLegalPerson(
+    public void Update(
         string legalName,
         string tradeName,
         string stateRegistration,

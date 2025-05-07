@@ -34,7 +34,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
             if (person == null)
                 return Result.CreateNotFound<bool>("Legal Person not found.");
 
-            person.UpdateLegalPerson(
+            person.Update(
                 request.LegalName,
                 request.TradeName,
                 request.StateRegistration,
