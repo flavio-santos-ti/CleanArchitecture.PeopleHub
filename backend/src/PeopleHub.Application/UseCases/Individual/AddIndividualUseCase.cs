@@ -46,7 +46,6 @@ public class AddIndividualUseCase : IAddIndividualUseCase
                 cpf,
                 request.BirthDate,
                 request.Gender,
-                address,
                 phone,
                 email
             );
