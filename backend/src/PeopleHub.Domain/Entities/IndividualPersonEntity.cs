@@ -57,8 +57,7 @@ public class IndividualPersonEntity
     public void UpdateIndividualPerson(
         string fullName,
         DateTime birthDate,
-        Gender gender,
-        Address address)
+        Gender gender)
     {
         FullName = fullName;
         BirthDate = birthDate;

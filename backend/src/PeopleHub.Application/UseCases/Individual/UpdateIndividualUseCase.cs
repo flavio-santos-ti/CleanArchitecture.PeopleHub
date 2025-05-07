@@ -42,8 +42,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             person.UpdateIndividualPerson(
                 request.FullName,
                 request.BirthDate,
-                request.Gender,
-                address
+                request.Gender
             );
 
             await _personRepository.UpdateAsync(person);
