@@ -36,7 +36,6 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             if (existingPerson != null)
                 return Result.CreateValidationError<bool>("Person already exists.");
 
-            var email = new Email(request.Email);
             var cpf = new Cpf(request.Cpf);
 
             var person = new IndividualPersonEntity(

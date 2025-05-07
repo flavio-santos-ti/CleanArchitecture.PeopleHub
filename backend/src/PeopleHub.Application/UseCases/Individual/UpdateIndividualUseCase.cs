@@ -34,7 +34,6 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             if (person == null)
                 return Result.CreateNotFound<bool>("Individual Person not found.");
 
-            var address = new Address(request.Street, request.Number, request.Complement, request.City, request.State, request.ZipCode);
             var phone = new Phone(request.Phone);
             var email = new Email(request.Email);
             var cpf = new Cpf(request.Cpf);
