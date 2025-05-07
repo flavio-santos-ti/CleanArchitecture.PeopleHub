@@ -54,7 +54,7 @@ public class IndividualPersonEntity
             throw new ArgumentException("Birth date cannot be in the future.");
     }
 
-    public void UpdateIndividualPerson(
+    public void Update(
         string fullName,
         DateTime birthDate,
         Gender gender)
