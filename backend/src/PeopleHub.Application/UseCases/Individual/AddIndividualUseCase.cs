@@ -45,9 +45,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
                 request.FullName,
                 cpf,
                 request.BirthDate,
-                request.Gender,
-                phone,
-                email
+                request.Gender
             );
 
             await _personRepository.AddAsync(person);
