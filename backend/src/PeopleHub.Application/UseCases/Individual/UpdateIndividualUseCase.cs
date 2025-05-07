@@ -39,7 +39,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             var email = new Email(request.Email);
             var cpf = new Cpf(request.Cpf);
 
-            person.UpdateIndividualPerson(
+            person.Update(
                 request.FullName,
                 request.BirthDate,
                 request.Gender
