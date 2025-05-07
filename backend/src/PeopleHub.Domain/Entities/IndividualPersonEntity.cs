@@ -25,7 +25,7 @@ public class IndividualPersonEntity
     }
 
     // Main constructor
-    public IndividualPersonEntity(string fullName, Cpf cpf, DateTime birthDate, Gender gender, Phone phone, Email email)
+    public IndividualPersonEntity(string fullName, Cpf cpf, DateTime birthDate, Gender gender)
     {
         PersonId = Guid.NewGuid();
         FullName = fullName;
