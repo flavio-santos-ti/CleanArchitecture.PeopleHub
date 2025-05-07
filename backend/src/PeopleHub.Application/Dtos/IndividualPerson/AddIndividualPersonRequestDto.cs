@@ -15,5 +15,4 @@ public class AddIndividualPersonRequestDto
     }
     public DateTime BirthDate { get; set; }
     public Gender Gender { get; set; }
-    public string Email { get; set; } = string.Empty;
 }
