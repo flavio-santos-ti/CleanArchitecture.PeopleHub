@@ -32,16 +32,16 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
         {
             var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
-                return Result.CreateNotFound<bool>("Individual Person not found.");
+                return Result.CreateNotFound<bool>("Pessoa física já cadastrada.");
 
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>("Legal Person has been successfully removed.");
+            return Result.CreateRemove<bool>("Pessoa física excluída com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
