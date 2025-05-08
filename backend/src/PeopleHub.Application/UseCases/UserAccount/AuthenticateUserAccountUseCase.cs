@@ -36,13 +36,13 @@ public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                return Result.CreateValidationError<object>("Invalid email or password.");
+                return Result.CreateValidationError<object>("Email ou senha inválida.");
 
             // JWT Configuration.
             var secretKey = _configuration["Jwt:Secret"];
 
             if (string.IsNullOrEmpty(secretKey))
-                return Result.CreateValidationError<object>("JWT SecretKey is missing in configuration.");
+                return Result.CreateValidationError<object>("Chave secreta do JWT não definida na configuração..");
 
             var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -66,7 +66,7 @@ public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
         }
         catch (Exception ex)
         {
-            string msg = $"An unexpected error occurred: {ex.Message}"; 
+            string msg = $"Ocorreu um erro inesperado: {ex.Message}"; 
             return Result.CreateError<object>(msg);
         }
     } 
