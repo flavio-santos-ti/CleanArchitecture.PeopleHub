@@ -35,7 +35,7 @@ public class AddLegalUseCase : IAddLegalUseCase
             var existingPerson = await _personRepository.GetByCnpjAsync(request.Cnpj);
 
             if (existingPerson != null)
-                return Result.CreateValidationError<bool>("Person jurídica já cadastrada.");
+                return Result.CreateValidationError<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
 
             var cnpj = new Cnpj(request.Cnpj);
             var cpf = new Cpf(request.LegalRepresentativeCpf);

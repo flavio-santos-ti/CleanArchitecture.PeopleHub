@@ -33,7 +33,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
         {
             var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
-                return Result.CreateNotFound<bool>("Pessoa jurídica não econtrada.");
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
 
             person.Update(
                 request.LegalName,
