@@ -30,7 +30,7 @@ public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return Result.CreateNotFound<bool>("User not found.");
+                return Result.CreateNotFound<bool>("Conta de usuário não encontrada.");
 
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
@@ -38,11 +38,11 @@ public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>("Account has been successfully removed.");
+            return Result.CreateRemove<bool>("Conta de usuário excluída com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
