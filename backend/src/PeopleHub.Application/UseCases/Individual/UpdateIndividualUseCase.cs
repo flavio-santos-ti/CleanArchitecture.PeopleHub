@@ -33,7 +33,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
         {
             var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
-                return Result.CreateNotFound<bool>("Pessoa física não encontrada.");
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
 
             var cpf = new Cpf(request.Cpf);
 

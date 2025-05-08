@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.Messages;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 using PeopleHub.Domain.ValueObjects;
@@ -35,7 +36,7 @@ public class GetIndividualByCpfUseCase : IGetIndividualByCpfUseCase
         var person = await _personRepository.GetByCpfAsync(cleanedCpf);
 
         if (person == null)
-            return Result.CreateNotFound<IndividualPersonDto?>("Pessoa física não encontrada.");
+            return Result.CreateNotFound<IndividualPersonDto?>(NotFoundMessages.Feminine("Pessoa física"));
 
         var personDto = new IndividualPersonDto(person);
 

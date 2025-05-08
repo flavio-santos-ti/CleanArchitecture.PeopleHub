@@ -32,7 +32,7 @@ public class DeleteLegalUseCase : IDeleteLegalUseCase
         {
             var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
-                return Result.CreateNotFound<bool>("Pessoa jurídica não econtrada.");
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
 
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
