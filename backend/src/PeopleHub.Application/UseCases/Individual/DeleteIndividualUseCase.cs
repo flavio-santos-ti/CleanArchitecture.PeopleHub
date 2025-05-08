@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.IndividualPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.Messages;
 using PeopleHub.Application.UseCases.Individual.Interfaces;
 using PeopleHub.Domain.Interfaces;
 
@@ -41,7 +42,7 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
+            return Result.CreateError<bool>(string.Format(SystemMessages.UnexpectedError, ex.Message));
         }
     }
 }
