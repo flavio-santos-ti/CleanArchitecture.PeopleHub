@@ -31,16 +31,16 @@ public class DeleteLegalUseCase : IDeleteLegalUseCase
         {
             var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
-                return Result.CreateNotFound<bool>("Legal Person not found.");
+                return Result.CreateNotFound<bool>("Pessoa jurídica não econtrada.");
 
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>("Legal Person has been successfully removed.");
+            return Result.CreateRemove<bool>("Pessoa jurídica excluída com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
