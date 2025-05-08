@@ -34,7 +34,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             var existingPerson = await _personRepository.GetByCpfAsync(request.Cpf);
 
             if (existingPerson != null)
-                return Result.CreateValidationError<bool>("Person already exists.");
+                return Result.CreateValidationError<bool>("Pessoa física já cadastrada.");
 
             var cpf = new Cpf(request.Cpf);
 
@@ -48,11 +48,11 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateAdd<bool>("User registered successfully.");
+            return Result.CreateAdd<bool>("Pessoa física cadastrada com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }

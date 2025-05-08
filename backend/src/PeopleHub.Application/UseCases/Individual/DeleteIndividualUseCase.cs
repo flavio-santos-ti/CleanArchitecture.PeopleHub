@@ -20,7 +20,6 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
         IUnitOfWork unitOfWork, 
         IAuthenticatedUserAccountService authenticatedUserService, 
         IHttpContextAccessor httpContextAccessor, 
-        //IAuditLogService auditLogService,
         IContextProvider contextProvider) 
     {
         _personRepository = personRepository;
