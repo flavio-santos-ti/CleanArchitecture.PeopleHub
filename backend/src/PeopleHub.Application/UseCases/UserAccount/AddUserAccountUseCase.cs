@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.Messages;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
 
@@ -44,7 +45,7 @@ public class AddUserAccountUseCase : IAddUserAccountUseCase
         }
         catch (Exception ex)
         {
-            return Result.CreateError<UserAccountEntity>($"Ocorreu um erro inesperado: {ex.Message}");
+            return Result.CreateError<UserAccountEntity>(string.Format(SystemMessages.UnexpectedError, ex.Message));
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using PeopleHub.Application.Dtos.UserAccount;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.Messages;
 using PeopleHub.Domain.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -66,8 +67,7 @@ public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
         }
         catch (Exception ex)
         {
-            string msg = $"Ocorreu um erro inesperado: {ex.Message}"; 
-            return Result.CreateError<object>(msg);
+            return Result.CreateError<object>(string.Format(SystemMessages.UnexpectedError, ex.Message));
         }
     } 
 }
