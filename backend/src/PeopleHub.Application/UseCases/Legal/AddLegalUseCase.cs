@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using PeopleHub.Application.Dtos.LegalPerson;
 using PeopleHub.Application.Interfaces.Common;
 using PeopleHub.Application.Interfaces.UserAccount;
+using PeopleHub.Application.Messages;
 using PeopleHub.Application.UseCases.Legal.Interfaces;
 using PeopleHub.Domain.Entities;
 using PeopleHub.Domain.Interfaces;
@@ -55,7 +56,7 @@ public class AddLegalUseCase : IAddLegalUseCase
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
+            return Result.CreateError<bool>(string.Format(SystemMessages.UnexpectedError, ex.Message));
         }
 
     }
