@@ -30,21 +30,21 @@ public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return Result.CreateNotFound<bool>("User not found.");
+                return Result.CreateNotFound<bool>("Conta de usuário não encontrada.");
 
             if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
-                return Result.CreateValidationError<bool>("Invalid email or password.");
+                return Result.CreateValidationError<bool>("Email ou senha inválida.");
 
             user.UpdatePassword(request.NewPassword);
 
             await _userAccountRepository.UpdateAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Password updated successfully.");
+            return Result.CreateModify<bool>("Senha alterada com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
