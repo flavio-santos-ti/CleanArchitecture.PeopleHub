@@ -32,7 +32,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
         {
             var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
-                return Result.CreateNotFound<bool>("Individual Person not found.");
+                return Result.CreateNotFound<bool>("Pessoa física não encontrada.");
 
             var cpf = new Cpf(request.Cpf);
 
@@ -45,11 +45,11 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Individual Person updated successfully.");
+            return Result.CreateModify<bool>("Pessoa física atualizada com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
