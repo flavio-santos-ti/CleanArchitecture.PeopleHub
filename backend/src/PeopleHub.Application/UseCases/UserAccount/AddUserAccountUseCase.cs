@@ -31,7 +31,7 @@ public class AddUserAccountUseCase : IAddUserAccountUseCase
         {
             var existingUser = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (existingUser != null)
-                return Result.CreateValidationError<UserAccountEntity>("User already exists.");
+                return Result.CreateValidationError<UserAccountEntity>("Conta de usuário já cadastrado.");
 
 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
@@ -40,11 +40,11 @@ public class AddUserAccountUseCase : IAddUserAccountUseCase
             await _userAccountRepository.AddAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateAdd("User registered successfully.", user);
+            return Result.CreateAdd("Conta de usuário cadastrado com sucesso.", user);
         }
         catch (Exception ex)
         {
-            return Result.CreateError<UserAccountEntity>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<UserAccountEntity>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
