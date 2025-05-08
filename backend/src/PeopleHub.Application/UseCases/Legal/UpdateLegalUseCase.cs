@@ -32,7 +32,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
         {
             var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
-                return Result.CreateNotFound<bool>("Legal Person not found.");
+                return Result.CreateNotFound<bool>("Pessoa jurídica não econtrada.");
 
             person.Update(
                 request.LegalName,
@@ -46,11 +46,11 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
             await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Legal Person updated successfully.");
+            return Result.CreateModify<bool>("Pessoa atualizada com sucesso.");
         }
         catch (Exception ex)
         {
-            return Result.CreateError<bool>($"An unexpected error occurred: {ex.Message}");
+            return Result.CreateError<bool>($"Ocorreu um erro inesperado: {ex.Message}");
         }
     }
 }
