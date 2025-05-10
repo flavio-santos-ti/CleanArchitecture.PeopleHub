@@ -33,7 +33,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
         {
             var person = await _personRepository.GetByCnpjAsync(request.Cnpj);
             if (person == null)
-                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.LegalPerson));
 
             person.Update(
                 request.LegalName,
@@ -47,7 +47,7 @@ public class UpdateLegalUseCase : IUpdateLegalUseCase
             await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Pessoa atualizada com sucesso.");
+            return Result.CreateModify<bool>($"{EntityNames.LegalPerson} atualizada com sucesso.");
         }
         catch (Exception ex)
         {
