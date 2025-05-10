@@ -33,12 +33,12 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
         {
             var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
-                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa física"));
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.IndividualPerson));
 
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>("Pessoa física excluída com sucesso.");
+            return Result.CreateRemove<bool>($"{EntityNames.IndividualPerson} excluída com sucesso.");
         }
         catch (Exception ex)
         {
