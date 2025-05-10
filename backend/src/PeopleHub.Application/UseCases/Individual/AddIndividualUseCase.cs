@@ -35,7 +35,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             var existingPerson = await _personRepository.GetByCpfAsync(request.Cpf);
 
             if (existingPerson != null)
-                return Result.CreateValidationError<bool>("Pessoa física já cadastrada.");
+                return Result.CreateValidationError<bool>($"{EntityNames.IndividualPerson} já cadastrada.");
 
             var cpf = new Cpf(request.Cpf);
 
@@ -49,7 +49,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateAdd<bool>("Pessoa física cadastrada com sucesso.");
+            return Result.CreateAdd<bool>($"{EntityNames.IndividualPerson} cadastrada com sucesso.");
         }
         catch (Exception ex)
         {
