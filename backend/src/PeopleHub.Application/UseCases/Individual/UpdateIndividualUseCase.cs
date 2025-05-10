@@ -33,7 +33,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
         {
             var person = await _personRepository.GetByCpfAsync(request.Cpf);
             if (person == null)
-                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Pessoa jurídica"));
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.IndividualPerson));
 
             var cpf = new Cpf(request.Cpf);
 
@@ -46,7 +46,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Pessoa física atualizada com sucesso.");
+            return Result.CreateModify<bool>($"{EntityNames.IndividualPerson} atualizada com sucesso.");
         }
         catch (Exception ex)
         {
