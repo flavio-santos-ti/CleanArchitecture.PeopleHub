@@ -39,7 +39,7 @@ public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>($"{EntityNames.UserAccount} excluída com sucesso.");
+            return Result.CreateRemove<bool>(SuccessMessages.RemovedFeminine(EntityNames.UserAccount));
         }
         catch (Exception ex)
         {
