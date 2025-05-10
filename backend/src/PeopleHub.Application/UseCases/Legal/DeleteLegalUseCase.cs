@@ -37,7 +37,7 @@ public class DeleteLegalUseCase : IDeleteLegalUseCase
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>($"{EntityNames.LegalPerson} excluída com sucesso.");
+            return Result.CreateRemove<bool>(SuccessMessages.RemovedFeminine(EntityNames.LegalPerson));
         }
         catch (Exception ex)
         {
