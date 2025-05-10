@@ -31,7 +31,7 @@ public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Conta de usuário"));
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.UserAccount));
 
             if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
                 return Result.CreateValidationError<bool>("Email ou senha inválida.");
