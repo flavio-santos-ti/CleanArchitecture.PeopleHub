@@ -31,7 +31,7 @@ public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
         {
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (user == null)
-                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine("Conta de usuário"));
+                return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.UserAccount));
 
             await _userAccountRepository.DeleteAsync(request.Email);
             await _unitOfWork.CommitAsync();
