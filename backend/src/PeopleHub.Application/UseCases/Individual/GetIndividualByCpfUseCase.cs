@@ -36,10 +36,10 @@ public class GetIndividualByCpfUseCase : IGetIndividualByCpfUseCase
         var person = await _personRepository.GetByCpfAsync(cleanedCpf);
 
         if (person == null)
-            return Result.CreateNotFound<IndividualPersonDto?>(NotFoundMessages.Feminine("Pessoa física"));
+            return Result.CreateNotFound<IndividualPersonDto?>(NotFoundMessages.Feminine(EntityNames.IndividualPerson));
 
         var personDto = new IndividualPersonDto(person);
 
-        return Result.CreateGet<IndividualPersonDto?>("Pessoa física retornada com sucesso.", personDto);
+        return Result.CreateGet<IndividualPersonDto?>($"{EntityNames.IndividualPerson} retornada com sucesso.", personDto);
     }
 }
