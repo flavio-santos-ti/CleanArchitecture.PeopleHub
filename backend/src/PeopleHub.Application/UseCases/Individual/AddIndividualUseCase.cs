@@ -49,7 +49,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             await _personRepository.AddAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateAdd<bool>($"{EntityNames.IndividualPerson} cadastrada com sucesso.");
+            return Result.CreateAdd<bool>(SuccessMessages.CreatedFeminine(EntityNames.IndividualPerson));
         }
         catch (Exception ex)
         {
