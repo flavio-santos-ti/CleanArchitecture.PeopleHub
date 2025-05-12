@@ -35,7 +35,7 @@ public class AddIndividualUseCase : IAddIndividualUseCase
             var existingPerson = await _personRepository.GetByCpfAsync(request.Cpf);
 
             if (existingPerson != null)
-                return Result.CreateValidationError<bool>($"{EntityNames.IndividualPerson} já cadastrada.");
+                return Result.CreateValidationError<bool>(ValidationMessages.AlreadyRegisteredFeminine(EntityNames.IndividualPerson));
 
             var cpf = new Cpf(request.Cpf);
 
