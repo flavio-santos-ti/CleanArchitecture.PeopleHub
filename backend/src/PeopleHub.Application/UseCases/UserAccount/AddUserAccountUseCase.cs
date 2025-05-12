@@ -32,7 +32,7 @@ public class AddUserAccountUseCase : IAddUserAccountUseCase
         {
             var existingUser = await _userAccountRepository.GetByEmailAsync(request.Email);
             if (existingUser != null)
-                return Result.CreateValidationError<UserAccountEntity>($"{EntityNames.UserAccount} já cadastrado.");
+                return Result.CreateValidationError<UserAccountEntity>(ValidationMessages.AlreadyRegisteredFeminine(EntityNames.UserAccount));
 
 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
