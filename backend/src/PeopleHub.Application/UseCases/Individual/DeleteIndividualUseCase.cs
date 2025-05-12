@@ -38,7 +38,7 @@ public class DeleteIndividualUseCase : IDeleteIndividualUseCase
             await _personRepository.DeleteAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateRemove<bool>(SuccessMessages.RemovedFeminine(EntityNames.IndividualPerson);
+            return Result.CreateRemove<bool>(SuccessMessages.RemovedFeminine(EntityNames.IndividualPerson));
         }
         catch (Exception ex)
         {
