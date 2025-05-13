@@ -34,7 +34,7 @@ public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
                 return Result.CreateNotFound<bool>(NotFoundMessages.Feminine(EntityNames.UserAccount));
 
             if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
-                return Result.CreateValidationError<bool>("Email ou senha inválida.");
+                return Result.CreateValidationError<bool>(ValidationMessages.InvalidEmailOrPassword);
 
             user.UpdatePassword(request.NewPassword);
 
