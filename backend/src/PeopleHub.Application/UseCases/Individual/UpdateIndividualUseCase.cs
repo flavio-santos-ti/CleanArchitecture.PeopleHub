@@ -46,7 +46,7 @@ public class UpdateIndividualUseCase : IUpdateIndividualUseCase
             await _personRepository.UpdateAsync(person);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>($"{EntityNames.IndividualPerson} atualizada com sucesso.");
+            return Result.CreateModify<bool>(SuccessMessages.UpdatedFeminine(EntityNames.IndividualPerson));
         }
         catch (Exception ex)
         {
