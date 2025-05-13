@@ -41,7 +41,7 @@ public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
             await _userAccountRepository.UpdateAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>("Senha alterada com sucesso.");
+            return Result.CreateModify<bool>($"{EntityNames.Password} alterada com sucesso.");
         }
         catch (Exception ex)
         {
