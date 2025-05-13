@@ -41,7 +41,7 @@ public class UpdateUserAccountUseCase : IUpdateUserAccountUseCase
             await _userAccountRepository.UpdateAsync(user);
             await _unitOfWork.CommitAsync();
 
-            return Result.CreateModify<bool>($"{EntityNames.Password} alterada com sucesso.");
+            return Result.CreateModify<bool>(SuccessMessages.UpdatedFeminine(EntityNames.Password));
         }
         catch (Exception ex)
         {
