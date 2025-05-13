@@ -37,7 +37,7 @@ public class AuthenticateUserAccountUseCase : IAuthenticateUserAccountUseCase
             var user = await _userAccountRepository.GetByEmailAsync(request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-                return Result.CreateValidationError<object>("Email ou senha inválida.");
+                return Result.CreateValidationError<object>(ValidationMessages.InvalidEmailOrPassword);
 
             // JWT Configuration.
             var secretKey = _configuration["Jwt:Secret"];
